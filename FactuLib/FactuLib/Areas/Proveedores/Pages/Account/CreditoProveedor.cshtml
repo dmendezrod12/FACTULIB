@@ -1,0 +1,178 @@
+﻿@page "/Proveedores/Credito"
+@model CreditoProveedorModel
+@{
+    var nombre = $"{Model.Input.DatosProveedor.NombreProveedor}";
+    var deudaActual = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosProveedor.DeudaActual)}";
+    var ultimoPago = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosProveedor.UltimoPago)}";
+    var mensual = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosProveedor.Mensual)}";
+    var id = Model.Input.DatosProveedor.CedulaJuridica;
+}
+
+<div class="container">
+    <h1>@nombre</h1>
+    <div class="row">
+        <div class="col-sm">
+            <form asp-area="Proveedores" asp-page="CreditoProveedor" method="post">
+                <div class="card text-center" style="width:21rem;">
+                    <div class="card-header">
+                        <h5>Credito de Proveedor</h5>
+                    </div>
+                    <div class="card-body">
+                        <nav> 
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" data-toggle="tab" href="#nav-fee" role="tab" aria-selected="true" onclick="new Clientes().SetSection(1)">Cuotas</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-fee" role="tabpanel">
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <p>Deuda: </p>
+                                        &nbsp;
+                                        <p>@deudaActual</p>
+                                        <input type="hidden" value="@Model.Input.DatosProveedor.DeudaActual" id="DeudaActual" />
+                                    </div>
+                                    <div class="row">
+                                        <p>Pago: </p>
+                                        &nbsp;
+                                        <p>@ultimoPago</p>
+                                    </div>
+                                    <div class="row">
+                                        <p>Cuotas por mes: </p>
+                                        &nbsp;
+                                        <p>@mensual</p>
+                                        <input type="hidden" value="@Model.Input.DatosProveedor.Mensual" id="Mensual" />
+                                    </div>
+                                    <div class="row">
+                                        <p>Fecha del Pago: </p>
+                                        &nbsp;
+                                        <p>@Model.Input.DatosProveedor.FechaPago.ToString("dd/MMM/yyy")</p>
+                                    </div>
+                                    <div class="row">
+                                        <p>Ticket:  </p>
+                                        &nbsp;
+                                        <p>@Model.Input.DatosProveedor.Ticket</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" id="inlineRadio1" asp-for="Input.RadioOptions" value="1" />
+                                    <label class="form-check-label" for="inlineRadio1">Cuotas</label>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <span asp-validation-for="Input.RadioOptions" class="text-danger"></span>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input asp-for="Input.Pago" placeholder="Pago" class="form-control" autofocus onkeypress="return proveedor.Pagos(event, this)" id="PagoProveedor" />
+                                        <span asp-validation-for="Input.Pago" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <p class="text-danger" id="pagoMensaje"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="submit" id="pago" value="Efectuar pago" class="btn btn-success btn-block"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-danger">@Html.DisplayFor(m=> m.Input.ErrorMessage)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <form asp-area="Proveedores" asp-page="CreditoProveedor" method="get">
+                    <div class="row">
+                        <div class="col-sm">
+                            <label class="form-check-label">Inicio</label>
+                            <input style="width: 10.5rem;" class="form-control" asp-for="Input.horaInicio" />
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-check-label">Final</label>
+                            <input style="width: 10.5rem;" class="form-control" asp-for="Input.horaFinal" />
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-check-label"></label>
+                            <input type="submit" value="Filtrar" class="btn btn-success btn-block" />
+                        </div>
+                    </div>
+                    <input type="hidden" value="@id" name="id" />
+                </form>
+                <div class="card-body">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-fee2" role="tab" aria-selected="true">Cuotas</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent1">
+                        <div class="tab-pane fade show active" id="nav-fee2" role="tabpanel">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.Deuda)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.DeudaActual)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.Pago)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.Fecha)
+                                        </th>
+                                        <th>
+                                            Opciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Input.TPagos.List)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @String.Format(Model.moneda + "{0:#,###,###,##0.00####}", item.Deuda)
+                                            </td>
+                                            <td>
+                                                @String.Format(Model.moneda + "{0:#,###,###,##0.00####}", item.DeudaActual)
+                                            </td>
+                                            <td>
+                                                @String.Format(Model.moneda + "{0:#,###,###,##0.00####}", item.Pago)
+                                            </td>
+                                            <td>
+                                                @{
+                                                    var FechaReg = $"{item.Fecha.Day}/{item.Fecha.Month}/{item.Fecha.Year}";
+                                                }
+                                                @Html.Raw(FechaReg)
+                                            </td>
+                                            <td>
+                                                <a href="/Proveedores/DetallesDeuda?idPago=@item.IdPago&cedula=@id" class="btn btn-outline-info btn-sm">Reporte</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

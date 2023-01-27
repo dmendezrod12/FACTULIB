@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FactuLib</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+</head>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow ">
+        <div class="container-fluid">
+            <a class="navbar-brand align-content-lg-start" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/images/logoNav.png" class="mx-auto imglogo" style="width:50px;" />  Libreria Dieka
+            </a>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="align-content-end">
+
+                    <partial name="_LoginPartial" />
+                </div>
+            }
+        </div>
+    </nav>
+</header>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="bg-dark">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                <li class="active">
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-person-fill"></i></span> Usuarios </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a asp-area="Users" asp-controller="Users" asp-action="Users">Lista de Usuarios</a></li>
+                        <li><a asp-route-id="0" asp-area="Users" asp-page="/Account/Register">Agregar Usuario</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-emoji-laughing-fill "></i></span> Clientes</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a asp-area="Clientes" asp-controller="Clientes" asp-action="Clientes"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Lista de Clientes</a></li>
+                        <li><a asp-route-id="0" asp-area="Clientes" asp-page="/Account/RegistrarCliente"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Agregar Cliente</a></li>
+                        <li><a asp-area="Clientes" asp-page="/Account/ReportsSearch"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Reportes Clientes</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-building "></i></span> Proveedores</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a asp-area="Proveedores" asp-controller="Proveedores" asp-action="Proveedores"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Lista de Proveedores</a></li>
+                        <li><a asp-route-id="0" asp-area="Proveedores" asp-page="/Account/RegistrarProveedor"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Agregar Proveedor</a></li>
+                        <li><a asp-area="Proveedores" asp-page="/Account/ReportsSearch"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Reportes Proveedores</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-cart "></i></span> Compras </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a asp-area="Compras" asp-page="/Account/AgregarCompra"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Realizar Compra</a></li>
+                        @*<li><a asp-route-id="0" asp-area="Proveedores" asp-page="/Account/RegistrarProveedor"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Agregar Proveedor</a></li>
+                        <li><a asp-area="Proveedores" asp-page="/Account/ReportsSearch"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Reportes Proveedores</a></li>*@
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+
+</body>
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2022 - FactuLib - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/Funciones.js" asp-append-version="true"></script>
+<script src="~/js/UploadPicture.js" asp-append-version="true"></script>
+<script src="~/js/Principal.js" asp-append-version="true"></script>
+<script src="~/js/User.js" asp-append-version="true"></script>
+<script src="~/js/Cliente.js" asp-append-version="true"></script>
+<script src="~/js/Proveedor.js" asp-append-version="true"></script>
+<script src="~/js/Compras.js" asp-append-version="true"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $("#menu-toggle-2").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled-2");
+        $('#menu ul').hide();
+    });
+
+    function initMenu() {
+        $('#menu ul').hide();
+        $('#menu ul').children('.current').parent().show();
+        //$('#menu ul:first').show();
+        $('#menu li a').click(
+            function () {
+                var checkElement = $(this).next();
+                if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+                    return false;
+                }
+                if ((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+                    $('#menu ul:visible').slideUp('normal');
+                    checkElement.slideDown('normal');
+                    return false;
+                }
+            }
+        );
+    }
+    $(document).ready(function () {
+        initMenu();
+    });
+</script>
+@await RenderSectionAsync("Scripts", required: false)
+
+</html>

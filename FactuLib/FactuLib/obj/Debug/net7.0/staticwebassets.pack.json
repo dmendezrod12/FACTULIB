@@ -1,0 +1,257 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\BuyMain.png",
+      "PackagePath": "staticwebassets\\images\\images\\BuyMain.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\CustomerMain.png",
+      "PackagePath": "staticwebassets\\images\\images\\CustomerMain.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\DefaultProveedor.png",
+      "PackagePath": "staticwebassets\\images\\images\\DefaultProveedor.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\ReporteCabecera.jpg",
+      "PackagePath": "staticwebassets\\images\\images\\ReporteCabecera.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\SupplyMain.png",
+      "PackagePath": "staticwebassets\\images\\images\\SupplyMain.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\agregarCompra.png",
+      "PackagePath": "staticwebassets\\images\\images\\agregarCompra.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\atencion.png",
+      "PackagePath": "staticwebassets\\images\\images\\atencion.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\background_login.jpg",
+      "PackagePath": "staticwebassets\\images\\images\\background_login.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\default.png",
+      "PackagePath": "staticwebassets\\images\\images\\default.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\defaultCliente.png",
+      "PackagePath": "staticwebassets\\images\\images\\defaultCliente.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\lock.png",
+      "PackagePath": "staticwebassets\\images\\images\\lock.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\logoNav.png",
+      "PackagePath": "staticwebassets\\images\\images\\logoNav.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\userMain.png",
+      "PackagePath": "staticwebassets\\images\\images\\userMain.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\images\\images\\wallpaperLogin.jpg",
+      "PackagePath": "staticwebassets\\images\\images\\wallpaperLogin.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\Cliente.js",
+      "PackagePath": "staticwebassets\\js\\Cliente.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\Compras.js",
+      "PackagePath": "staticwebassets\\js\\Compras.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\Funciones.js",
+      "PackagePath": "staticwebassets\\js\\Funciones.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\Principal.js",
+      "PackagePath": "staticwebassets\\js\\Principal.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\Proveedor.js",
+      "PackagePath": "staticwebassets\\js\\Proveedor.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\UploadPicture.js",
+      "PackagePath": "staticwebassets\\js\\UploadPicture.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\User.js",
+      "PackagePath": "staticwebassets\\js\\User.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\source\\repos\\FactuLib\\FactuLib\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.FactuLib.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.FactuLib.props",
+      "PackagePath": "build\\FactuLib.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.FactuLib.props",
+      "PackagePath": "buildMultiTargeting\\FactuLib.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.FactuLib.props",
+      "PackagePath": "buildTransitive\\FactuLib.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

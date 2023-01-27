@@ -1,0 +1,149 @@
+﻿@page
+@model DetailsModel
+
+@{
+    var image = "data:image/jpg;base64," + Convert.ToBase64String(Model.Input.DatosProveedor.Image, 0, Model.Input.DatosProveedor.Image.Length);
+    var name = Model.Input.DatosProveedor.NombreProveedor;
+}
+
+<div class="container">
+    <h1>@name</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card text-center" style="width: 21rem;">
+                <div class="card-header">
+                    <img class="imageUserDetail" src="@image" />
+                </div>
+                <div class="card-body">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <p>@Model.Input.DatosProveedor.NombreProveedor</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a asp-area="Proveedores" asp-page="CreditoProveedor" asp-route-id="@Model.Input.DatosProveedor.CedulaJuridica" class="btn btn-info">Credito de Proveedor</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <table class="tableCursos">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Informacion
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Cedula Juridica
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.DatosProveedor.CedulaJuridica</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Nombre
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@name</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Telefono
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.DatosProveedor.Telefono</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Correo Electronico
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.DatosProveedor.Email</p>
+                                </td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <th>
+                                    Provincia
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.DatosProveedor.nombreProvincia</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Canton
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.DatosProveedor.nombreCanton</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Distrito
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.DatosProveedor.nombreDistrito</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Direccion Exacta
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.DatosProveedor.Direccion</p>
+                                </td>
+                            </tr>
+                        <td>
+                            <form asp-area="Proveedores" asp-route-id="1" asp-page="RegistrarProveedor" method="post">
+                                        @{
+                                            var datosProveedor = JsonConvert.SerializeObject(Model.Input.DatosProveedor);
+                                        }
+                                <input type="hidden" name="datosProveedor" value="@datosProveedor" />
+                                <button type="submit" value="Editar" class="btn btn-success btn-sm">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-area="Proveedores" asp-route-id="2" asp-page="DeleteProveedor" method="post">
+                                        @{
+                                            var datosProveedor2 = JsonConvert.SerializeObject(Model.Input.DatosProveedor);
+                                        }
+                                <input type="hidden" name="DataUser" value="@datosProveedor2" />
+                                <button type="submit" value="Borrar" class="btn btn-danger btn-sm" onclick="return confirm('Seguro de eliminar el Proveedor: @Model.Input.DatosProveedor.NombreProveedor ')">
+                                    <i class="bi bi-trash3-fill"></i> Borrar
+                                </button>
+                            </form>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

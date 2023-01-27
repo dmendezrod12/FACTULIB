@@ -1,0 +1,38 @@
+﻿@model RecoveryPassViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container p-4">
+    <div class="row text-center">
+        <h1>Recuperacion de contraseña</h1>
+    </div>
+    <form action="@Url.Content("~/Home/Recovery")" method="post">
+        <div class="form-group">
+            @Html.HiddenFor(d=>d.token)
+        </div>
+        <div class="form-group">
+            <p>Digite la nueva contraseña</p>
+            <input asp-for="Password" placeholder="Contraseña" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <p>Digite nuevamente la contraseña</p>
+            <input asp-for="ConfirmPassword" placeholder="Confirmación de Contraseña" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <span class="text-danger">
+                @Html.DisplayFor(d => d.ErrorMessage);
+            </span>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary">Recuperar</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
