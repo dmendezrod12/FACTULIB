@@ -1,6 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\FactuLib",
+    "\\FactuLib\\FactuLib",
+    "\\FactuLib\\FactuLib\\Areas",
+    "\\FactuLib\\FactuLib\\Areas\\Compras",
+    "\\FactuLib\\FactuLib\\Areas\\Compras\\Pages",
+    "\\FactuLib\\FactuLib\\Areas\\Compras\\Pages\\Account"
   ],
+  "SelectedNode": "\\FactuLib\\FactuLib\\Areas\\Compras\\Pages\\Account\\AgregarCompra.cshtml.cs",
   "PreviewInSolutionExplorer": false
 }

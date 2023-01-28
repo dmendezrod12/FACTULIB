@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-FactuLib-8A222036-0707-41D5-8170-7FD7CD0E8702")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("FactuLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]

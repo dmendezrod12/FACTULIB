@@ -12,20 +12,6 @@ namespace FactuLib.Areas.Compras.Models
         [Key]
         public int idTempCompras { get; set; }
 
-        [Required(ErrorMessage = "El campo Nombre Producto es Obligatorio")]
-        public string Nombre { get; set; }
-
-        [Required(ErrorMessage = "El campo descripción es obligatorio")]
-        public string Descripcion { get; set; }
-
-        [Required(ErrorMessage = "El campo cantidad es obligarorio")]
-        public int Cantidad { get; set; }
-
-        [Required(ErrorMessage = "El campo precio es obligatorio")]
-        
-        [RegularExpression(@"^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$", ErrorMessage = "El Pago no es correcto")]
-        public float Precio { get; set; }
-
         public float TotalNeto { get; set; }
 
         public float TotalImpuestos { get; set; }
@@ -33,6 +19,8 @@ namespace FactuLib.Areas.Compras.Models
         public float TotalDescuentos { get; set; }
 
         public float TotalBruto { get; set; }
+
+        public int Cantidad_Compra { get; set; }
 
         [ForeignKey("IdProveedor")]
         public TProveedor Tproveedor { get; set; }
@@ -44,8 +32,7 @@ namespace FactuLib.Areas.Compras.Models
 
         public TProducto TProducto { get; set; }
 
-        public byte[] Image { get; set; }
-
         public DateTime Date { get; set; }
+
     }
 }

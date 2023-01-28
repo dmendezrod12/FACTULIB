@@ -9,11 +9,11 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FactuLib
 build_property.RootNamespace = FactuLib
-build_property.ProjectDir = C:\Users\pafla\Source\Repos\dmendezrod12\FACTULIB\FactuLib\FactuLib\
+build_property.ProjectDir = C:\Users\pafla\source\repos\dmendezrod12\FACTULIB\FactuLib\FactuLib\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\pafla\Source\Repos\dmendezrod12\FACTULIB\FactuLib\FactuLib
+build_property.MSBuildProjectDirectory = C:\Users\pafla\source\repos\dmendezrod12\FACTULIB\FactuLib\FactuLib
 build_property._RazorSourceGeneratorDebug = 
 
 [C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Clientes/Pages/Account/CreditoCliente.cshtml]

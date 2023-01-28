@@ -5,6 +5,7 @@ using FactuLib.Areas.Users.Models;
 using FactuLib.Data;
 using FactuLib.Library;
 using FactuLib.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ using System.Threading.Tasks;
 
 namespace FactuLib.Areas.Compras.Pages.Account
 {
+    [Authorize]
     public class AgregarCompraModel : PageModel
     {
         private static InputModel _dataInput, _dataInput2;
@@ -27,8 +29,9 @@ namespace FactuLib.Areas.Compras.Pages.Account
         private IWebHostEnvironment _environment;
         private UserManager<IdentityUser> _userManager;
         private LCompras _compras;
-        private static TTemporalCompras _temporal_compras;
+        private static InputModelCompras _temporal_compras;
         private static byte[] imageByte = null;
+        private static bool compraIniciada = false;
         public int _idPagina;
         public string Moneda = "¢";
         public float monto = 0;
@@ -49,10 +52,13 @@ namespace FactuLib.Areas.Compras.Pages.Account
         }
 
 
-        public void OnGet(int id, int IdTemporal, string nombreProveedor,int idProducto, string search)
+        public void OnGet(int id, int IdTemporal, string nombreProveedor,int idProducto, string search, bool error)
         {
             _idPagina = id;
             monto = _compras.getMontoTotal();
+
+           
+
             if (_dataInput != null)
             {
                 Input = _dataInput;
@@ -61,12 +67,21 @@ namespace FactuLib.Areas.Compras.Pages.Account
                 Input.Temporal_compras = _compras.Get_Temporal_Compras(_idPagina, 5, search, Request);
                 Input.Lista_Proveedores = _compras.GetProveedoreslista(_idPagina, 5, null, Request);
                 Input.Lista_Productos = _compras.GetProductosLista(_idPagina, 5, null, Request);
-                
+
+                if (error == true)
+                {
+                    Input.ErrorMessage = _dataInput.ErrorMessage;
+                }
+
             }
 
             if (_dataInput2 != null)
             {
                 Input = _dataInput2;
+                if (error == true)
+                {
+                    Input.ErrorMessage = _dataInput.ErrorMessage;
+                }
             }
             else
             {
@@ -85,6 +100,11 @@ namespace FactuLib.Areas.Compras.Pages.Account
                     Image = _temporal_compras.Image,
                     Date = _temporal_compras.Date,
                 };
+
+                if (error == true)
+                {
+                    Input.ErrorMessage = _dataInput.ErrorMessage;
+                }
 
                 if (Input.idTempCompras != 0)
                 {
@@ -154,7 +174,14 @@ namespace FactuLib.Areas.Compras.Pages.Account
                 {
                     if (_temporal_compras.idTempCompras == 0)
                     {
-                        await SaveAsync();
+                        if (await SaveAsync())
+                        {
+                            return Redirect("/Compras/AgregarCompra?area=Compras");
+                        }
+                        else
+                        {
+                            return Redirect("/Compras/AgregarCompra?area=Compras&error=true");
+                        }
                     }
                     else
                     {
@@ -173,7 +200,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
         {
             public string User { get; set; }
 
-            public string Proveedor { get; set; }
+            
 
             public string NombreProveedor { get; set; }
 
@@ -196,7 +223,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
 
             public List<TTemporalCompras> Compras { get; set; }
 
-            public DataPaginador<TTemporalCompras> Temporal_compras { get; set; }
+            public DataPaginador<InputModelCompras> Temporal_compras { get; set; }
 
             public DataPaginador<TProveedor> Lista_Proveedores { get; set; }
 
@@ -218,14 +245,28 @@ namespace FactuLib.Areas.Compras.Pages.Account
                 {
                     var dataProveedor = proveedor.Last();
                     var idUser = _userManager.GetUserId(User);
+                    bool proveedorInvalido = false;
                     var dataCompras = _context.TTemporalCompras.Where(t => t.Tproveedor.IdProveedor.Equals(dataProveedor.IdProveedor) && t.TUser.IdUser.Equals(idUser)).ToList();
-                    if (dataCompras.Count == 0)
+
+                    //if (dataCompras.Count == 0 && compraIniciada == false)
+                    //{
+                    //    compraIniciada = true; 
+                    //}
+
+
+                    if (dataCompras.Count == 0 && compraIniciada == true)
+                    {
+                        proveedorInvalido = true;
+                    }
+
+                    if (dataCompras.Count == 0 && proveedorInvalido == false)
                     {
                         await SaveAsync();
+                        compraIniciada = true; 
                     }
                     else
                     {
-                        if (dataCompras[0].Tproveedor.IdProveedor.Equals(dataProveedor.IdProveedor))
+                        if (proveedorInvalido == false)
                         {
                             await SaveAsync();
                         }
@@ -251,18 +292,14 @@ namespace FactuLib.Areas.Compras.Pages.Account
                                     float montoNeto = monto + descuento + impuesto;
                                     var compras = new TTemporalCompras
                                     {
-                                        Nombre = _dataInput.Nombre,
-                                        Descripcion = _dataInput.Descripcion,
-                                        Precio = _dataInput.Precio,
-                                        Cantidad = _dataInput.Cantidad,
                                         TotalBruto = monto,
                                         TotalDescuentos = descuento,
                                         TotalImpuestos = impuesto,
                                         TotalNeto = montoNeto,
+                                        Cantidad_Compra = _dataInput.Cantidad,
                                         Tproveedor = dataProveedor,
                                         TProducto = producto,
                                         TUser = userData,
-                                        Image = imageByte,
                                         Date = DateTime.Now
                                     };
 
@@ -278,6 +315,11 @@ namespace FactuLib.Areas.Compras.Pages.Account
                                     _dataInput.ErrorMessage = ex.Message;
                                     transaction.Rollback();
                                     valor = false;
+
+                                    if (dataCompras.Count.Equals(0) && compraIniciada == true)
+                                    {
+                                        compraIniciada = false;
+                                    }
                                 }
                             }
                         });
@@ -311,7 +353,6 @@ namespace FactuLib.Areas.Compras.Pages.Account
             if (Input.AvatarImage != null)
             {
                 imageByte = await _uploadImage.ByteAvatarImageAsync(Input.AvatarImage, _environment, "images/images/agregarCompra.png");
-                _temporal_compras.Image = imageByte;
             }
             var proveedor = _context.TProveedor.Where(u => u.Nombre_Proveedor.Replace(" ", "").Equals(_dataInput.Proveedor.Replace(" ", ""))).ToList();
 
@@ -342,19 +383,15 @@ namespace FactuLib.Areas.Compras.Pages.Account
                                 var compras = new TTemporalCompras
                                 {
                                     idTempCompras = _temporal_compras.idTempCompras,
-                                    Descripcion = _dataInput.Descripcion,
-                                    Nombre = _dataInput.Nombre,
-                                    Cantidad = _dataInput.Cantidad,
-                                    Precio = _dataInput.Precio,
                                     Date = _temporal_compras.Date,
                                     TotalDescuentos = descuento,
                                     TotalImpuestos = impuesto,
                                     TotalNeto = montoNeto,
                                     TotalBruto = monto,
+                                    Cantidad_Compra = _dataInput.Cantidad,
                                     Tproveedor = datosProveedor,
                                     TProducto = producto,
                                     TUser = usuario,
-                                    Image = _temporal_compras.Image
                                 };
                                 _context.Update(compras);
                                 _context.SaveChanges();
