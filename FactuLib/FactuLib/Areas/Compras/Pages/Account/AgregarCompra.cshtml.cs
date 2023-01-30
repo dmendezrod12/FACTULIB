@@ -34,8 +34,9 @@ namespace FactuLib.Areas.Compras.Pages.Account
         private static bool compraIniciada = false;
         public int _idPagina;
         public string Moneda = "¢";
-        public float monto = 0;
-        
+        public float monto, montoDescuento, montoImpuesto, montoBruto = 0;
+        public static string _proveedorSeleccionado;
+
         public static string _nombreProveedor = "";
 
         public AgregarCompraModel(
@@ -52,12 +53,13 @@ namespace FactuLib.Areas.Compras.Pages.Account
         }
 
 
-        public void OnGet(int id, int IdTemporal, string nombreProveedor,int idProducto, string search, bool error)
+        public void OnGet(int id, int IdTemporal, string nombreProveedor, int idProducto, string search, bool error)
         {
             _idPagina = id;
             monto = _compras.getMontoTotal();
-
-           
+            montoBruto = _compras.getMontoBruto();
+            montoDescuento = _compras.getMontoDescuentos();
+            montoImpuesto = _compras.getMontoImpuestos();
 
             if (_dataInput != null)
             {
@@ -108,7 +110,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
 
                 if (Input.idTempCompras != 0)
                 {
-                    var producto = _context.TProducto.Where(p => p.Nombre_Producto.Replace(" ","").Equals(Input.Nombre.Replace(" ",""))).ToList().Last();
+                    var producto = _context.TProducto.Where(p => p.Nombre_Producto.Replace(" ", "").Equals(Input.Nombre.Replace(" ", ""))).ToList().Last();
                     Input.TProducto = producto;
                     Input.InputIdProducto = producto.Id_Producto;
                 }
@@ -148,12 +150,12 @@ namespace FactuLib.Areas.Compras.Pages.Account
             }
         }
 
-        public async Task<IActionResult> OnPost(int delete, String NombreProv,int SelProv, int value, int SelProd, int IdProd)
+        public async Task<IActionResult> OnPost(int delete, String NombreProv, int SelProv, int value, int SelProd, int IdProd)
         {
             if (SelProv == 1)
             {
                 //_dataInput2 = Input;
-                return Redirect("/Compras/AgregarCompra?area=Compras&nombreProveedor="+NombreProv);
+                return Redirect("/Compras/AgregarCompra?area=Compras&nombreProveedor=" + NombreProv);
             }
 
             if (SelProd == 1)
@@ -168,7 +170,14 @@ namespace FactuLib.Areas.Compras.Pages.Account
             {
                 if (value == 1)
                 {
-                    await ComprasAsync();
+                    if (await ComprasAsync())
+                    {
+                        return Redirect("/Compras/AgregarCompra?area=Compras");
+                    }
+                    else
+                    {
+                        return Redirect("/Compras/AgregarCompra?area=Compras&error=true");
+                    }
                 }
                 else
                 {
@@ -200,7 +209,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
         {
             public string User { get; set; }
 
-            
+
 
             public string NombreProveedor { get; set; }
 
@@ -227,7 +236,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
 
             public DataPaginador<TProveedor> Lista_Proveedores { get; set; }
 
-            public DataPaginador <TProducto> Lista_Productos { get; set; }
+            public DataPaginador<TProducto> Lista_Productos { get; set; }
 
 
         }
@@ -262,7 +271,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
                     if (dataCompras.Count == 0 && proveedorInvalido == false)
                     {
                         await SaveAsync();
-                        compraIniciada = true; 
+                        compraIniciada = true;
                     }
                     else
                     {
@@ -277,6 +286,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
                     }
                     async Task SaveAsync()
                     {
+                        _proveedorSeleccionado = _dataInput.Proveedor;
                         var strategy = _context.Database.CreateExecutionStrategy();
                         var userData = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList().Last();
                         var producto = _context.TProducto.Where(p => p.Id_Producto.Equals(_dataInput.InputIdProducto)).ToList().Last();
@@ -453,12 +463,16 @@ namespace FactuLib.Areas.Compras.Pages.Account
             });
         }
 
-        private async Task ComprasAsync()
+        private async Task<bool> ComprasAsync()
         {
             _dataInput = Input;
+            var valor = false;
             var idUser = _userManager.GetUserId(User);
-            var proveedor = _context.TProveedor.Where(u => u.Nombre_Proveedor.Replace(" ", "").Equals(_dataInput.Proveedor.Replace(" ", ""))).ToList().Last();
+            var proveedor = _context.TProveedor.Where(u => u.Nombre_Proveedor.Replace(" ", "").Equals(_proveedorSeleccionado.Replace(" ", ""))).ToList().Last();
             var datosTemporal = _context.TTemporalCompras.Where(u => u.TUser.IdUser.Equals(idUser) && u.Tproveedor.IdProveedor.Equals(proveedor.IdProveedor)).ToList();
+            var productos = _context.TProducto.ToList();
+            var proveedores = _context.TProveedor.ToList();
+            var creditosProveedor = _context.TCreditoProveedor.ToList();
             if (datosTemporal.Count > 0)
             {
                 var strategy  = _context.Database.CreateExecutionStrategy();
@@ -469,20 +483,158 @@ namespace FactuLib.Areas.Compras.Pages.Account
                         {
                             string _ticket = null;
                             var dateNow = DateTime.Now;
+                            var metodoPago = 0;
                             var _cambio = 0.0m;
                             var user = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList();
                             var nameUser = $"{user[0].Name} {user[0].Apellido1} {user[0].Apellido2}";
                             var monto = _compras.getMontoTotal();
+                            var montoBruto = _compras.getMontoBruto();
+                            var montoDescuento = _compras.getMontoDescuentos();
+                            var montoImpuesto = _compras.getMontoImpuestos();
                             var dataTempo = datosTemporal.Last();
                             var deuda = monto - Input.Pagos;
                             //var datosCompras = _context.TRegistroCompras.Where (u=> u.TProveedor.IdProveedor.Equals(dataTempo.Tproveedor.IdProveedor)).ToList();
 
+                            if (_dataInput.Contado == true)
+                            {
+                                if (_dataInput.ChkEfectivo == true)
+                                {
+                                    metodoPago = 1;
+                                }
+                                if (_dataInput.ChkTarjeta == true)
+                                {
+                                    metodoPago = 2;
+                                }
+                                if (_dataInput.ChkTransferencia == true)
+                                {
+                                    metodoPago = 3;
+                                }
 
+                                _cambio = (decimal)(_dataInput.Pagos - monto);
+
+                                var RegistroCompra = new TRegistroCompras
+                                {
+                                    NumeroFacturaProveedor = _dataInput.FacturaProveedor,
+                                    Total_Bruto = montoBruto,
+                                    Total_Descuento = montoDescuento,
+                                    Total_IVA = montoImpuesto,
+                                    Total_Neto = monto,
+                                    MetodoPago = metodoPago,
+                                    DineroRecibido = _dataInput.Pagos,
+                                    CambioCompra = _cambio,
+                                    Fecha_Compra = DateTime.Now,
+                                    TProveedor = proveedor
+                                };
+
+                                await _context.AddAsync(RegistroCompra);
+                                await _context.SaveChangesAsync();
+
+                                foreach (var item in datosTemporal)
+                                {
+                                   var ProductoDetalle = productos.Where(p => p.Id_Producto.Equals(item.TProducto.Id_Producto)).ToList().Last();
+                                   ProductoDetalle.Cantidad_Producto = ProductoDetalle.Cantidad_Producto + item.Cantidad_Compra;
+
+                                    var DetalleCompra = new TDetallesCompras
+                                    {
+                                        Cantidad_Producto = item.Cantidad_Compra,
+                                        Monto_Bruto_Detalle = item.TotalBruto,
+                                        Descuento_Detalle = item.TotalDescuentos,
+                                        Monto_Neto_Detalle = item.TotalNeto,
+                                        Monto_Impuesto_Detalle = item.TotalImpuestos,
+                                        TRegistroCompras = RegistroCompra,
+                                        TProducto = ProductoDetalle
+                                    };
+
+                                    await _context.AddAsync(DetalleCompra);
+                                    await _context.SaveChangesAsync();
+
+                                    _context.TTemporalCompras.Where(t => t.idTempCompras.Equals(item.idTempCompras)).ToList().ForEach(d => _context.TTemporalCompras.Remove(d));
+                                    await _context.SaveChangesAsync();
+                                }
+                                valor = true; 
+                                transaction.Commit();
+                            }
+                            if (_dataInput.Credito == true)
+                            {
+                                var credito = creditosProveedor.Where(c => c.TProveedor.IdProveedor.Equals(proveedor.IdProveedor)).ToList().Last();
+
+                                var deudaActualAnterior = (float)credito.DeudaActual;
+                                var deudaNueva = deudaActualAnterior + monto;
+                                var deudaActualNueva = deudaNueva;
+
+                                var CreditoProveedor = new TCreditoProveedor
+                                {
+                                    //idCredito = credito.idCredito,
+                                    Deuda = (Decimal)deudaNueva,
+                                    Mensual = credito.Mensual,
+                                    Cambio = credito.Cambio,
+                                    UltimoPago = credito.UltimoPago,
+                                    FechaPago = credito.FechaPago,
+                                    DeudaActual = (Decimal)deudaActualNueva,
+                                    FechaDeuda = credito.FechaDeuda,
+                                    Ticket = credito.Ticket,
+                                    FechaLimite = credito.FechaLimite,
+                                    TProveedor = proveedor,
+
+                                };
+
+                                _context.Update(CreditoProveedor);
+                                _context.SaveChanges();
+
+                                var RegistroCompra = new TRegistroCompras
+                                {
+                                    NumeroFacturaProveedor = _dataInput.FacturaProveedor,
+                                    Total_Bruto = montoBruto,
+                                    Total_Descuento = montoDescuento,
+                                    Total_IVA = montoImpuesto,
+                                    Total_Neto = monto,
+                                    MetodoPago = 0,
+                                    DineroRecibido = 0,
+                                    CambioCompra = 0,
+                                    Fecha_Compra = DateTime.Now,
+                                    TProveedor = proveedor
+                                };
+
+                                await _context.AddAsync(RegistroCompra);
+                                await _context.SaveChangesAsync();
+
+                                foreach (var item in datosTemporal)
+                                {
+                                    var ProductoDetalle = productos.Where(p => p.Id_Producto.Equals(item.TProducto.Id_Producto)).ToList().Last();
+                                    ProductoDetalle.Cantidad_Producto = ProductoDetalle.Cantidad_Producto + item.Cantidad_Compra;
+
+                                    var DetalleCompra = new TDetallesCompras
+                                    {
+                                        Cantidad_Producto = item.Cantidad_Compra,
+                                        Monto_Bruto_Detalle = item.TotalBruto,
+                                        Descuento_Detalle = item.TotalDescuentos,
+                                        Monto_Neto_Detalle = item.TotalNeto,
+                                        Monto_Impuesto_Detalle = item.TotalImpuestos,
+                                        TRegistroCompras = RegistroCompra,
+                                        TProducto = ProductoDetalle
+                                    };
+
+                                    await _context.AddAsync(DetalleCompra);
+                                    await _context.SaveChangesAsync();
+
+                                    _context.TTemporalCompras.Where(t => t.idTempCompras.Equals(item.idTempCompras)).ToList().ForEach(d => _context.TTemporalCompras.Remove(d));
+                                    await _context.SaveChangesAsync();
+                                }
+                                valor = true;
+                                transaction.Commit();
+                            }
+
+                            if (_dataInput.Credito == false && _dataInput.Contado == false)
+                            {
+                                _dataInput.ErrorMessage = "Debe seleccionar una forma de Pago";
+                                valor = false;
+                            }
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
-
-                            throw;
+                            _dataInput.ErrorMessage = ex.Message;
+                            valor = false;
+                            transaction.Rollback();
                         }
                     }
                 });
@@ -491,6 +643,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
             {
                 _dataInput.ErrorMessage = "No hay productos registrados";
             }
+            return valor;
         }
     }
 }

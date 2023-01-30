@@ -16,6 +16,8 @@ namespace FactuLib.Areas.Compras.Models
 
         public float Monto_Neto_Detalle { get; set; }
 
+        public float Monto_Impuesto_Detalle { get; set; }
+
         public TRegistroCompras TRegistroCompras { get; set; }
 
         public TProducto TProducto { get; set;  }

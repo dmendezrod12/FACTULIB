@@ -4,6 +4,7 @@ using FactuLib.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FactuLib.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230129042102_Migration20")]
+    partial class Migration20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,8 +281,8 @@ namespace FactuLib.Data.Migrations
                     b.Property<decimal>("CambioCompra")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("DineroRecibido")
-                        .HasColumnType("real");
+                    b.Property<int>("DineroRecibido")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha_Compra")
                         .HasColumnType("datetime2");

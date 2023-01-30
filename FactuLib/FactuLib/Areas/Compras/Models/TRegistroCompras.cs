@@ -20,6 +20,12 @@ namespace FactuLib.Areas.Compras.Models
 
         public float Total_Neto { get; set; }
 
+        public int MetodoPago { get; set; }
+
+        public float DineroRecibido { get; set; }
+
+        public Decimal CambioCompra { get; set; }
+
         public DateTime Fecha_Compra { get; set; }
 
         [ForeignKey("Id_Proveedor")]

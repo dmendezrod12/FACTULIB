@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
 
 namespace FactuLib.Areas.Compras.Models
 {
@@ -24,12 +25,20 @@ namespace FactuLib.Areas.Compras.Models
 
         [Required(ErrorMessage = "El campo pago es obligatorio")]
         [RegularExpression(@"^\s*(?=.*[0-9])\d*(?:\.\d{1,2})?\s*$", ErrorMessage = "El pago no es correcto")]
-
         public float Pagos { get; set; }
+
+        //[Required(ErrorMessage = "El campo Factura es obligatorio")]
+        public string FacturaProveedor { get; set; }
 
         public bool Credito { get; set; }
 
         public bool Contado { get; set; }
+
+        public bool ChkEfectivo { get; set; }
+
+        public bool ChkTransferencia { get; set; }
+
+        public bool ChkTarjeta { get; set; }
 
         public byte[] Image { get; set; }
     }

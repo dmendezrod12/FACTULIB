@@ -35,11 +35,40 @@
         let deuda = monto - pagos;
         if (monto < pagos) {
             document.getElementById("labelCompra_Deuda").innerHTML = "Cambio para el sistema";
+            document.getElementById("checkContado").disabled = false;
+            document.getElementById("checkCredito").disabled = true;
         } else {
-            document.getElementById("labelCompra_Deuda").innerHTML = "";
+            document.getElementById("labelCompra_Deuda").innerHTML = "Monto de Deuda";
+            document.getElementById("checkContado").disabled = true;
+            document.getElementById("checkCredito").disabled = false;
         }
         let deudas = numberDecimales(deuda);
         document.getElementById("labelCompra_Deudas").innerHTML = deudas.replace('-', '');
+    }
+
+    CheckCredito() {
+        if (document.getElementById("checkCredito").checked) {
+            document.getElementById("checkContado").disabled = true;
+            document.getElementById("Input_Pagos").value = 0;
+            document.getElementById("Input_Pagos").disabled = true;
+        } else {
+            document.getElementById("checkContado").disabled = false;
+            document.getElementById("Input_Pagos").disabled = false;
+        }
+    }
+
+    CheckContado() {
+        if (document.getElementById("checkContado").checked) {
+            document.getElementById("checkCredito").disabled = true;
+            document.getElementById("checkTransferencia").disabled = false;
+            document.getElementById("checkTarjeta").disabled = false;
+            document.getElementById("checkEfectivo").disabled = false;
+        } else {
+            document.getElementById("checkCredito").disabled = false;
+            document.getElementById("checkTransferencia").disabled = true;
+            document.getElementById("checkTarjeta").disabled = true;
+            document.getElementById("checkEfectivo").disabled = true;
+        }
     }
 
     BusquedaProducto() {

@@ -4,6 +4,7 @@ using FactuLib.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FactuLib.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230129033857_Migration19")]
+    partial class Migration19
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,9 +249,6 @@ namespace FactuLib.Data.Migrations
                     b.Property<float>("Monto_Bruto_Detalle")
                         .HasColumnType("real");
 
-                    b.Property<float>("Monto_Impuesto_Detalle")
-                        .HasColumnType("real");
-
                     b.Property<float>("Monto_Neto_Detalle")
                         .HasColumnType("real");
 
@@ -275,11 +275,11 @@ namespace FactuLib.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_RegistroCompras"));
 
-                    b.Property<decimal>("CambioCompra")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("CambioCompra")
+                        .HasColumnType("int");
 
-                    b.Property<float>("DineroRecibido")
-                        .HasColumnType("real");
+                    b.Property<int>("DineroRecibido")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha_Compra")
                         .HasColumnType("datetime2");

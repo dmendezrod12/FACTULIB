@@ -354,5 +354,47 @@ namespace FactuLib.Library
             }
             return monto;
         }
+
+        public float getMontoBruto()
+        {
+            float montoBruto = 0;
+            var listTemporal = _context.TTemporalCompras.ToList();
+            if (0 < listTemporal.Count)
+            {
+                listTemporal.ForEach(item =>
+                {
+                    montoBruto = montoBruto + item.TotalBruto;
+                });
+            }
+            return montoBruto;
+        }
+
+        public float getMontoImpuestos()
+        {
+            float montoImpuesto = 0;
+            var listTemporal = _context.TTemporalCompras.ToList();
+            if (0 < listTemporal.Count)
+            {
+                listTemporal.ForEach(item =>
+                {
+                    montoImpuesto = montoImpuesto + item.TotalImpuestos;
+                });
+            }
+            return montoImpuesto;
+        }
+
+        public float getMontoDescuentos()
+        {
+            float montoDescuento = 0;
+            var listTemporal = _context.TTemporalCompras.ToList();
+            if (0 < listTemporal.Count)
+            {
+                listTemporal.ForEach(item =>
+                {
+                    montoDescuento = montoDescuento + item.TotalDescuentos;
+                });
+            }
+            return montoDescuento;
+        }
     }
 }

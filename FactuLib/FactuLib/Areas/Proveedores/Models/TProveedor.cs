@@ -19,6 +19,5 @@ namespace FactuLib.Areas.Proveedores.Models
 
         public bool Enabled { get; set; }
 
-        public List<TCreditoProveedor> TCreditoProveedor { get; set; }
     }
 }
