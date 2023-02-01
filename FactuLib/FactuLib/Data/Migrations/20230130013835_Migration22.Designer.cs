@@ -4,6 +4,7 @@ using FactuLib.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FactuLib.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230130013835_Migration22")]
+    partial class Migration22
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -375,8 +378,8 @@ namespace FactuLib.Data.Migrations
                     b.Property<string>("Descripcion_Producto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Descuento_Producto")
-                        .HasColumnType("int");
+                    b.Property<float>("Descuento_Producto")
+                        .HasColumnType("real");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
@@ -393,11 +396,11 @@ namespace FactuLib.Data.Migrations
                     b.Property<string>("Nombre_Producto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Precio_Costo")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Precio_Costo")
+                        .HasColumnType("real");
 
-                    b.Property<decimal>("Precio_Venta")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Precio_Venta")
+                        .HasColumnType("real");
 
                     b.HasKey("Id_Producto");
 

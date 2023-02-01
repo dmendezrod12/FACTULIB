@@ -68,6 +68,14 @@
                         <li><a asp-area="Proveedores" asp-page="/Account/ReportsSearch"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Reportes Proveedores</a></li>*@
                     </ul>
                 </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-pen"></i></span> Inventario </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a asp-area="Productos" asp-controller="Productos" asp-action="Productos"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Lista de Prodctos</a></li>
+                        <li><a asp-area="Productos" asp-page="/Account/AgregarProducto"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Agregar Producto</a></li>
+                        <li><a asp-area="Productos" asp-page="/Account/ReportsSearch"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Reportes Inventario</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -99,6 +107,7 @@
 <script src="~/js/Cliente.js" asp-append-version="true"></script>
 <script src="~/js/Proveedor.js" asp-append-version="true"></script>
 <script src="~/js/Compras.js" asp-append-version="true"></script>
+<script src="~/js/Productos.js" asp-append-version="true"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script>
     $("#menu-toggle").click(function (e) {

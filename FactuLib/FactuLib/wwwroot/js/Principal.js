@@ -69,7 +69,6 @@ class Principal {
                                 document.getElementById("InputCedulaResidencia").value = "999999999999";
                                 break;
                         }
-
                     });
                 });
                 break;
@@ -91,6 +90,9 @@ class Principal {
                 });
                 document.getElementById('files').addEventListener('change', imageShopping, false);
                 compras.Restore();
+                break;
+            case "ProductosAgregarProducto":
+                document.getElementById('files').addEventListener('change', imageProducto, false);
                 break;
                 
         }

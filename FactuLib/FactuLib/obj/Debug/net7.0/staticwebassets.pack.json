@@ -89,6 +89,10 @@
       "PackagePath": "staticwebassets\\js\\Principal.js"
     },
     {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Productos.js",
+      "PackagePath": "staticwebassets\\js\\Productos.js"
+    },
+    {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Proveedor.js",
       "PackagePath": "staticwebassets\\js\\Proveedor.js"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CgZAze/PN76BTLFkLvUBzJNDzmBSpsBtLwvmUNptlNM=",
+  "Hash": "TcAGHY2NXeRwx4TCn1bExh6u444R8pb0JzyJmPmYVQk=",
   "Source": "FactuLib",
   "BasePath": "_content/FactuLib",
   "Mode": "Default",
@@ -1409,6 +1409,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Principal.js"
+    },
+    {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Productos.js",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "js/Productos.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Productos.js"
     },
     {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Proveedor.js",

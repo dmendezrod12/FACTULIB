@@ -136,7 +136,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
                     var producto = Input.Lista_Productos.List.Where(p => p.Id_Producto.Equals(idProducto)).ToList().Last();
                     Input.Nombre = producto.Nombre_Producto;
                     Input.Descripcion = producto.Descripcion_Producto;
-                    Input.Precio = producto.Precio_Costo;
+                    Input.Precio = (float)producto.Precio_Costo;
                     Input.Image = producto.Imagen;
                     Input.InputIdProducto = producto.Id_Producto;
                     Input.Descuento = producto.Descuento_Producto;

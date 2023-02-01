@@ -108,6 +108,30 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJpbmNpcGFsXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pafla/source/repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Pages/Account/AgregarProducto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFBhZ2VzXEFjY291bnRcQWdyZWdhclByb2R1Y3RvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/source/repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFBhZ2VzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/source/repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFBhZ2VzXF9WaWV3U3RhcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/source/repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Views/Productos/Productos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFZpZXdzXFByb2R1Y3Rvc1xQcm9kdWN0b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/source/repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/source/repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pafla/source/repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Proveedores/Pages/Account/CreditoProveedor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvdmVlZG9yZXNcUGFnZXNcQWNjb3VudFxDcmVkaXRvUHJvdmVlZG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
