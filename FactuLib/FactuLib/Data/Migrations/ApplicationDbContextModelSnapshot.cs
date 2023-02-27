@@ -22,6 +22,89 @@ namespace FactuLib.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("FactuLib.Areas.Cajas.Models.TRegistroApertura", b =>
+                {
+                    b.Property<int>("Id_Apertura")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Apertura"));
+
+                    b.Property<float>("Dinero_Cajas")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Dinero_Cuentas")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Fecha_Apertura")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Id_Usuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_Apertura");
+
+                    b.HasIndex("Id_Usuario");
+
+                    b.ToTable("TRegisroApertura");
+                });
+
+            modelBuilder.Entity("FactuLib.Areas.Cajas.Models.TRegistroCierre", b =>
+                {
+                    b.Property<int>("Id_Cierre")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Cierre"));
+
+                    b.Property<float>("Dinero_Cajas")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Dinero_Cuentas")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("Fecha_Cierre")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Id_Apertura")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Id_Usuario")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Monto_Faltante")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Compras_Credito")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Compras_Cuentas")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Compras_Efectivo")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Ventas_Credito")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Ventas_Cuentas")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Ventas_Efectivo")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id_Cierre");
+
+                    b.HasIndex("Id_Apertura");
+
+                    b.HasIndex("Id_Usuario");
+
+                    b.ToTable("TRegisroCierre");
+                });
+
             modelBuilder.Entity("FactuLib.Areas.Clientes.Models.TClientes", b =>
                 {
                     b.Property<int>("IdCliente")
@@ -281,10 +364,16 @@ namespace FactuLib.Data.Migrations
                     b.Property<float>("DineroRecibido")
                         .HasColumnType("real");
 
+                    b.Property<bool>("Estado_Compra")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("Fecha_Compra")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("Id_Proveedor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Id_User")
                         .HasColumnType("int");
 
                     b.Property<int>("MetodoPago")
@@ -308,6 +397,8 @@ namespace FactuLib.Data.Migrations
                     b.HasKey("Id_RegistroCompras");
 
                     b.HasIndex("Id_Proveedor");
+
+                    b.HasIndex("Id_User");
 
                     b.ToTable("TRegistroCompras");
                 });
@@ -662,6 +753,140 @@ namespace FactuLib.Data.Migrations
                     b.ToTable("TUsers");
                 });
 
+            modelBuilder.Entity("FactuLib.Areas.Ventas.Models.TDetallesVentas", b =>
+                {
+                    b.Property<int>("Id_Detalle_Venta")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Detalle_Venta"));
+
+                    b.Property<int>("Cantidad_Producto")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Descuento_Detalle")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Monto_Bruto_Detalle")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Monto_Impuesto_Detalle")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Monto_Neto_Detalle")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("TProductoId_Producto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TRegistroVentasId_RegistroVentas")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_Detalle_Venta");
+
+                    b.HasIndex("TProductoId_Producto");
+
+                    b.HasIndex("TRegistroVentasId_RegistroVentas");
+
+                    b.ToTable("TDetallesVentas");
+                });
+
+            modelBuilder.Entity("FactuLib.Areas.Ventas.Models.TRegistroVentas", b =>
+                {
+                    b.Property<int>("Id_RegistroVentas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_RegistroVentas"));
+
+                    b.Property<decimal>("CambioCompra")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<float>("DineroRecibido")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("Estado_Venta")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Fecha_Compra")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Id_Cliente")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Id_User")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MetodoPago")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Total_Bruto")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Descuento")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_IVA")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Total_Neto")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id_RegistroVentas");
+
+                    b.HasIndex("Id_Cliente");
+
+                    b.HasIndex("Id_User");
+
+                    b.ToTable("TRegistroVentas");
+                });
+
+            modelBuilder.Entity("FactuLib.Areas.Ventas.Models.TTemporalVentas", b =>
+                {
+                    b.Property<int>("idTempVentas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idTempVentas"));
+
+                    b.Property<int>("Cantidad_Venta")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("IdCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<float>("TotalBruto")
+                        .HasColumnType("real");
+
+                    b.Property<float>("TotalDescuentos")
+                        .HasColumnType("real");
+
+                    b.Property<float>("TotalImpuestos")
+                        .HasColumnType("real");
+
+                    b.Property<float>("TotalNeto")
+                        .HasColumnType("real");
+
+                    b.HasKey("idTempVentas");
+
+                    b.HasIndex("IdCliente");
+
+                    b.HasIndex("IdProducto");
+
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("TTemporalVentas");
+                });
+
             modelBuilder.Entity("FactuLib.Models.TCanton", b =>
                 {
                     b.Property<int>("idCanton")
@@ -923,6 +1148,30 @@ namespace FactuLib.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("FactuLib.Areas.Cajas.Models.TRegistroApertura", b =>
+                {
+                    b.HasOne("FactuLib.Areas.Users.Models.TUser", "TUser")
+                        .WithMany()
+                        .HasForeignKey("Id_Usuario");
+
+                    b.Navigation("TUser");
+                });
+
+            modelBuilder.Entity("FactuLib.Areas.Cajas.Models.TRegistroCierre", b =>
+                {
+                    b.HasOne("FactuLib.Areas.Cajas.Models.TRegistroApertura", "TRegistroApertura")
+                        .WithMany()
+                        .HasForeignKey("Id_Apertura");
+
+                    b.HasOne("FactuLib.Areas.Users.Models.TUser", "TUser")
+                        .WithMany()
+                        .HasForeignKey("Id_Usuario");
+
+                    b.Navigation("TRegistroApertura");
+
+                    b.Navigation("TUser");
+                });
+
             modelBuilder.Entity("FactuLib.Areas.Clientes.Models.TCorreosClientes", b =>
                 {
                     b.HasOne("FactuLib.Areas.Clientes.Models.TClientes", "cliente")
@@ -935,7 +1184,7 @@ namespace FactuLib.Data.Migrations
             modelBuilder.Entity("FactuLib.Areas.Clientes.Models.TCreditoClientes", b =>
                 {
                     b.HasOne("FactuLib.Areas.Clientes.Models.TClientes", "TClients")
-                        .WithMany("TCreditoClientes")
+                        .WithMany()
                         .HasForeignKey("TClientsIdCliente");
 
                     b.Navigation("TClients");
@@ -992,7 +1241,13 @@ namespace FactuLib.Data.Migrations
                         .WithMany()
                         .HasForeignKey("Id_Proveedor");
 
+                    b.HasOne("FactuLib.Areas.Users.Models.TUser", "TUser")
+                        .WithMany()
+                        .HasForeignKey("Id_User");
+
                     b.Navigation("TProveedor");
+
+                    b.Navigation("TUser");
                 });
 
             modelBuilder.Entity("FactuLib.Areas.Compras.Models.TTemporalCompras", b =>
@@ -1082,6 +1337,57 @@ namespace FactuLib.Data.Migrations
                     b.Navigation("proveedor");
                 });
 
+            modelBuilder.Entity("FactuLib.Areas.Ventas.Models.TDetallesVentas", b =>
+                {
+                    b.HasOne("FactuLib.Areas.Productos.Models.TProducto", "TProducto")
+                        .WithMany()
+                        .HasForeignKey("TProductoId_Producto");
+
+                    b.HasOne("FactuLib.Areas.Ventas.Models.TRegistroVentas", "TRegistroVentas")
+                        .WithMany()
+                        .HasForeignKey("TRegistroVentasId_RegistroVentas");
+
+                    b.Navigation("TProducto");
+
+                    b.Navigation("TRegistroVentas");
+                });
+
+            modelBuilder.Entity("FactuLib.Areas.Ventas.Models.TRegistroVentas", b =>
+                {
+                    b.HasOne("FactuLib.Areas.Clientes.Models.TClientes", "TClientes")
+                        .WithMany()
+                        .HasForeignKey("Id_Cliente");
+
+                    b.HasOne("FactuLib.Areas.Users.Models.TUser", "TUser")
+                        .WithMany()
+                        .HasForeignKey("Id_User");
+
+                    b.Navigation("TClientes");
+
+                    b.Navigation("TUser");
+                });
+
+            modelBuilder.Entity("FactuLib.Areas.Ventas.Models.TTemporalVentas", b =>
+                {
+                    b.HasOne("FactuLib.Areas.Clientes.Models.TClientes", "TCliente")
+                        .WithMany()
+                        .HasForeignKey("IdCliente");
+
+                    b.HasOne("FactuLib.Areas.Productos.Models.TProducto", "TProducto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto");
+
+                    b.HasOne("FactuLib.Areas.Users.Models.TUser", "TUser")
+                        .WithMany()
+                        .HasForeignKey("IdUser");
+
+                    b.Navigation("TCliente");
+
+                    b.Navigation("TProducto");
+
+                    b.Navigation("TUser");
+                });
+
             modelBuilder.Entity("FactuLib.Models.TCanton", b =>
                 {
                     b.HasOne("FactuLib.Models.TProvincia", "provincia")
@@ -1155,11 +1461,6 @@ namespace FactuLib.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FactuLib.Areas.Clientes.Models.TClientes", b =>
-                {
-                    b.Navigation("TCreditoClientes");
                 });
 #pragma warning restore 612, 618
         }

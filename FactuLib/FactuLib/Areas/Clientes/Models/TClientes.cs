@@ -33,6 +33,6 @@ namespace FactuLib.Areas.Clientes.Models
 
        // public TCorreosClientes correosClientes { get; set; }
         
-        public List<TCreditoClientes> TCreditoClientes { get; set; }
+       // public List<TCreditoClientes> TCreditoClientes { get; set; }
     }
 }

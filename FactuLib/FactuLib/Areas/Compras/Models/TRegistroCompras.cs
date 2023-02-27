@@ -1,4 +1,5 @@
 ﻿using FactuLib.Areas.Proveedores.Models;
+using FactuLib.Areas.Users.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,7 +29,13 @@ namespace FactuLib.Areas.Compras.Models
 
         public DateTime Fecha_Compra { get; set; }
 
+        public bool Estado_Compra { get; set; }
+
         [ForeignKey("Id_Proveedor")]
         public TProveedor TProveedor { get; set; }
+
+        [ForeignKey("Id_User")]
+
+        public TUser TUser { get; set; }
     }
 }

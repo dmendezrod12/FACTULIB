@@ -1,0 +1,65 @@
+﻿@page "/Proveedores/ReporteBusquedaProveedor"
+@model ReporteBusquedaProveedorModel
+@{
+}
+<div class="container">
+    <h1>Seleccione proveedor para extraer reporte</h1>
+    <div class="col-sm">
+        <div class="card">
+            <div class="card-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" data-toggle="tab" href="#nav-fee" role="tab" aria-selected="true">Lista de Proveedores</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-fee" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.proveedores.Last().CedulaJuridica)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.proveedores.Last().NombreProveedor)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.proveedores.Last().Telefono)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.proveedores.Last().Email)
+                                    </th>
+                                    <th>
+                                        Opciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Input.proveedores)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.CedulaJuridica
+                                        </td>
+                                        <td>
+                                            @item.NombreProveedor
+                                        </td>
+                                        <td>
+                                            @item.Telefono
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td>
+                                            <a href="/Proveedores/ReportesPagosProveedores?Cedula=@item.CedulaJuridica&area=Proveedores" class="btn btn-outline-info btn-sm">Generar Reporte</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@page "/Ventas/ListaVentas"
+@model FactuLib.Areas.Ventas.Pages.Account.ListaVentasModel
+@{
+}
+<div class="container">
+    <h2>Lista de Ventas</h2>
+    <br />
+    <div class="card">
+        <div class="card-header">
+            <form asp-area="Ventas" asp-page="ListaVentas" method="get">
+                <div class="row">
+                    <div class="col-sm">
+                        <label class="form-check-label">Inicio</label>
+                        <input style="width: 9rem;" asp-for="Input.horaInicio" />
+                    </div>
+                    <div class="col-sm">
+                        <label class="form-check-label">Final</label>
+                        <input style="width: 9rem;" asp-for="Input.horaFinal" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="form-check-label"></label>
+                        <input type="submit" value="filtrar" class="btn btn-success" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessageFecha)</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-fee" role="tabpanel">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Numero de Ticket
+                                </th>
+                                <th>
+                                    Nombre de Cliente
+                                </th>
+                                <th>
+                                    Fecha de Venta
+                                </th>
+                                <th>
+                                    Importe Total
+                                </th>
+                                <th>
+                                    Opciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Input.TRegistroVentas.List)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Id_RegistroVentas
+                                    </td>
+                                    <td>
+                                        @Model.Input.cliente.getNombreCliente(item.TClientes.IdCliente)
+                                    </td>
+                                    <td>
+                                        @{
+                                            var FechaReg = $"{item.Fecha_Compra.Day}/{item.Fecha_Compra.Month}/{item.Fecha_Compra.Year}";
+                                        }
+                                        @Html.Raw(FechaReg)
+                                    </td>
+                                    <td>
+                                        @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}", item.Total_Neto)
+                                    </td>
+                                    <td>
+                                        <a href="/Ventas/DetallesVentas?idVenta=@item.Id_RegistroVentas" class="btn btn-outline-info btn-sm">Reporte</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        Resultados @Html.Raw(Model.Input.TRegistroVentas.Pagi_info)
+                        <br />
+                        @Html.Raw(Model.Input.TRegistroVentas.Pagi_navegacion)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,5 +29,9 @@ namespace FactuLib.Areas.Productos.Models
         public TTipoProducto TTipoProducto { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        public string Base64Imagen { get; set; }
+
+        public Decimal PrecioProductoJS { get; set; }
     }
 }

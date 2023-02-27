@@ -18,7 +18,6 @@ namespace FactuLib.Library
         public LCliente(ApplicationDbContext context)
         {
             _context = context;
-
         }
         public List<InputModelRegistrar> getTClienteAsync(String valor, long id)
         {
@@ -432,6 +431,20 @@ namespace FactuLib.Library
                 resultado = false;
             }
             return resultado;
+        }
+
+        public string getNombreCliente(int id)
+        {
+            string nombreCliente = "";
+            if (id > 0)
+            {
+                var cliente = _context.TClientes.Where(p => p.IdCliente.Equals(id)).ToList().Last();
+                if (cliente.IdCliente > 0)
+                {
+                    nombreCliente = cliente.Nombre + " " + cliente.Apellido1;
+                }
+            }
+            return nombreCliente;
         }
     }
 }

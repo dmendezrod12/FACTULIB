@@ -75,6 +75,8 @@ namespace FactuLib
                 endpoints.MapAreaControllerRoute("Proveedores", "Proveedores", "{controller=Proveedores}/{action=Proveedores}/{id?}");
                 endpoints.MapAreaControllerRoute("Compras", "Compras", "{controller=Compras}/{action=Compras}/{id?}");
                 endpoints.MapAreaControllerRoute("Productos", "Productos", "{controller=Productos}/{action=Productos}/{id?}");
+                endpoints.MapAreaControllerRoute("Ventas", "Ventas", "{controller=Ventas}/{action=Ventas}/{id?}");
+                endpoints.MapAreaControllerRoute("Cajas", "Cajas", "{controller=Cajas}/{action=Cajas}/{id?}");
                 endpoints.MapRazorPages();
                 
             });

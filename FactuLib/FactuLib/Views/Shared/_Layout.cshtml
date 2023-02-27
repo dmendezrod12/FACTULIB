@@ -64,6 +64,7 @@
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-cart "></i></span> Compras </a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a asp-area="Compras" asp-page="/Account/AgregarCompra"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Realizar Compra</a></li>
+                        <li><a asp-area="Compras" asp-page="/Account/ListaCompras"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Listado de Compras</a></li>
                         @*<li><a asp-route-id="0" asp-area="Proveedores" asp-page="/Account/RegistrarProveedor"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Agregar Proveedor</a></li>
                         <li><a asp-area="Proveedores" asp-page="/Account/ReportsSearch"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Reportes Proveedores</a></li>*@
                     </ul>
@@ -74,6 +75,20 @@
                         <li><a asp-area="Productos" asp-controller="Productos" asp-action="Productos"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Lista de Prodctos</a></li>
                         <li><a asp-area="Productos" asp-page="/Account/AgregarProducto"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Agregar Producto</a></li>
                         <li><a asp-area="Productos" asp-page="/Account/ReportsSearch"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Reportes Inventario</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-shop-window"></i></span> Ventas </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a asp-area="Ventas" asp-page="/Account/AgregarVenta"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Realizar Venta</a></li>
+                        <li><a asp-area="Ventas" asp-page="/Account/ListaVentas"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Listado de Ventas</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-cash"></i></span> Cajas </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a asp-area="Cajas" asp-page="/Account/Apertura_Caja"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Aperturar Caja</a></li> 
+                        <li><a asp-area="Cajas" asp-page="/Account/Cierre_Caja"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Cerrar Caja</a></li>
                     </ul>
                 </li>
             </ul>
@@ -106,6 +121,7 @@
 <script src="~/js/User.js" asp-append-version="true"></script>
 <script src="~/js/Cliente.js" asp-append-version="true"></script>
 <script src="~/js/Proveedor.js" asp-append-version="true"></script>
+<script src="~/js/AperturaCaja.js" asp-append-version="true"></script>
 <script src="~/js/Compras.js" asp-append-version="true"></script>
 <script src="~/js/Productos.js" asp-append-version="true"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

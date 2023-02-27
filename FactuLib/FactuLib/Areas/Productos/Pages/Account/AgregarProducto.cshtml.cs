@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
+using FactuLib.Models;
 
 namespace FactuLib.Areas.Productos.Pages.Account
 {
@@ -111,6 +112,7 @@ namespace FactuLib.Areas.Productos.Pages.Account
                             Fecha = _dataProductos1.Fecha,
                             Imagen = _dataProductos1.Imagen,
                             TTipoProducto = _dataProductos1.TTipoProducto,
+                            TipoProductoItems = _TipoProductoItems
                         };
 
                         if (_dataInput != null)
@@ -136,7 +138,7 @@ namespace FactuLib.Areas.Productos.Pages.Account
                 Input = _dataInput;
                 Input.TipoProductoItems = _TipoProductoItems;
             }
-            if (_dataProductos1 == null)
+            if (_dataProductos1 != null)
             {
                 _dataProductos2 = _dataProductos1;
             }
@@ -144,9 +146,9 @@ namespace FactuLib.Areas.Productos.Pages.Account
             _dataProductos1 = null;
         }
 
-        public async Task<IActionResult> OnPost(string DataUser, int id)
+        public async Task<IActionResult> OnPost(string DataProducto, int id)
         {
-            if (DataUser == null)
+            if (DataProducto == null)
             {
                 if (_dataProductos2 == null)
                 {
@@ -186,32 +188,31 @@ namespace FactuLib.Areas.Productos.Pages.Account
                 }
                 else
                 {
-                    return Redirect("/Productos/Productos?area=Productos");
-                    //if (User.IsInRole("Administrador"))
-                    //{
-                    //    if (await UpdateAsync())
-                    //    {
-                    //        var url = $"/Productos/Account/Details?id={_dataProductos2.Id_Producto}";
-                    //        _dataProductos2 = null;
-                    //        _dataProductos1 = null;
-                    //        _dataInput = null;
-                    //        return Redirect(url);
-                    //    }
-                    //    else
-                    //    {
-                    //        return Redirect("/Producto/AgregarProducto?id=1");
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    return Redirect("/Home/ErrorNoAutorizado/");
-                    //}
+                    if (User.IsInRole("Administrador"))
+                    {
+                        if (await UpdateAsync())
+                        {
+                            var url = $"/Productos/Account/Details?id={_dataProductos2.Codigo_Producto}";
+                            _dataProductos2 = null;
+                            _dataProductos1 = null;
+                            _dataInput = null;
+                            return Redirect(url);
+                        }
+                        else
+                        {
+                            return Redirect("/Productos/AgregarProducto?id=1");
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/Home/ErrorNoAutorizado/");
+                    }
                 }
 
             }
             else
             {
-                _dataProductos1 = JsonConvert.DeserializeObject<InputModelProductos>(DataUser);
+                _dataProductos1 = JsonConvert.DeserializeObject<InputModelProductos>(DataProducto);
                 return Redirect("/Productos/AgregarProducto?id=1");
             }
         }
@@ -317,106 +318,105 @@ namespace FactuLib.Areas.Productos.Pages.Account
             return valor;
         }
 
-        //private async Task<bool> UpdateAsync()
-        //{
-        //    _dataInput = Input;
-        //    var valor = false;
-        //    byte[] imageByte = null;
-        //    var listProvincias = _context.TProvincia.ToList();
-        //    var listCantones = _context.TCanton.ToList();
-        //    var distrito = _context.TDistrito.Where(d => d.idDistrito.Equals(InputProvincia.distrito)).ToList().Last();
-        //    var canton = _context.TCanton.Where(c => c.idCanton.Equals(distrito.canton.idCanton)).ToList().Last();
-        //    var provincia = _context.TProvincia.Where(p => p.idProvincia.Equals(canton.provincia.idProvincia)).ToList().Last();
-        //    var strategy = _context.Database.CreateExecutionStrategy();
-        //    await strategy.ExecuteAsync(async () =>
-        //    {
-        //        using (var transaction = _context.Database.BeginTransaction())
-        //        {
-        //            try
-        //            {
-        //                var clientData = _cliente.getCliente(_dataCliente2.Cedula);
-        //                if (!clientData.Count.Equals(0))
-        //                {
-        //                    if (clientData[0].Cedula.Equals(_dataCliente2.Cedula))
-        //                    {
-        //                        if (Input.AvatarImage == null)
-        //                        {
-        //                            imageByte = _dataCliente2.Image;
-        //                        }
-        //                        else
-        //                        {
-        //                            imageByte = await _uploadimage.ByteAvatarImageAsync(Input.AvatarImage, _environment, "");
-        //                        }
-        //                        var client = new TClientes
-        //                        {
-        //                            IdCliente = clientData.Last().IdCliente,
-        //                            Cedula = _dataCliente2.Cedula,
-        //                            Nombre = Input.Name,
-        //                            Apellido1 = Input.Apellido1,
-        //                            Apellido2 = Input.Apellido2,
-        //                            Credito = Input.Credit,
-        //                            Imagen = imageByte,
-        //                            Fecha = clientData.Last().Fecha,
-        //                            Enabled = true
-        //                        };
-        //                        _context.Update(client);
-        //                        _context.SaveChanges();
-
-        //                        var correos = new TCorreosClientes
-        //                        {
-        //                            correo = Input.Email,
-        //                            cliente = client
-        //                        };
-
-        //                        _context.Update(correos);
-        //                        _context.SaveChanges();
-
-        //                        var telefonos = new TTelefonoCliente
-        //                        {
-        //                            telefono = Input.Phone,
-        //                            clientes = client
-        //                        };
-
-        //                        _context.Update(telefonos);
-        //                        _context.SaveChanges();
-
-        //                        var direccionCliente = new TDireccionCliente
-        //                        {
-        //                            Direccion = Input.Direction,
-        //                            clientes = client,
-        //                            Cedula = client.Cedula,
-        //                            idDistrito = InputProvincia.distrito,
-        //                            TProvincia = provincia,
-        //                            TCanton = canton,
-        //                        };
-        //                        _context.Update(direccionCliente);
-        //                        _context.SaveChanges();
-
-        //                        transaction.Commit();
-        //                        valor = true;
-        //                    }
-        //                    else
-        //                    {
-        //                        _dataInput.ErrorMessage = $"No se puede modificar el campo numero de cedula";
-        //                        valor = false;
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    _dataInput.ErrorMessage = $"El numero de cedula {Input.Cedula} no esta registrado";
-        //                    valor = false;
-        //                }
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                _dataInput.ErrorMessage = ex.Message;
-        //                transaction.Rollback();
-        //                valor = false;
-        //            }
-        //        }
-        //    });
-        //    return valor;
-        //}
+        private async Task<bool> UpdateAsync()
+        {
+            _dataInput = Input;
+            var valor = false;
+            byte[] imageByte = null;
+            var tipoProductos = _context.TTipoProducto.ToList();
+            string[] PrecioCostoArray = _dataInput.Precio_Costo.Split(",");
+            string precioCostoAjustado = "";
+            for (int i = 0; i < PrecioCostoArray.Count(); i++)
+            {
+                PrecioCostoArray[i] = PrecioCostoArray[i].Replace("¢", "");
+                PrecioCostoArray[i] = PrecioCostoArray[i].Replace(".", ",");
+                precioCostoAjustado += PrecioCostoArray[i];
+            }
+            decimal PrecioCosto = Decimal.Parse(precioCostoAjustado);
+            string[] PrecioVentaArray = _dataInput.Precio_Venta.Split(",");
+            string precioVentaAjustado = "";
+            for (int i = 0; i < PrecioVentaArray.Count(); i++)
+            {
+                PrecioVentaArray[i] = PrecioVentaArray[i].Replace("¢", "");
+                PrecioVentaArray[i] = PrecioVentaArray[i].Replace(".", ",");
+                precioVentaAjustado += PrecioVentaArray[i];
+            }
+            decimal PrecioVenta = Decimal.Parse(precioVentaAjustado);
+            if (ModelState.IsValid)
+            {
+                var strategy = _context.Database.CreateExecutionStrategy();
+                await strategy.ExecuteAsync(async () =>
+                {
+                    using (var transaction = _context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var productoData = _producto.getProducto(_dataProductos2.Codigo_Producto);
+                            if (!productoData.Count.Equals(0))
+                            {
+                                if (productoData[0].Codigo_Producto.Equals(_dataProductos2.Codigo_Producto))
+                                {
+                                    if (Input.AvatarImage == null)
+                                    {
+                                        imageByte = _dataProductos2.Imagen;
+                                    }
+                                    else
+                                    {
+                                        imageByte = await _uploadimage.ByteAvatarImageAsync(Input.AvatarImage, _environment, "");
+                                    }
+                                    var producto = new TProducto
+                                    {
+                                        Id_Producto = productoData.Last().Id_Producto,
+                                        Codigo_Producto = productoData.Last().Codigo_Producto,
+                                        Nombre_Producto = Input.Nombre_Producto,
+                                        Cantidad_Producto = Input.Cantidad_Producto,
+                                        Precio_Costo = PrecioCosto,
+                                        Precio_Venta = PrecioVenta,
+                                        Descuento_Producto = Input.Descuento_Producto,
+                                        Fecha = productoData.Last().Fecha,
+                                        TTipoProducto = tipoProductos.Where(t => t.Id_TipoProducto.Equals(Input.IdTipoProducto)).ToList().Last(),
+                                        Imagen = imageByte,
+                                        Descripcion_Producto = Input.Descripcion_Producto,
+                                        Enabled = productoData.Last().Enabled
+                                    };
+                                    _context.Update(producto);
+                                    _context.SaveChanges();
+                                    transaction.Commit();
+                                    valor = true;
+                                }
+                                else
+                                {
+                                    _dataInput.ErrorMessage = $"No se puede modificar el campo código";
+                                    valor = false;
+                                }
+                            }
+                            else
+                            {
+                                _dataInput.ErrorMessage = $"El código {Input.Codigo_Producto} no esta registrado";
+                                valor = false;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _dataInput.ErrorMessage = ex.Message;
+                            transaction.Rollback();
+                            valor = false;
+                        }
+                    }
+                });
+            }
+            else
+            {
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        _dataInput.ErrorMessage += error.ErrorMessage;
+                    }
+                }
+            }
+            return valor;
+        }
 
     }
 }

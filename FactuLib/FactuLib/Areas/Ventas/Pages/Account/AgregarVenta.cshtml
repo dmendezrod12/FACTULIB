@@ -1,0 +1,544 @@
+﻿@page "/Ventas/AgregarVenta"
+@model AgregarVentaModel
+@{
+    var image = "";
+    if (Model.Input.Image != null)
+    {
+        image = "data:image/jpg;base64," + Convert.ToBase64String(Model.Input.Image, 0, Model.Input.Image.Length);
+    }
+    else
+    {
+        image = "/images/images/agregarCompra.png";
+    }
+}
+<div class="container">
+    <h2>Ventas</h2>
+    <br />
+    <div class="row">
+        <div class="col-sm">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item  nav-link active" data-toggle="tab" href="#nav-ventas" role="tab" aria-selected="true">Agregar Productos</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#nav-pagos" role="tab" aria-selected="false">Procesar Pago</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-ventas" role="tabpanel">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-header">
+                                        <output id="imageShopping">
+                                            <img id="imgProductoCompra" src="@image" class="imageUser" />
+                                        </output>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-md-5">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"> Registrar Venta </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card">
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <div class="input-group mb-3">
+                                                                <input asp-for="Input.Cliente " placeholder="Cliente" class="form-control" autofocus autocomplete="off" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly />
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#BusquedaCliente"><i class="bi bi-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <span asp-validation-for="Input.Cliente" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="basic-addon1">Id.Prod</span>
+                                                                </div>
+                                                                <input asp-for="Input.InputIdProducto" placeholder="IdProducto" class="form-control" id="InputIdProducto" onblur="compras.BusquedaProducto()" aria-label="Username" aria-describedby="basic-addon1" autofocus autocomplete="off" />
+                                                            </div>
+                                                            <span asp-validation-for="Input.InputIdProducto" class="text-danger"></span>
+                                                            <span class="text-danger" id="ExisteProducto"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="input-group mb-3">
+                                                                <input asp-for="Input.Nombre" placeholder="Nombre de Producto" class="form-control" id="InputNombre" autofocus autocomplete="off" aria-label="Recipient's username" aria-describedby="basic-addon2" readonly />
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#BusquedaProducto"><i class="bi bi-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input asp-for="Input.Descripcion" placeholder="Descripcion" class="form-control" id="InputDescripcion" readonly />
+                                                            <span asp-validation-for="Input.Descripcion" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" id="basic-addon1">Cant</span>
+                                                                </div>
+                                                                <input asp-for="Input.Cantidad" placeholder="Cantidad" class="form-control" min="1" autocomplete="off" aria-label="Username" aria-describedby="basic-addon1" onkeyup="compras.purchaseAmount()" />
+                                                            </div>
+                                                            <span asp-validation-for="Input.Cantidad" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">Precio</span>
+                                                                    <span class="input-group-text">¢</span>
+                                                                </div>
+                                                                <input asp-for="Input.Precio" placeholder="Precio de Compra" class="form-control" autocomplete="off" id="InputPrecio" onkeyup="compras.purchaseAmount()" readonly />
+                                                            </div>
+                                                            <span asp-validation-for="Input.Precio" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">Descuento</span>
+                                                                    <span class="input-group-text">%</span>
+                                                                </div>
+                                                                <input class="form-control" asp-for="Input.Descuento" readonly autocomplete="off" />
+                                                            </div>
+                                                            <span asp-validation-for="Input.Descuento" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessage)</label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <span class="text-danger labelCompra_Importe">
+                                                                <label>T.Bruto: </label>
+                                                                @Html.Raw(Model.Input.Moneda)
+                                                                <label class="text-success labelCompra_Importe" id="labelCompra_Importe">0.00</label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <span class="text-danger labelCompra_Importe">
+                                                                <label>Desc: </label>
+                                                                @Html.Raw(Model.Input.Moneda)
+                                                                <label class="text-success labelCompra_Importe" id="labelCompra_Descuento">0.00</label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <span class="text-danger labelCompra_Importe">
+                                                                <label>IVA: </label>
+                                                                @Html.Raw(Model.Input.Moneda)
+                                                                <label class="text-success labelCompra_Importe" id="labelCompra_Impuesto">0.00</label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <span class="text-danger labelCompra_Importe">
+                                                                <label>T.NETO: </label>
+                                                                @Html.Raw(Model.Input.Moneda)
+                                                                <label class="text-success labelCompra_Importe" id="labelCompra_Neto">0.00</label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary btn-block">Registrar Venta</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-pagos" role="tabpanel">
+                    <form method="post">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Procesar Venta</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card">
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Bruto
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoBruto)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Impuestos
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoImpuesto)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Descuentos
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoDescuento)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Neto
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.monto)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <!--***-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Pago</span>
+                                                            <span class="input-group-text">¢</span>
+                                                        </div>
+                                                        <input asp-for="Input.Pagos" placeholder="Pago" class="form-control" autocomplete="off" onkeyup="compras.Pagos(@Model.monto)" value="0.0" />
+                                                    </div>
+                                                    <span asp-validation-for="Input.Pagos" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="labelCompra_Deuda">
+                                                        Deuda Total
+                                                    </label>
+                                                    <br />
+                                                    <span class="text-danger labelCompra_Importe">
+                                                        @Html.Raw(Model.Input.Moneda)
+                                                        <label class="text-success labelCompra_Importe" id="labelCompra_Deudas">
+                                                            0.00
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" class="form-check-input" id="checkCredito" asp-for="Input.Credito" onclick="compras.CheckCredito()" />
+                                                        <label class="form-check-label" for="check">Crédito</label>
+                                                        &nbsp;
+                                                        <input type="checkbox" class="form-check-input" id="checkContado" asp-for="Input.Contado" onclick="compras.CheckContado()" />
+                                                        <label class="form-check-label" for="check">Contado</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-check-label">Metodo de Pago</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" class="form-check-input" id="checkEfectivo" asp-for="Input.ChkEfectivo" onclick="compras.CheckEfectivo()" disabled="true" />
+                                                        <label class="form-check-label" for="check">Efect.</label>
+                                                        &nbsp;
+                                                        <input type="checkbox" class="form-check-input" id="checkTarjeta" asp-for="Input.ChkTarjeta" onclick="compras.CheckTarjeta()" disabled="true" />
+                                                        <label class="form-check-label" for="check">Tarj.</label>
+                                                        &nbsp;
+                                                        <input type="checkbox" class="form-check-input" id="checkTransferencia" asp-for="Input.ChkTransferencia" onclick="compras.CheckTransferencia()" disabled="true" />
+                                                        <label class="form-check-label" for="check">Transf.</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary btn-block"> Aceptar </button>
+                                                        </div>
+                                                        &nbsp;&nbsp;
+                                                        <div class="form-group">
+                                                            <a href="/Compras/AgregarCompra" class="btn btn-warning btn-block text-white"> Cancelar </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input name="value" type="hidden" value="1" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="text-danger">
+                                                            @Html.DisplayFor(m=> m.Input.ErrorMessage)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-fee2" role="tabpanel">
+                            <div class="tab-pane fade show active" id="nav-fee2" role="tabpanel">
+                                <form method="get">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <input type="text" name="search" placeholder="Buscar" class="form-control" autofocus autocomplete="off" />
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-outline-info btn-sm">Buscar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Input.Nombre)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Input.Cantidad_Venta)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Input.Precio)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Input.TotalNeto)
+                                            </th>
+                                            <th>
+                                                Editar
+                                            </th>
+                                            <th>
+                                                Borrar
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Input.Temporal_Ventas.List)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.Raw(item.Nombre)
+                                                </td>
+                                                <td>
+                                                    @Html.Raw(item.Cantidad_Venta)
+                                                </td>
+                                                <td>
+                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",item.Precio)
+                                                </td>
+                                                <td>
+                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",item.TotalNeto)
+                                                </td>
+                                                <td>
+                                                    <a href="/Ventas/AgregarVenta?id=@Model._idPagina&IdTemporal=@item.idTempVentas" class="btn btn-outline-info btn-sm">Editar</a>
+                                                </td>
+                                                <td>
+                                                    <form method="post">
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input name="delete" type="hidden" value="@item.idTempVentas" />
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <label>
+                                        Importe total:&nbsp;
+                                        <span class="text-danger">
+                                            @Html.Raw(Model.Input.Moneda)
+                                            <label class="text-success">@string.Format("{0:#,###,###,##0.00####}",Model.monto)</label>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="text-center">
+                                    Resultados @Html.Raw(Model.Input.Temporal_Ventas.Pagi_info)
+                                    <br />
+                                    @Html.Raw(Model.Input.Temporal_Ventas.Pagi_navegacion)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="BusquedaCliente" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Contenido del modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Seleccione un Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="get">
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" name="search" placeholder="Buscar" class="form-control" autofocus autocomplete="off" />
+                        </div>
+                        &nbsp;&nbsp;
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-info btn-sm">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Input.NombreCliente)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Input.CedCliente)
+                            </th>
+                            <th>
+                                Seleccionar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Input.Lista_Clientes.List)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.Raw(item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.Raw(item.Cedula)
+                                </td>
+                                <td>
+                                    <form method="post">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-outline-info btn-sm">Seleccionar</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="NombreCliente" type="hidden" value="@item.Nombre" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="SelCliente" type="hidden" value="1" />
+                                        </div>
+                                    </form>
+                                    @*<a href="/Compras/AgregarCompra?SelProv=1" class="btn btn-outline-info btn-sm" method="POST">Seleccionar</a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    Resultados @Html.Raw(Model.Input.Lista_Clientes.Pagi_info)
+                    <br />
+                    @Html.Raw(Model.Input.Lista_Clientes.Pagi_navegacion)
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="BusquedaProducto" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Contenido del modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Seleccione un Producto</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="get">
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" name="search" placeholder="Buscar" class="form-control" autofocus autocomplete="off" />
+                        </div>
+                        &nbsp;&nbsp;
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-outline-info btn-sm">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Input.IdProducto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Input.NombreProducto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Input.CantidadProducto)
+                            </th>
+                            <th>
+                                Seleccionar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Input.Lista_Productos.List)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.Raw(item.Id_Producto)
+                                </td>
+                                <td>
+                                    @Html.Raw(item.Nombre_Producto)
+                                </td>
+                                <td>
+                                    @Html.Raw(item.Cantidad_Producto)
+                                </td>
+                                <td>
+                                    <form method="post">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-outline-info btn-sm">Seleccionar</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="IdProd" type="hidden" value="@item.Id_Producto" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="SelProd" type="hidden" value="1" />
+                                        </div>
+                                    </form>
+                                    @*<a href="/Compras/AgregarCompra?SelProv=1" class="btn btn-outline-info btn-sm" method="POST">Seleccionar</a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    Resultados @Html.Raw(Model.Input.Lista_Productos.Pagi_info)
+                    <br />
+                    @Html.Raw(Model.Input.Lista_Productos.Pagi_navegacion)
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

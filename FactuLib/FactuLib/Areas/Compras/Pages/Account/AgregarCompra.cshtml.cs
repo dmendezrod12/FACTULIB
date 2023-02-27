@@ -99,6 +99,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
                     Cantidad = _temporal_compras.Cantidad,
                     Precio = _temporal_compras.Precio,
                     TotalBruto = _temporal_compras.TotalBruto,
+                    Descuento = _temporal_compras.Descuento,
                     Image = _temporal_compras.Image,
                     Date = _temporal_compras.Date,
                 };
@@ -221,7 +222,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
 
             public int NombreProducto { get; set; }
 
-            public float Descuento { get; set; }
+            
 
             public int CantidadProducto { get; set; }
             public string Moneda { get; set; } = "¢";
@@ -485,8 +486,8 @@ namespace FactuLib.Areas.Compras.Pages.Account
                             var dateNow = DateTime.Now;
                             var metodoPago = 0;
                             var _cambio = 0.0m;
-                            var user = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList();
-                            var nameUser = $"{user[0].Name} {user[0].Apellido1} {user[0].Apellido2}";
+                            var user = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList().Last();
+                            var nameUser = $"{user.Name} {user.Apellido1} {user.Apellido2}";
                             var monto = _compras.getMontoTotal();
                             var montoBruto = _compras.getMontoBruto();
                             var montoDescuento = _compras.getMontoDescuentos();
@@ -523,7 +524,9 @@ namespace FactuLib.Areas.Compras.Pages.Account
                                     DineroRecibido = _dataInput.Pagos,
                                     CambioCompra = _cambio,
                                     Fecha_Compra = DateTime.Now,
-                                    TProveedor = proveedor
+                                    TProveedor = proveedor,
+                                    TUser = user,
+                                    Estado_Compra = true
                                 };
 
                                 await _context.AddAsync(RegistroCompra);
@@ -553,6 +556,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
                                 }
                                 valor = true; 
                                 transaction.Commit();
+                                compraIniciada = false;
                             }
                             if (_dataInput.Credito == true)
                             {
@@ -592,7 +596,9 @@ namespace FactuLib.Areas.Compras.Pages.Account
                                     DineroRecibido = 0,
                                     CambioCompra = 0,
                                     Fecha_Compra = DateTime.Now,
-                                    TProveedor = proveedor
+                                    TProveedor = proveedor,
+                                    TUser = user,
+                                    Estado_Compra = true
                                 };
 
                                 await _context.AddAsync(RegistroCompra);
@@ -622,6 +628,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
                                 }
                                 valor = true;
                                 transaction.Commit();
+                                compraIniciada = false;
                             }
 
                             if (_dataInput.Credito == false && _dataInput.Contado == false)

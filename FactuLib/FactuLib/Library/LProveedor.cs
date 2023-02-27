@@ -307,5 +307,19 @@ namespace FactuLib.Library
             return dataProveedores;
         }
 
+        public string getNombreProveedor (int id)
+        {
+            string nombreProveedor = "";
+            if (id > 0)
+            {
+                var proveedor = _context.TProveedor.Where(p => p.IdProveedor.Equals(id)).ToList().Last();
+                if (proveedor.IdProveedor > 0)
+                {
+                    nombreProveedor = proveedor.Nombre_Proveedor;
+                }
+            }
+            return nombreProveedor;   
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using FactuLib.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 
@@ -59,6 +60,31 @@ namespace FactuLib.Areas.Productos.Controllers
             {
                 return Redirect("/");
             }
+        }
+
+        public ActionResult ReportesProductos(String opcion)
+        {
+            Object[] objects = new Object[3];
+            var data = _producto.getProductosAsync(null, 0);
+            var url = Request.Scheme + "://" + Request.Host.Value;
+            objects = new LPaginador<InputModelProductos>().paginador(data, 0, 10, "Productos", "Productos", "Reportes", url);
+            // Define la URL de la Cabecera 
+            string _headerUrl = Url.Action("HeaderPDF", "Clientes", null, "https");
+            // Define la URL del Pie de página
+            string _footerUrl = Url.Action("FooterPDF", "Clientes", null, "https");
+
+            models = new DataPaginador<InputModelProductos>
+            {
+                List = (List<InputModelProductos>)objects[2],
+                Pagi_info = (String)objects[0],
+                Pagi_navegacion = (String)objects[1],
+                Input = new InputModelProductos()
+            };
+
+            return new ViewAsPdf("ReportesProductos", models)
+            {
+                //..
+            };
         }
     }
 }

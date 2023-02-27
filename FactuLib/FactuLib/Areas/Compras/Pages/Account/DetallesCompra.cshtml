@@ -1,0 +1,151 @@
+﻿@page "/Compras/DetallesCompra"
+@model FactuLib.Areas.Compras.Pages.Account.DetallesCompraModel
+@{
+}
+<div class="container">
+    <h2 class="text-center">Reporte de Compra</h2>
+    <br />
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-2 text-left">
+                    <p style="font-weight:bold;">Fecha:</p>
+                </div>
+                <div class="col-sm-2 text-left">
+                    <p>@Model.Input.FechaCompra</p>
+                </div>
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <p style="font-weight:bold;">Id de Compra:</p>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <p>@Model.Input.IdRegistroCompra</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 text-left">
+                    <p style="font-weight:bold;">Nombre de Proveedor:</p>
+                </div>
+                <div class="col-sm-2 text-left">
+                    <p>@Model.Input.NombreProveedor</p>
+                </div>
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <p style="font-weight:bold;">Numero de Factura Proveedor:</p>
+                </div>
+                <div class="col-sm-2 text-right">
+                    <p>@Model.Input.FacturaProveedor</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 text-left">
+                    <p style="font-weight:bold;">Metodo de Pago:</p>
+                </div>
+                <div class="col-sm-4 text-left">
+                    <p>@Model.Input.MetodoPago</p>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3 class="text-center">Listado de Productos</h3>
+            <br />
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            Código de Producto
+                        </th>
+                        <th>
+                            Nombre de Producto
+                        </th>
+                        <th>
+                            Precio de Costo
+                        </th>
+                        <th>
+                            Cantidad
+                        </th>
+                        <th>
+                            Total Impuesto
+                        </th>
+                        <th>
+                            Total Descuento
+                        </th>
+                        <th>
+                            Total Neto
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Input.TDetallesCompras.List)
+                    {
+                        <tr>
+                            <td>
+                                @item.TProducto.Codigo_Producto
+                            </td>
+                            <td>
+                                @item.TProducto.Nombre_Producto
+                            </td>
+                            <td>
+                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",  @item.TProducto.Precio_Costo)
+                            </td>
+                            <td>
+                                @item.Cantidad_Producto
+                            </td>
+                            <td>
+                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",@item.Monto_Impuesto_Detalle)
+                               
+                            </td>
+                            <td>
+                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",@item.Descuento_Detalle) 
+                            </td>
+                            <td>
+                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",@item.Monto_Bruto_Detalle)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center">
+                Resultados @Html.Raw(Model.Input.TDetallesCompras.Pagi_info)
+                <br />
+                @Html.Raw(Model.Input.TDetallesCompras.Pagi_navegacion)
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row" style="font-size:18px;">
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <p style="font-weight:bold;">Total Descuentos:</p>
+                </div>
+                <div class="col-sm-2 text-right text-danger">
+                    <p>@String.Format(Model.Moneda + "{0:#,###,###,##0.00####}", Model.Input.TotalDescuentos)</p>
+                </div>
+            </div>
+            <div class="row" style="font-size:18px;">
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <p style="font-weight:bold;">Total Impuestos:</p>
+                </div>
+                <div class="col-sm-2 text-right text-danger">
+                    <p>@String.Format(Model.Moneda + "{0:#,###,###,##0.00####}", Model.Input.TotalImpuestos)</p>
+                </div>
+            </div>
+            <div class="row" style="font-size:18px;">
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-2 text-right">
+                    <p style="font-weight:bold;">Total Neto:</p>
+                </div>
+                <div class="col-sm-2 text-right text-danger">
+                    <p>@String.Format(Model.Moneda + "{0:#,###,###,##0.00####}", Model.Input.TotalNeto)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

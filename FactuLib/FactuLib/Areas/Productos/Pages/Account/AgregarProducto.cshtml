@@ -32,7 +32,7 @@
             </div>
             <div class="col-xs-6 col-md-5">
                 <div class="panel panel-primary">
-                    @if (Model.Input.Id_Producto.Equals(0))
+                    @if (Model.Input.Codigo_Producto.Equals(0))
                     {
                         <h3 class="panel-title">Registrar Producto</h3>
                     }
@@ -64,7 +64,12 @@
                                                 <input asp-for='Input.Codigo_Producto' placeholder='Codigo Producto' class='form-control' autofocus />
                                                 <span asp-validation-for='Input.Codigo_Producto' class='text-danger'></span>
                                             </div>
-                                        }                       
+                                        }else{
+                                            <div class="form-group">
+                                                <input asp-for='Input.Codigo_Producto' placeholder='Codigo Producto' class='form-control' autofocus readonly/>
+                                                <span asp-validation-for='Input.Codigo_Producto' class='text-danger'></span>
+                                            </div>
+                                        }                     
                                     </div>
                                     <div class="form-group">
                                         <input asp-for="Input.Nombre_Producto" placeholder="Nombre de Producto" class="form-control" />

@@ -19,6 +19,7 @@ namespace FactuLib.Library
         {
             List<TProducto> listTProductos;
             var productosList = new List<InputModelProductos>();
+            var tiposProductos = _context.TTipoProducto.ToList();
             if (valor == null && id.Equals(0))
             {
                 listTProductos = _context.TProducto.ToList();
@@ -74,6 +75,29 @@ namespace FactuLib.Library
                 resultado = false;
             }
             return resultado;
+        }
+
+        public string getTipoProducto (List<InputModelProductos> data)
+        {
+            string nombreProducto = "";
+            var tiposProductos = _context.TTipoProducto.ToList();
+            var idProducto = data.ToList().Last().TTipoProducto.Id_TipoProducto;
+            var tipoProducto = _context.TTipoProducto.Where(t => t.Id_TipoProducto.Equals(idProducto)).ToList().Last();
+            if (tipoProducto.Id_TipoProducto != 0)
+            {
+                nombreProducto = tipoProducto.NombreTipo;
+            }
+            return nombreProducto;
+        }
+
+        public List<TProducto> getProducto(int codigoProducto)
+        {
+            var listTProductos = new List<TProducto>();
+            using (var dbContext = new ApplicationDbContext())
+            {
+                listTProductos = dbContext.TProducto.Where(u => u.Codigo_Producto.Equals(codigoProducto)).ToList();
+            }
+            return listTProductos;
         }
     }
 }

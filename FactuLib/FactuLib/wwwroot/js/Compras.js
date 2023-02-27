@@ -71,6 +71,44 @@
         }
     }
 
+    CheckEfectivo() {
+        if (document.getElementById("checkEfectivo").checked) {            
+            document.getElementById("checkTransferencia").disabled = true;
+            document.getElementById("checkTarjeta").disabled = true;
+            document.getElementById("checkEfectivo").disabled = false;
+        } else {
+            document.getElementById("checkTransferencia").disabled = false;
+            document.getElementById("checkTarjeta").disabled = false;
+            document.getElementById("checkEfectivo").disabled = false;
+        }
+    }
+
+
+    CheckTarjeta() {
+        if (document.getElementById("checkTarjeta").checked) {
+            document.getElementById("checkTransferencia").disabled = true;
+            document.getElementById("checkTarjeta").disabled = false;
+            document.getElementById("checkEfectivo").disabled = true;
+        } else {
+            document.getElementById("checkTransferencia").disabled = false;
+            document.getElementById("checkTarjeta").disabled = false;
+            document.getElementById("checkEfectivo").disabled = false;
+        }
+    }
+
+    CheckTransferencia() {
+        if (document.getElementById("checkTransferencia").checked) {
+            document.getElementById("checkTransferencia").disabled = false;
+            document.getElementById("checkTarjeta").disabled = true;
+            document.getElementById("checkEfectivo").disabled = true;
+        } else {
+            document.getElementById("checkTransferencia").disabled = false;
+            document.getElementById("checkTarjeta").disabled = false;
+            document.getElementById("checkEfectivo").disabled = false;
+        }
+    }
+
+
     BusquedaProducto() {
         var idProducto = document.getElementById("InputIdProducto").value;
         document.getElementById("ExisteProducto").innerHTML = "";
@@ -91,7 +129,9 @@
                     $.each(data, function (index, row) {
                         document.getElementById("InputNombre").value = data.nombre_Producto;
                         document.getElementById("InputDescripcion").value = data.descripcion_Producto;
-                        document.getElementById("InputPrecio").value = data.precio_Costo;
+                        document.getElementById("InputPrecio").value = data.precioProductoJS;
+                        document.getElementById("Input_Descuento").value = data.descuento_Producto;
+                        document.getElementById("imgProductoCompra").src = data.base64Imagen;
                     });
                 } else {
                     
@@ -99,6 +139,7 @@
                     document.getElementById("InputNombre").value = "";
                     document.getElementById("InputDescripcion").value = "";
                     document.getElementById("InputPrecio").value = "";
+                    document.getElementById("imgProductoCompra").src = "/images/images/agregarCompra.png";
                 }
                 
             }

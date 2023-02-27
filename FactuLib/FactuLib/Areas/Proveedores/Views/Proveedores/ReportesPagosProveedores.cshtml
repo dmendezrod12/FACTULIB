@@ -1,0 +1,95 @@
+﻿@*model IEnumerable<InputModelRegistrar>*@
+@model DataPaginador<THistoricoPagosProveedor>
+
+@{
+    ViewData["Title"] = "ReportesPagosProveedores";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reportes Clientes</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div style="background-image: url('/images/images/ReporteCabecera.jpg');">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <img alt="Imagen" src="/images/images/logoNav.png" style="width:50px; height:50px; margin-left:25px; margin-top:25px;" />
+                </div>
+                <div class="col-md-8">
+                    <h2 class="text-light text-center">
+                        Reporte de Pagos Proveedor
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <hr />
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm">
+                        <h3>Reporte de Pagos para cedula de proveedor: </h3>
+                    </div>
+                    <div class="col-sm">
+                        @if (Model.List.Count.Equals(0))
+                        {
+                            <h3>No hay pagos registrados</h3>
+                        }
+                        else
+                        {
+                            <h3>@Html.DisplayFor(modelItem => Model.List.Last().proveedor.Ced_Jur)</h3>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Deuda)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.DeudaActual)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Pago)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Fecha)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Deuda)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeudaActual)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using FactuLib.Areas.Compras.Models;
+﻿using FactuLib.Areas.Clientes.Models;
+using FactuLib.Areas.Compras.Models;
 using FactuLib.Areas.Productos.Models;
 using FactuLib.Areas.Proveedores.Models;
 using FactuLib.Data;
@@ -210,6 +211,7 @@ namespace FactuLib.Library
                                 TotalBruto = item.TotalBruto,
                                 TotalNeto = item.TotalNeto,
                                 TotalDescuentos = item.TotalDescuentos,
+                                Descuento = item.Descuento_Producto,
                                 TotalImpuestos = item.TotalImpuestos,
                                 Cantidad_Compra = item.Cantidad_Compra,
                                 TUser = item.TUser,
@@ -331,6 +333,7 @@ namespace FactuLib.Library
                             TotalNeto = item.TotalNeto,
                             TotalDescuentos = item.TotalDescuentos,
                             TotalImpuestos = item.TotalImpuestos,
+                            Descuento  = query.Descuento_Producto,
                             //TProducto = producto,
                             TUser = user,
                             Date = item.Date,
@@ -340,6 +343,117 @@ namespace FactuLib.Library
             }
             return TemporalList;
         }
+
+        public DataPaginador<TRegistroCompras> GetRegistroCompras (int page, int num, InputModelCompras input, HttpRequest request)
+        {
+            Object[] objects = new Object[3];
+            var url = request.Scheme + "://" + request.Host.Value;
+            var data = GetRegistrosCompras(input);
+            if (data.Count > 0)
+            {
+                data.Reverse();
+                objects = new LPaginador<TRegistroCompras>().paginador(data, page, 5, "Compras", "Compras", "ListaCompras", url);
+            }
+            else
+            {
+                objects[0] = "No hay datos que mostrar";
+                objects[1] = "No hay datos que mostrar";
+                objects[2] = new List<TRegistroCompras>();
+            }
+            var models = new DataPaginador<TRegistroCompras>
+            {
+                List = (List<TRegistroCompras>)objects[2],
+                Pagi_info = (String)objects[0],
+                Pagi_navegacion = (String)objects[1],
+                Input = new TRegistroCompras(),
+            };
+            return models;
+        }
+
+
+        public List<TRegistroCompras> GetRegistrosCompras(InputModelCompras input)
+        {
+            var listPagos = new List<TRegistroCompras>();
+            var listPagos2 = new List<TRegistroCompras>();
+            /*
+             Menor a cero: si t1 es anterior a t2
+             Cero: si t1 es lo mismo que t2
+             Mayor a cero: si t1 es posterior a t2
+             */
+            var t1 = input.horaInicio.ToString("dd/MMM/yyy");
+            var t2 = input.horaFinal.ToString("dd/MMM/yyy");
+            var proveedor = _context.TProveedor.ToList();
+
+            int fechaCompare = DateTime.Compare(DateTime.Parse(t1), DateTime.Parse(t2));
+
+            if (fechaCompare > 0)
+            {
+                listPagos2 = _context.TRegistroCompras.ToList();
+            }
+            else
+            {
+                if (t1.Equals(t2) && DateTime.Now.ToString("dd/MMM/yyy").Equals(t1) && DateTime.Now.ToString("dd/MMM/yyy").Equals(t2))
+                {
+                    listPagos2 = _context.TRegistroCompras.ToList();
+                }
+                else
+                {
+                    foreach (var item in _context.TRegistroCompras.ToList())
+                    {
+                        int fecha1 = DateTime.Compare(DateTime.Parse(item.Fecha_Compra.ToString("dd/MMM/yyy")), DateTime.Parse(t1));
+                        if (fecha1.Equals(0) || fecha1 > 0)
+                        {
+                            listPagos.Add(item);
+                        }
+                    }
+                    foreach (var item in listPagos)
+                    {
+                        int fecha2 = DateTime.Compare(DateTime.Parse(item.Fecha_Compra.ToString("dd/MMM/yyy")), DateTime.Parse(t2));
+                        if (fecha2.Equals(0) || fecha2 < 0)
+                        {
+                            listPagos2.Add(item);
+                        }
+                    }
+                }
+            }
+            return listPagos2;
+        }
+
+        public DataPaginador<TDetallesCompras> GetDetallesCompras(int id, int page, int num, HttpRequest request)
+        {
+            Object[] objects = new Object[3];
+            var url = request.Scheme + "://" + request.Host.Value;
+            var data = GetListaDetalleCompra(id);
+            if (data.Count > 0)
+            {
+                data.Reverse();
+                objects = new LPaginador<TDetallesCompras>().paginadorDetalle(id, data, page, 5, "Compras", "Compras","DetallesCompra", url);
+            }
+            else
+            {
+                objects[0] = "No hay datos que mostrar";
+                objects[1] = "No hay datos que mostrar";
+                objects[2] = new List<TDetallesCompras>();
+            }
+            var models = new DataPaginador<TDetallesCompras>
+            {
+                List = (List<TDetallesCompras>)objects[2],
+                Pagi_info = (String)objects[0],
+                Pagi_navegacion = (String)objects[1],
+                Input = new TDetallesCompras(),
+            };
+            return models;
+        }
+
+        public List<TDetallesCompras> GetListaDetalleCompra(int idCompra)
+        {
+           var listDetalles = new List<TDetallesCompras>();
+            var productos = _context.TProducto.ToList();
+           var compras = _context.TRegistroCompras.ToList();
+           listDetalles = _context.TDetallesCompras.Where(d=>d.TRegistroCompras.Id_RegistroCompras.Equals(idCompra)).ToList();
+           return listDetalles;
+        }
+
 
         public float getMontoTotal()
         {
@@ -395,6 +509,48 @@ namespace FactuLib.Library
                 });
             }
             return montoDescuento;
+        }
+
+        public float getTotalComprasCajasCierre(String IdUser)
+        {
+            float montoComprasCierre = 0;
+            var comprasCierre = _context.TRegistroCompras.Where(r => r.TUser.IdUser.Equals(IdUser) && r.Estado_Compra == true && r.MetodoPago.Equals(1)).ToList();
+            if (0 < comprasCierre.Count)
+            {
+                comprasCierre.ForEach(item =>
+                {
+                    montoComprasCierre = montoComprasCierre + item.Total_Neto;
+                });
+            }
+            return montoComprasCierre;
+        }
+
+        public float getTotalComprasCuentasCierre(String IdUser)
+        {
+            float montoComprasCierre = 0;
+            var comprasCierre = _context.TRegistroCompras.Where(r => r.TUser.IdUser.Equals(IdUser) && r.Estado_Compra == true && (r.MetodoPago.Equals(2) || r.MetodoPago.Equals(3))).ToList();
+            if (0 < comprasCierre.Count)
+            {
+                comprasCierre.ForEach(item =>
+                {
+                    montoComprasCierre = montoComprasCierre + item.Total_Neto;
+                });
+            }
+            return montoComprasCierre;
+        }
+
+        public float getTotalComprasCreditoCierre(String IdUser)
+        {
+            float montoComprasCierre = 0;
+            var comprasCierre = _context.TRegistroCompras.Where(r => r.TUser.IdUser.Equals(IdUser) && r.Estado_Compra == true && r.MetodoPago.Equals(0)).ToList();
+            if (0 < comprasCierre.Count)
+            {
+                comprasCierre.ForEach(item =>
+                {
+                    montoComprasCierre = montoComprasCierre + item.Total_Neto;
+                });
+            }
+            return montoComprasCierre;
         }
     }
 }

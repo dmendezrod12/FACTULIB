@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\AnalisisCash.png",
+      "PackagePath": "staticwebassets\\images\\images\\AnalisisCash.png"
+    },
+    {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\BuyMain.png",
       "PackagePath": "staticwebassets\\images\\images\\BuyMain.png"
     },
@@ -33,6 +37,10 @@
       "PackagePath": "staticwebassets\\images\\images\\SupplyMain.png"
     },
     {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\VentasMain.png",
+      "PackagePath": "staticwebassets\\images\\images\\VentasMain.png"
+    },
+    {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\agregarCompra.png",
       "PackagePath": "staticwebassets\\images\\images\\agregarCompra.png"
     },
@@ -45,12 +53,20 @@
       "PackagePath": "staticwebassets\\images\\images\\background_login.jpg"
     },
     {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\closeCash.png",
+      "PackagePath": "staticwebassets\\images\\images\\closeCash.png"
+    },
+    {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\default.png",
       "PackagePath": "staticwebassets\\images\\images\\default.png"
     },
     {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\defaultCliente.png",
       "PackagePath": "staticwebassets\\images\\images\\defaultCliente.png"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\informacion.png",
+      "PackagePath": "staticwebassets\\images\\images\\informacion.png"
     },
     {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\lock.png",
@@ -65,12 +81,20 @@
       "PackagePath": "staticwebassets\\images\\images\\logoNav.png"
     },
     {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\openCash.png",
+      "PackagePath": "staticwebassets\\images\\images\\openCash.png"
+    },
+    {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\userMain.png",
       "PackagePath": "staticwebassets\\images\\images\\userMain.png"
     },
     {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\wallpaperLogin.jpg",
       "PackagePath": "staticwebassets\\images\\images\\wallpaperLogin.jpg"
+    },
+    {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\AperturaCaja.js",
+      "PackagePath": "staticwebassets\\js\\AperturaCaja.js"
     },
     {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Cliente.js",

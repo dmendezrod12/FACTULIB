@@ -29,15 +29,15 @@
                                 <div class="card text-center">
                                     <div class="card-header">
                                         <output id="imageShopping">
-                                            <img src="@image" class="imageUser" />
+                                            <img id="imgProductoCompra" src="@image" class="imageUser" />
                                         </output>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="caption text-center">
-                                            <label class="btn btn-primary" for="files">Imagen</label>
-                                            <input asp-for="Input.AvatarImage" accept="image/*" type="file" id="files" />
-                                        </div>
+                                    @*<div class="card-body">
+                                    <div class="caption text-center">
+                                    <label class="btn btn-primary" for="files">Imagen</label>
+                                    <input asp-for="Input.AvatarImage" accept="image/*" type="file" id="files" />
                                     </div>
+                                    </div>*@
                                 </div>
                             </div>
                             <div class="col-xl-7 col-md-5">
@@ -157,135 +157,144 @@
                 </div>
                 <div class="tab-pane fade" id="nav-pagos" role="tabpanel">
                     <form method="post">
-                        <div class="col-xl-7 col-md-5">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">Procesar Compra</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="accordion" id="accordionExample">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Procesar Compra</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card">
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Bruto
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoBruto)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Impuestos
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoImpuesto)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Descuentos
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoDescuento)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Total Neto
+                                                            </label>
+                                                            <br />
+                                                            <span class="text-danger labelCompra_Importe_peq">
+
+                                                                <label class="text-danger labelCompra_Importe_peq">
+                                                                    @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.monto)
+                                                                </label>
+                                                            </span>
+                                                        </div>
+                                                        <!--***-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
                                         <div class="card">
-                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <div class="form-group">
-                                                        <label>
-                                                            Total Bruto
-                                                        </label>
-                                                        <br />
-                                                        <span class="text-danger labelCompra_Importe">
-
-                                                            <label class="text-danger labelCompra_Importe">
-                                                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoBruto)
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>
-                                                            Total Impuestos
-                                                        </label>
-                                                        <br />
-                                                        <span class="text-danger labelCompra_Importe">
-
-                                                            <label class="text-danger labelCompra_Importe">
-                                                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoImpuesto)
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>
-                                                            Total Descuentos
-                                                        </label>
-                                                        <br />
-                                                        <span class="text-danger labelCompra_Importe">
-
-                                                            <label class="text-danger labelCompra_Importe">
-                                                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.montoDescuento)
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>
-                                                            Total Neto
-                                                        </label>
-                                                        <br />
-                                                        <span class="text-danger labelCompra_Importe">
-
-                                                            <label class="text-danger labelCompra_Importe">
-                                                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.monto)
-                                                            </label>
-                                                        </span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">Factura</span>
-                                                            </div>
-                                                            <input asp-for="Input.FacturaProveedor" placeholder="FacturaProveedor" class="form-control" autocomplete="off" value="0"/>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Factura</span>
                                                         </div>
-                                                        <span asp-validation-for="Input.FacturaProveedor" class="text-danger"></span>
+                                                        <input asp-for="Input.FacturaProveedor" placeholder="FacturaProveedor" class="form-control" autocomplete="off" value="0" />
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">Pago</span>
-                                                                <span class="input-group-text">¢</span>
-                                                            </div>
-                                                            <input asp-for="Input.Pagos" placeholder="Pago" class="form-control" autocomplete="off" onkeyup="compras.Pagos(@Model.monto)" value="0.0" />
+                                                    <span asp-validation-for="Input.FacturaProveedor" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Pago</span>
+                                                            <span class="input-group-text">¢</span>
                                                         </div>
-                                                        <span asp-validation-for="Input.Pagos" class="text-danger"></span>
+                                                        <input asp-for="Input.Pagos" placeholder="Pago" class="form-control" autocomplete="off" onkeyup="compras.Pagos(@Model.monto)" value="0.0" />
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label id="labelCompra_Deuda">
-                                                            Deuda Total
+                                                    <span asp-validation-for="Input.Pagos" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="labelCompra_Deuda">
+                                                        Deuda Total
+                                                    </label>
+                                                    <br />
+                                                    <span class="text-danger labelCompra_Importe">
+                                                        @Html.Raw(Model.Input.Moneda)
+                                                        <label class="text-success labelCompra_Importe" id="labelCompra_Deudas">
+                                                            0.00
                                                         </label>
-                                                        <br />
-                                                        <span class="text-danger labelCompra_Importe">
-                                                            @Html.Raw(Model.Input.Moneda)
-                                                            <label class="text-success labelCompra_Importe" id="labelCompra_Deudas">
-                                                                0.00
-                                                            </label>
-                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" class="form-check-input" id="checkCredito" asp-for="Input.Credito" onclick="compras.CheckCredito()" />
+                                                        <label class="form-check-label" for="check">Crédito</label>
+                                                        &nbsp;
+                                                        <input type="checkbox" class="form-check-input" id="checkContado" asp-for="Input.Contado" onclick="compras.CheckContado()" />
+                                                        <label class="form-check-label" for="check">Contado</label>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="checkbox" class="form-check-input" id="checkCredito" asp-for="Input.Credito" onclick="compras.CheckCredito()" />
-                                                            <label class="form-check-label" for="check">Crédito</label>
-                                                            &nbsp;
-                                                            <input type="checkbox" class="form-check-input" id="checkContado" asp-for="Input.Contado" onclick="compras.CheckContado()" />
-                                                            <label class="form-check-label" for="check">Contado</label>
-                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-check-label">Metodo de Pago</label>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" class="form-check-input" id="checkEfectivo" asp-for="Input.ChkEfectivo" onclick="compras.CheckEfectivo()" disabled="true" />
+                                                        <label class="form-check-label" for="check">Efect.</label>
+                                                        &nbsp;
+                                                        <input type="checkbox" class="form-check-input" id="checkTarjeta" asp-for="Input.ChkTarjeta" onclick="compras.CheckTarjeta()" disabled="true" />
+                                                        <label class="form-check-label" for="check">Tarj.</label>
+                                                        &nbsp;
+                                                        <input type="checkbox" class="form-check-input" id="checkTransferencia" asp-for="Input.ChkTransferencia" onclick="compras.CheckTransferencia()" disabled="true" />
+                                                        <label class="form-check-label" for="check">Transf.</label>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="form-check-label">Metodo de Pago</label>
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="checkbox" class="form-check-input" id="checkEfectivo" asp-for="Input.ChkEfectivo" disabled="true"/>
-                                                            <label class="form-check-label" for="check">Efect.</label>
-                                                            &nbsp;
-                                                            <input type="checkbox" class="form-check-input" id="checkTarjeta" asp-for="Input.ChkTarjeta" disabled="true" />
-                                                            <label class="form-check-label" for="check">Tarj.</label>
-                                                            &nbsp;
-                                                            <input type="checkbox" class="form-check-input" id="checkTransferencia" asp-for="Input.ChkTransferencia" disabled="true" />
-                                                            <label class="form-check-label" for="check">Transf.</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="form-group">
-                                                                <button type="submit" class="btn btn-primary btn-block"> Aceptar </button>
-                                                            </div>
-                                                            &nbsp;&nbsp;
-                                                            <div class="form-group">
-                                                                <a href="/Compras/AgregarCompra" class="btn btn-warning btn-block text-white"> Cancelar </a>
-                                                            </div>
-                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
                                                         <div class="form-group">
-                                                            <input name="value" type="hidden" value="1" />
+                                                            <button type="submit" class="btn btn-primary btn-block"> Aceptar </button>
                                                         </div>
+                                                        &nbsp;&nbsp;
                                                         <div class="form-group">
-                                                            <label class="text-danger">
-                                                                @Html.DisplayFor(m=> m.Input.ErrorMessage)
-                                                            </label>
+                                                            <a href="/Compras/AgregarCompra" class="btn btn-warning btn-block text-white"> Cancelar </a>
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input name="value" type="hidden" value="1" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="text-danger">
+                                                            @Html.DisplayFor(m=> m.Input.ErrorMessage)
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>

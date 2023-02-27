@@ -9,6 +9,8 @@ using FactuLib.Models;
 using FactuLib.Areas.Proveedores.Models;
 using FactuLib.Areas.Compras.Models;
 using FactuLib.Areas.Productos.Models;
+using FactuLib.Areas.Ventas.Models;
+using FactuLib.Areas.Cajas.Models;
 
 namespace FactuLib.Data
 {
@@ -65,9 +67,19 @@ namespace FactuLib.Data
 
         public DbSet <TDetallesCompras> TDetallesCompras { get; set; }
 
+        public DbSet<TTemporalVentas> TTemporalVentas { get; set; }
+
+        public DbSet<TRegistroVentas> TRegistroVentas { get; set; }
+
+        public DbSet<TDetallesVentas> TDetallesVentas { get; set; }
+
         public DbSet <TTipoProducto> TTipoProducto { get; set; }
 
         public DbSet <TProducto> TProducto { get; set; }
+
+        public DbSet <TRegistroApertura> TRegisroApertura { get; set; }
+
+        public DbSet <TRegistroCierre> TRegisroCierre { get; set; }
 
         //public DbSet <TTemporalProducto> TTemporalProducto { get; set; }
     }

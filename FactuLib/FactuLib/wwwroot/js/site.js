@@ -43,9 +43,15 @@ var productos = new Productos();
 var imageProducto = (evt) => {
     productos.archivo(evt, "imageProducto");
 }
+
+/*Codigo de Apertura*/
+var apertura = new AperturaCaja();
+
 $().ready(() => {
     let URLactual = window.location.pathname;
     principal.userLink(URLactual);
+
+
 
     /*Codigo de Proveeodr*/
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TcAGHY2NXeRwx4TCn1bExh6u444R8pb0JzyJmPmYVQk=",
+  "Hash": "4gmzYdwhzZka+T+xZzRYvnlb7ZiIuTuoe7DmWsPRe7M=",
   "Source": "FactuLib",
   "BasePath": "_content/FactuLib",
   "Mode": "Default",
@@ -1105,6 +1105,23 @@
       "OriginalItemSpec": "wwwroot\\images\\images\\agregarCompra.png"
     },
     {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\AnalisisCash.png",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "images/images/AnalisisCash.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\images\\AnalisisCash.png"
+    },
+    {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\atencion.png",
       "SourceId": "FactuLib",
       "SourceType": "Discovered",
@@ -1154,6 +1171,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\images\\BuyMain.png"
+    },
+    {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\closeCash.png",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "images/images/closeCash.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\images\\closeCash.png"
     },
     {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\CustomerMain.png",
@@ -1224,6 +1258,23 @@
       "OriginalItemSpec": "wwwroot\\images\\images\\DefaultProveedor.png"
     },
     {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\informacion.png",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "images/images/informacion.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\images\\informacion.png"
+    },
+    {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\lock.png",
       "SourceId": "FactuLib",
       "SourceType": "Discovered",
@@ -1273,6 +1324,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\images\\logoNav.png"
+    },
+    {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\openCash.png",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "images/images/openCash.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\images\\openCash.png"
     },
     {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\ReporteCabecera.jpg",
@@ -1326,6 +1394,23 @@
       "OriginalItemSpec": "wwwroot\\images\\images\\userMain.png"
     },
     {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\VentasMain.png",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "images/images/VentasMain.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\images\\VentasMain.png"
+    },
+    {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\images\\images\\wallpaperLogin.jpg",
       "SourceId": "FactuLib",
       "SourceType": "Discovered",
@@ -1341,6 +1426,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\images\\wallpaperLogin.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\AperturaCaja.js",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "js/AperturaCaja.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\AperturaCaja.js"
     },
     {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Cliente.js",
