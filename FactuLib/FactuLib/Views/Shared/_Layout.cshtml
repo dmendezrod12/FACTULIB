@@ -89,6 +89,16 @@
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a asp-area="Cajas" asp-page="/Account/Apertura_Caja"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Aperturar Caja</a></li> 
                         <li><a asp-area="Cajas" asp-page="/Account/Cierre_Caja"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Cerrar Caja</a></li>
+                        <li><a asp-area="Cajas" asp-page="/Account/Lista_Cierres"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Lista de Cierres</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="bi bi-graph-up"></i></span> Analisis </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiNTk4MjlhM2MtMGU3Yi00MWZjLWE1MzMtNDNiMDA0MDE1MTdhIiwidCI6IjkyMjQ5ZDczLTYzNWQtNDlkOC1iZDJlLWIwZjViNjFjYmMyMCJ9"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Clientes</a></li>
+                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiYjFjZGVlODctNzE5Yi00YzEyLWIzYjMtYWIyOTY1M2EzMDU0IiwidCI6IjkyMjQ5ZDczLTYzNWQtNDlkOC1iZDJlLWIwZjViNjFjYmMyMCJ9"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Proveedores</a></li>
+                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiN2ZmN2EwZTUtYTE1OS00ZWFmLWI4ZTUtMTVlNTFlMTczNWNiIiwidCI6IjkyMjQ5ZDczLTYzNWQtNDlkOC1iZDJlLWIwZjViNjFjYmMyMCJ9"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Ventas</a></li>
+                        <li><a href="https://app.powerbi.com/view?r=eyJrIjoiMzIyZjdjNjItMDllZi00MTYzLWIyZGMtMjM2NGQ2YzQ1MjYxIiwidCI6IjkyMjQ5ZDczLTYzNWQtNDlkOC1iZDJlLWIwZjViNjFjYmMyMCJ9"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Compras</a></li>
                     </ul>
                 </li>
             </ul>
@@ -124,6 +134,9 @@
 <script src="~/js/AperturaCaja.js" asp-append-version="true"></script>
 <script src="~/js/Compras.js" asp-append-version="true"></script>
 <script src="~/js/Productos.js" asp-append-version="true"></script>
+<script src="~/js/chart.js" asp-append-version="true"></script>
+<script src="~/js/chart.min.js" asp-append-version="true"></script>
+<script src="~/js/Graficos.js" asp-append-version="true"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script>
     $("#menu-toggle").click(function (e) {

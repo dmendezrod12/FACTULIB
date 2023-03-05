@@ -35,6 +35,12 @@ namespace FactuLib.Areas.Cajas.Models
 
         public float Total_Compras_Cuentas { get; set; }
 
-        public float Monto_Faltante { get; set; }
+        public float Monto_Faltante_Cajas { get; set; }
+
+        public float Monto_Faltante_Cuentas { get; set; }
+
+        public float Monto_Sobrante_Cajas { get; set; }
+
+        public float Monto_Sobrante_Cuentas { get; set; }
     }
 }

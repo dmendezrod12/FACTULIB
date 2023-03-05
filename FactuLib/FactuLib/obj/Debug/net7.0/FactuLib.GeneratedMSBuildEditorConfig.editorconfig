@@ -16,12 +16,32 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\pafla\Source\Repos\dmendezrod12\FACTULIB\FactuLib\FactuLib
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Analisis/Views/Analisis/Analisis.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQW5hbGlzaXNcVmlld3NcQW5hbGlzaXNcQW5hbGlzaXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Analisis/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQW5hbGlzaXNcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Analisis/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQW5hbGlzaXNcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Cajas/Pages/Account/Apertura_Caja.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ2FqYXNcUGFnZXNcQWNjb3VudFxBcGVydHVyYV9DYWphLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Cajas/Pages/Account/Cierre_Caja.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ2FqYXNcUGFnZXNcQWNjb3VudFxDaWVycmVfQ2FqYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Cajas/Pages/Account/DetallesCajas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ2FqYXNcUGFnZXNcQWNjb3VudFxEZXRhbGxlc0NhamFzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Cajas/Pages/Account/Lista_Cierres.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ2FqYXNcUGFnZXNcQWNjb3VudFxMaXN0YV9DaWVycmVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Cajas/Pages/_ViewImports.cshtml]

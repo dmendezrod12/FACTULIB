@@ -75,7 +75,16 @@ namespace FactuLib.Data.Migrations
                     b.Property<int?>("Id_Usuario")
                         .HasColumnType("int");
 
-                    b.Property<float>("Monto_Faltante")
+                    b.Property<float>("Monto_Faltante_Cajas")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Monto_Faltante_Cuentas")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Monto_Sobrante_Cajas")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Monto_Sobrante_Cuentas")
                         .HasColumnType("real");
 
                     b.Property<float>("Total_Compras_Credito")

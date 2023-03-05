@@ -14,14 +14,14 @@
     </div>
     <form method="post">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <h3>Monedas</h3>
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢5</span>
                         </div>
-                        <input asp-for="Input.CantMonedasCinco" placeholder="0" class="form-control" min="0" pattern="^[0-9]+" autocomplete="off" id="inputMonCinco" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantMonedasCinco" placeholder="0" class="form-control" min="0" pattern="^[0-9]+" autocomplete="off" id="inputMonCinco" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantMonedasCinco" class="text-danger"></span>
                 </div>
@@ -30,7 +30,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢10</span>
                         </div>
-                        <input asp-for="Input.CantMonedasDiez" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonDiez" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantMonedasDiez" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonDiez" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantMonedasDiez" class="text-danger"></span>
                 </div>
@@ -39,7 +39,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢25</span>
                         </div>
-                        <input asp-for="Input.CantMonedasVeinticinco" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonVeinticinco" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantMonedasVeinticinco" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonVeinticinco" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantMonedasVeinticinco" class="text-danger"></span>
                 </div>
@@ -48,7 +48,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢50</span>
                         </div>
-                        <input asp-for="Input.CantMonedasCincuenta" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonCincuenta" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantMonedasCincuenta" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonCincuenta" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantMonedasCincuenta" class="text-danger"></span>
                 </div>
@@ -57,7 +57,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢100</span>
                         </div>
-                        <input asp-for="Input.CantMonedasCien" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonCien" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantMonedasCien" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonCien" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantMonedasCien" class="text-danger"></span>
                 </div>
@@ -66,7 +66,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢500</span>
                         </div>
-                        <input asp-for="Input.CantMonedasQuinientos" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonQuinientos" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantMonedasQuinientos" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputMonQuinientos" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantMonedasQuinientos" class="text-danger"></span>
                 </div>
@@ -75,19 +75,19 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Cuentas</span>
                         </div>
-                        <input asp-for="Input.CantDineroCuentas" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputDineroCuentas" onkeyup="apertura.dineroCuentas()" />
+                        <input asp-for="Input.CantDineroCuentas" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputDineroCuentas" value="0" onkeyup="apertura.dineroCuentas()" onchange="apertura.faltanteCajas()"/>
                     </div>
                     <span asp-validation-for="Input.CantDineroCuentas" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <h3>Billetes</h3>
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢1000</span>
                         </div>
-                        <input asp-for="Input.CantBilletesMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillMil" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantBilletesMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillMil" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantBilletesMil" class="text-danger"></span>
                 </div>
@@ -96,7 +96,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢2000</span>
                         </div>
-                        <input asp-for="Input.CantBilletesDosMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillDosMil" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantBilletesDosMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillDosMil" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantBilletesDosMil" class="text-danger"></span>
                 </div>
@@ -105,7 +105,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢5000</span>
                         </div>
-                        <input asp-for="Input.CantBilletesCincoMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillCincoMil" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantBilletesCincoMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillCincoMil" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantBilletesCincoMil" class="text-danger"></span>
                 </div>
@@ -114,7 +114,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢10000</span>
                         </div>
-                        <input asp-for="Input.CantBilletesDiezMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillDiezMil" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantBilletesDiezMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillDiezMil" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantBilletesDiezMil" class="text-danger"></span>
                 </div>
@@ -123,7 +123,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢20000</span>
                         </div>
-                        <input asp-for="Input.CantBillesVeinteMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillVeinteMil" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantBillesVeinteMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillVeinteMil" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantBillesVeinteMil" class="text-danger"></span>
                 </div>
@@ -132,10 +132,21 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">¢50000</span>
                         </div>
-                        <input asp-for="Input.CantBilletesCincuentaMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillCincuentaMil" onkeyup="apertura.calculaTotal()" />
+                        <input asp-for="Input.CantBilletesCincuentaMil" placeholder="0" class="form-control" min="0" autocomplete="off" id="inputBillCincuentaMil" onkeyup="apertura.calculaTotal()" onchange="apertura.faltanteCajas()" />
                     </div>
                     <span asp-validation-for="Input.CantBilletesCincuentaMil" class="text-danger"></span>
                 </div>
+                <input type="hidden" asp-for="Input.Dinero_Cuentas" id="inputDineroCuentas" />
+                <input type="hidden" asp-for="Input.TotalVentas" id = "inputTotalVentas"/>
+                <input type="hidden" asp-for="Input.TotalVentasCuentasBancarias" id="inputTotalVentasCuentas" />
+                <input type="hidden" asp-for="Input.TotalCompras" id="inputTotalCompras" />
+                <input type="hidden" asp-for="Input.TotalComprasCuentasBancarias" id="inputTotalComprasCuentas" />
+                <input type="hidden" asp-for="Input.MontoCajasApertura" id="inputDineroApertura"/>
+                <input type="hidden" asp-for="Input.MontoVentasDineroRecibido" id="inputDineroRecibidoVentas" />
+                <input type="hidden" asp-for="Input.MontoComprasDineroRecibido" id="inputDineroRecibidoCompras" />
+                <input type="hidden" asp-for="Input.MontoCambioVentas" id="inputCambioVentas" />
+                <input type="hidden" asp-for="Input.MontoCambioCompras" id="inputCambioCompras" />
+                <input type="hidden" asp-for="Input.MontoCuentasApertura" id="inputMontoCuentasApertura" />
                 <button type="submit" class="btn-outline-info btn-sm btn-block" style="font-size:20px;">Cerrar Caja</button>
                 <div class="form-group">
                     <label class="text-danger">
@@ -143,7 +154,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="card">
                     <div class="card-header">
                         <h4>Totales</h4>
@@ -167,7 +178,7 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Ventas Efectivo:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblTotalVentasCajas">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.TotalVentas)
                                 </label>
                             </span>
@@ -176,7 +187,7 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Ventas Cuentas:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblTotalVentasCuentas">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.TotalVentasCuentasBancarias)
                                 </label>
                             </span>
@@ -185,7 +196,7 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Ventas Credito:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblTotalVentasCredito">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.TotalVentasCredito)
                                 </label>
                             </span>
@@ -194,7 +205,7 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Compras Efectivo:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblTotalCompras">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.TotalCompras)
                                 </label>
                             </span>
@@ -203,7 +214,7 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Compras Credito:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblTotalComprasCredito">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.TotalComprasCredito)
                                 </label>
                             </span>
@@ -212,7 +223,7 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Compras Cuentas:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblTotalComprasCuentas">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.TotalComprasCuentasBancarias)
                                 </label>
                             </span>
@@ -221,7 +232,7 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Caja Apertura:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblCajasApertura">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.MontoCajasApertura)
                                 </label>
                             </span>
@@ -230,8 +241,53 @@
                             <span class="text-danger labelCompra_Importe_peq">
                                 <label>Total Cuentas Apertura:</label>
                                 @Html.Raw(Model.Input.Moneda)
-                                <label class="text-success labelCompra_Importe_peq">
+                                <label class="text-success labelCompra_Importe_peq" id="lblCuentasApertura">
                                     @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}",Model.Input.MontoCuentasApertura)
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Arqueo de Caja</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <span class="text-danger labelCompra_Importe_peq">
+                                <label>Faltante en Cajas:</label>
+                                @Html.Raw(Model.Input.Moneda)
+                                <label class="text-success labelCompra_Importe_peq" id="lblFaltanteCajas">
+                                    0.00
+                                </label>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="text-danger labelCompra_Importe_peq">
+                                <label>Sobrante en Cajas:</label>
+                                @Html.Raw(Model.Input.Moneda)
+                                <label class="text-success labelCompra_Importe_peq" id="lblSobranteCajas">
+                                    0.00
+                                </label>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="text-danger labelCompra_Importe_peq">
+                                <label>Faltante en cuentas:</label>
+                                @Html.Raw(Model.Input.Moneda)
+                                <label class="text-success labelCompra_Importe_peq" id="lblFaltanteCuentas">
+                                    0.00
+                                </label>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="text-danger labelCompra_Importe_peq">
+                                <label>Sobrante en cuentas:</label>
+                                @Html.Raw(Model.Input.Moneda)
+                                <label class="text-success labelCompra_Importe_peq" id="lblSobranteCuentas">
+                                    0.00
                                 </label>
                             </span>
                         </div>

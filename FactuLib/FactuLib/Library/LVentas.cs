@@ -525,6 +525,34 @@ namespace FactuLib.Library
             return montoVentasCierre;
         }
 
+        public float getDineroRecibidoVentas(String IdUser)
+        {
+            float montoDineroRecibidoVentas = 0;
+            var ventasCierre = _context.TRegistroVentas.Where(r => r.TUser.IdUser.Equals(IdUser) && r.Estado_Venta == true && r.MetodoPago.Equals(1)).ToList();
+            if (0 < ventasCierre.Count)
+            {
+                ventasCierre.ForEach(item =>
+                {
+                    montoDineroRecibidoVentas = montoDineroRecibidoVentas + item.DineroRecibido;
+                });
+            }
+            return montoDineroRecibidoVentas;
+        }
+
+        public float getTotalCambiosVentas(String IdUser)
+        {
+            float montoCambioVentas = 0;
+            var ventasCierre = _context.TRegistroVentas.Where(r => r.TUser.IdUser.Equals(IdUser) && r.Estado_Venta == true && r.MetodoPago.Equals(1)).ToList();
+            if (0 < ventasCierre.Count)
+            {
+                ventasCierre.ForEach(item =>
+                {
+                    montoCambioVentas = montoCambioVentas + (float)item.CambioCompra;
+                });
+            }
+            return montoCambioVentas;
+        }
+
         public float getTotalVentasCuentasCierre(String IdUser)
         {
             float montoVentasCierre = 0;

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "lUss5Q1vTPp9iqh1rw8BEyP8CGMIHY/q4DOOV3AwA8Rt+C4OmBy9YHgEvS+jXa6xsvmlrARsz/eDoxKQ0axGHw==",
+  "dgSpecHash": "qi/Rce9fIdgFWdl1ZW770t1OzQAaq5t4eoIrj46laSqCo3bC+NHDzs0btZ9Fm79ew1WnUBqFa/afe3sSwM648A==",
   "success": true,
   "projectFilePath": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pafla\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\pafla\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\pafla\\.nuget\\packages\\chart.js\\3.7.1\\chart.js.3.7.1.nupkg.sha512",
     "C:\\Users\\pafla\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\pafla\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.0.1\\microsoft.aspnetcore.antiforgery.2.0.1.nupkg.sha512",
     "C:\\Users\\pafla\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.0.1\\microsoft.aspnetcore.authentication.abstractions.2.0.1.nupkg.sha512",

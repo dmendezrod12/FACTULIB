@@ -465,17 +465,19 @@ namespace FactuLib.Areas.Ventas.Pages.Account
 
         private async Task<bool> VentasAsync()
         {
-            _dataInput = Input;
-            var valor = false;
-            var idUser = _userManager.GetUserId(User);
-            var userReg = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList().Last();
-            var cliente = _context.TClientes.Where(u => u.Nombre.Replace(" ", "").Equals(_clienteSeleccionado.Replace(" ", ""))).ToList().Last();
-            var productos = _context.TProducto.ToList();
-            var clientes = _context.TClientes.ToList();
-            var creditosCliente = _context.TCreditoClientes.ToList();
-            var credito = creditosCliente.Where(c => c.TClients.IdCliente.Equals(cliente.IdCliente)).ToList().Last();
-            var RegistrosVentas = _context.TRegistroVentas.ToList();
-            int numeroTicket = 0;
+            _dataInput = Input; // Variable que almacena los datos que fueron ingresados en el formulario
+            var valor = false; // Variable utilizada para dar el resultado de la operación satisfactorio o fallido. 
+            var idUser = _userManager.GetUserId(User); // Devuelve el Id del usuario logueado en el sistema
+            var userReg = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList().Last(); // Devuelve el registro de usuario logueado al sistema
+            var cliente = _context.TClientes.Where(u => u.Nombre.Replace(" ", "").Equals(_clienteSeleccionado.Replace(" ", ""))).ToList().Last(); // Retorna el registro de cliente de la venta
+            var productos = _context.TProducto.ToList(); // Retorna el listado de productos registrados en el sistema.
+            var clientes = _context.TClientes.ToList(); //Retorna el listado de cliente registrados en el sistema.
+            var creditosCliente = _context.TCreditoClientes.ToList(); // Retorna el listado de creditos de clientes registrados en el sistema
+            var credito = creditosCliente.Where(c => c.TClients.IdCliente.Equals(cliente.IdCliente)).ToList().Last(); // Retorna el credito del cliente de la venta
+            var RegistrosVentas = _context.TRegistroVentas.ToList(); // Retorna los registros de ventas en el sistema
+            int numeroTicket = 0; // Numero de ticket asignado a la venta
+            
+            // Si no existen ventas registradas el numero de ticket sera 1, de lo contrario el numero de ticket sera el ultimo registro +1. 
             if (RegistrosVentas.Count == 0)
             {
                 numeroTicket = 1;
@@ -484,33 +486,36 @@ namespace FactuLib.Areas.Ventas.Pages.Account
             {
                 numeroTicket = RegistrosVentas.ToList().Last().Id_RegistroVentas + 1;
             }
+
+            //Trae los datos de la tabla temporal de ventas donde contiene los productos a vender. 
             List<TTemporalVentas> datosTemporal = _context.TTemporalVentas.Where(u => u.TUser.IdUser.Equals(idUser) && u.TCliente.IdCliente.Equals(cliente.IdCliente)).ToList();
             if (datosTemporal.Count > 0)
             {
-                var strategy = _context.Database.CreateExecutionStrategy();
+                var strategy = _context.Database.CreateExecutionStrategy(); // Apertura una strategia de base de datos para abrir una transaccion. 
                 await strategy.ExecuteAsync(async () =>
                 {
-                    using (var transaction = _context.Database.BeginTransaction())
+                    using (var transaction = _context.Database.BeginTransaction()) // Abre una transacción de base de datos 
                     {
                         try
                         {
-                            string _ticket = null;
-                            var dateNow = DateTime.Now;
-                            var metodoPago = 0;
-                            var _cambio = 0.0m;
-                            var user = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList();
-                            var nameUser = $"{user[0].Name} {user[0].Apellido1} {user[0].Apellido2}";
-                            var nameCliente = $"{cliente.Nombre} {cliente.Apellido1} {cliente.Apellido2}";
-                            var monto = _ventas.getMontoTotal();
-                            var montoBruto = _ventas.getMontoBruto();
-                            var montoDescuento = _ventas.getMontoDescuentos();
-                            var montoImpuesto = _ventas.getMontoImpuestos();
-                            var dataTempo = datosTemporal.Last();
-                            var deuda = monto - Input.Pagos;
-                            //var datosCompras = _context.TRegistroCompras.Where (u=> u.TProveedor.IdProveedor.Equals(dataTempo.Tproveedor.IdProveedor)).ToList();
-
+                            string _ticket = null; // Declara variable de ticket
+                            var dateNow = DateTime.Now; // Declara variable con fecha actual del sistema
+                            var metodoPago = 0; // Declara variable de metodo de pago
+                            var _cambio = 0.0m; // Declara la variable de cambio al momento de pagar la venta. 
+                            var user = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList(); // Declara la variable de usuario
+                            var nameUser = $"{user[0].Name} {user[0].Apellido1} {user[0].Apellido2}"; // Declara la variable de nombre de usuario
+                            var nameCliente = $"{cliente.Nombre} {cliente.Apellido1} {cliente.Apellido2}"; // Declara el nombre del cliente
+                            var monto = _ventas.getMontoTotal(); //Calcula el monto neto de la venta
+                            var montoBruto = _ventas.getMontoBruto(); // Calcula el monto bruto de la venta
+                            var montoDescuento = _ventas.getMontoDescuentos(); // Calcula el monto descuento de la venta
+                            var montoImpuesto = _ventas.getMontoImpuestos(); // Calcula el monto de impuesto de la venta
+                            var dataTempo = datosTemporal.Last(); // declara variable con el ultimo registro de la tabla temporal
+                            var deuda = monto - Input.Pagos; // Declara el monto de la deuda de la venta en caso de ser a credito.
+                            
+                            // Si la venta es a contado realiza los siguientes procedimientos
                             if (_dataInput.Contado == true)
                             {
+                                //Establece el metodo de pago
                                 if (_dataInput.ChkEfectivo == true)
                                 {
                                     metodoPago = 1;
@@ -523,9 +528,11 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                 {
                                     metodoPago = 3;
                                 }
-
+                                
+                                //Calcula el cambio del sistema
                                 _cambio = (decimal)(_dataInput.Pagos - monto);
 
+                                //Declara el objeto de Registro de venta a cargarse en base de datos
                                 var RegistroVenta = new TRegistroVentas
                                 {
                                     Total_Bruto = montoBruto,
@@ -541,14 +548,19 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                     Estado_Venta = true
                                 };
 
+                                //Agrega el objeto en base de datos
                                 await _context.AddAsync(RegistroVenta);
+                                // Guarda cambios 
                                 await _context.SaveChangesAsync();
 
+
+                                //Agrega todos los productos ingresados en la tabla temporal de ventas, a la venta
                                 foreach (var item in datosTemporal)
                                 {
                                     var ProductoDetalle = productos.Where(p => p.Id_Producto.Equals(item.TProducto.Id_Producto)).ToList().Last();
                                     ProductoDetalle.Cantidad_Producto = ProductoDetalle.Cantidad_Producto - item.Cantidad_Venta;
 
+                                    //Declara el objeto de detalles de la venta 
                                     var DetalleVenta = new TDetallesVentas
                                     {
                                         Cantidad_Producto = item.Cantidad_Venta,
@@ -560,24 +572,33 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                         TProducto = ProductoDetalle
                                     };
 
+                                    //Agrega el objeto en base de datos
                                     await _context.AddAsync(DetalleVenta);
+                                    //Guarda cambios
                                     await _context.SaveChangesAsync();
 
+                                    //Elimina Información de la tabla temporal
                                     _context.TTemporalVentas.Where(t => t.idTempVentas.Equals(item.idTempVentas)).ToList().ForEach(d => _context.TTemporalVentas.Remove(d));
                                     await _context.SaveChangesAsync();
                                 }
                                 valor = true;
+                                //Genera ticket al finalizar la venta
                                 GeneraTicket(numeroTicket, nameCliente, nameUser, datosTemporal,montoBruto,montoImpuesto,montoDescuento,monto);
+                                //Realiza commit en la transacción para guardar los registros en base de datos
                                 transaction.Commit();
                                 ventaIniciada = false;
                             }
+                            // Si la venta es a credito realiza los siguientes procedimientos
                             if (_dataInput.Credito == true)
                             {
                                 
+                                //Declara los valores de deuda a ingresar para la venta
 
                                 var deudaActualAnterior = (float)credito.DeudaActual;
                                 var deudaNueva = deudaActualAnterior + monto;
                                 var deudaActualNueva = deudaNueva;
+
+                                //Declara el objeto de credito de cliente
 
                                 var CreditoCliente = new TCreditoClientes
                                 {
@@ -594,9 +615,12 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                     TClients = cliente,
                                 };
 
+                                //Envia a actualizar el objeto en base de datos 
                                 _context.Update(CreditoCliente);
+                                //Guarda cambios realizados en base de datos
                                 _context.SaveChanges();
 
+                                //Declara el objeto de Registro de venta a cargarse en base de datos
                                 var RegistroVenta = new TRegistroVentas
                                 {
                                     Total_Bruto = montoBruto,
@@ -612,14 +636,19 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                     Estado_Venta = true
                                 };
 
+                                //Agrega el objeto en base de datos
                                 await _context.AddAsync(RegistroVenta);
+
+                                //Guarda cambios en base de datos
                                 await _context.SaveChangesAsync();
 
+                                //Agrega todos los productos ingresados en la tabla temporal de ventas, a la venta
                                 foreach (var item in datosTemporal)
                                 {
                                     var ProductoDetalle = productos.Where(p => p.Id_Producto.Equals(item.TProducto.Id_Producto)).ToList().Last();
                                     ProductoDetalle.Cantidad_Producto = ProductoDetalle.Cantidad_Producto - item.Cantidad_Venta;
 
+                                    //Declara el objeto de detalles de la venta 
                                     var DetallesVenta = new TDetallesVentas
                                     {
                                         Cantidad_Producto = item.Cantidad_Venta,
@@ -631,18 +660,24 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                         TProducto = ProductoDetalle
                                     };
 
+                                    // Agrege el detalle de venta a la base de datos
                                     await _context.AddAsync(DetallesVenta);
+                                    // Guarda cambios
                                     await _context.SaveChangesAsync();
 
+                                    //Elimina información de la tabla temporal 
                                     _context.TTemporalVentas.Where(t => t.idTempVentas.Equals(item.idTempVentas)).ToList().ForEach(d => _context.TTemporalVentas.Remove(d));
                                     await _context.SaveChangesAsync();
                                 }
                                 valor = true;
+                                //Genera ticket
                                 GeneraTicket(numeroTicket, nameCliente, nameUser, datosTemporal, montoBruto, montoImpuesto, montoDescuento, monto);
+                                //Realiza commit de la transaccion para guardar registros en base de datos
                                 transaction.Commit();
                                 ventaIniciada = false;
                             }
 
+                            //Validacion de que ingrese opciones de credito o contado
                             if (_dataInput.Credito == false && _dataInput.Contado == false)
                             {
                                 _dataInput.ErrorMessage = "Debe seleccionar una forma de Pago";
@@ -651,8 +686,11 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                         }
                         catch (Exception ex)
                         {
+                            //En caso de que se genere una excepcion la carga en la propiedad error message del modelo de datos.
                             _dataInput.ErrorMessage = ex.Message;
                             valor = false;
+
+                            //Realiza rollback de la transaccion
                             transaction.Rollback();
                         }
                     }
@@ -667,6 +705,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
 
         public void GeneraTicket(int numeroTicket, string nombreCliente, string userName, List<TTemporalVentas> detalles, float montoBruto ,float montoIVA, float montoDesc, float montoNeto)
         {
+            //Genera el ticket que se le entrega al cliente al momento de la venta. 
             LTicket TicketPago = new LTicket();
             //TicketPago.AbreCajon();
             TicketPago.TextoCentro("Libreria y Bazar Dieka");

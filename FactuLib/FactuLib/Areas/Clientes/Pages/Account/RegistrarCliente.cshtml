@@ -59,111 +59,132 @@
                                  data-parent="#accordionExample">
                                 <div class="card-body">
                                     <div class="form-group">
+                                        @*Carga los campos de cedula para realizar el registro de un cliente*@
                                         @if (Model.Input.Cedula.Equals(0))
                                         {
+                                            @*Campo para ingresar tipo de identificacion*@
                                             <div class="form-group">
                                                 <select id="ddlTipoCedula" class="form-control" asp-for="Input.OpcionCedula" asp-items="@Model.Input.opcionCedula">
                                                     <option selected="true" disabled="disabled">--Seleccione tipo de identificación--</option>
                                                 </select>
                                             </div>
+                                            @*Campo para ingresar cedula*@
                                             <div class="form-group" id="CampoCedula" style="display:none">
                                                 <input asp-for= 'Input.Cedula' placeholder = 'Cedula' class= 'form-control' aria-describedby='CedulaAyuda'id="InputCedula" autofocus />
                                                 <span asp-validation-for='Input.Cedula' class='text-danger'></span>
                                             </div>
+                                            @*Campo para ingresar Cedula Juridica*@
                                             <div class="form-group" id="CampoCedulaJuridica" style="display:none">
                                                 <input asp-for='Input.CedulaJuridica' placeholder='Cedula Juridica' class='form-control' aria-describedby='CedulaAyuda' id="InputCedulaJuridica" autofocus />
                                                 <span asp-validation-for='Input.CedulaJuridica' class='text-danger'></span>
                                             </div>
+                                            @*Campo para ingresar Cedula Residencia*@
                                             <div class="form-group" id="CampoCedulaResidencia" style="display:none">
                                                 <input asp-for='Input.CedulaResidencia' placeholder='Cedula Residencia' class='form-control' aria-describedby='CedulaAyuda' id="InputCedulaResidencia" autofocus />
                                                 <span asp-validation-for='Input.CedulaResidencia' class='text-danger'></span>
                                             </div>
+                                            @*Campo para ingresar Cedula NITE*@
                                             <div class="form-group" id="CampoCedulaNITE" style="display:none">
                                                 <input asp-for='Input.CedulaNITE' placeholder='Cedula NITE' class='form-control' aria-describedby='CedulaAyuda' id="InputCedulaNITE" autofocus />
                                                 <span asp-validation-for='Input.CedulaNITE' class='text-danger'></span>
                                             </div>
-                                            @*<input asp-for="Input.Cedula" placeholder="Cedula" class="form-control" aria-describedby="CedulaAyuda" autofocus />*@
                                         }                       
                                         else
                                         {
+                                            @*Carga los campos de cedula para realizar la actualizacion de un cliente a diferencia de los registros de cliente estos campos son readonly*@
                                             <input asp-for="Input.CedulaActulizar" placeholder="Cedula" class="form-control" aria-describedby="CedulaAyuda" readonly />
-                                            
+                                            @*Campo para ingresar Cedula Juridica*@
                                             <div class="form-group" id="CampoCedulaJuridica" style="display:none">
                                                 <input asp-for='Input.CedulaJuridica' placeholder='Cedula Juridica' class='form-control' aria-describedby='CedulaAyuda' id="InputCedulaJuridica" autofocus />
                                                 <span asp-validation-for='Input.CedulaJuridica' class='text-danger'></span>
                                             </div>
+                                            @*Campo para ingresar Cedula Residencia*@
                                             <div class="form-group" id="CampoCedulaResidencia" style="display:none">
                                                 <input asp-for='Input.CedulaResidencia' placeholder='Cedula Residencia' class='form-control' aria-describedby='CedulaAyuda' id="InputCedulaResidencia" autofocus/>
                                                 <span asp-validation-for='Input.CedulaResidencia' class='text-danger'></span>
                                             </div>
+                                            @*Campo para ingresar Cedula NITE*@
                                             <div class="form-group" id="CampoCedulaNITE" style="display:none">
                                                 <input asp-for='Input.CedulaNITE' placeholder='Cedula NITE' class='form-control' aria-describedby='CedulaAyuda' id="InputCedulaNITE" autofocus />
                                                 <span asp-validation-for='Input.CedulaNITE' class='text-danger' ></span>
                                             </div>
                                         }
-                                        @*<span asp-validation-for="Input.Cedula" class="text-danger"></span>*@
                                         <div id="CedulaAyuda" class="form-text">
                                             @*<small>El numero de cédula tiene que contener 9 digitos númericos.</small>*@
                                         </div>
                                     </div>
+                                    @*Campo para ingresar el nombre del cliente*@
                                     <div class="form-group">
                                         <input asp-for="Input.Name" placeholder="Nombre" class="form-control" />
                                         <span asp-validation-for="Input.Name" class="text-danger"></span>
                                     </div>
+                                    @*Campo para ingresar Primer Apellido del cliente*@
                                     <div class="form-group">
                                         <input asp-for="Input.Apellido1" placeholder="Primer Apellido" class="form-control" />
                                         <span asp-validation-for="Input.Apellido1" class="text-danger"></span>
                                     </div>
+                                    @*Campo para ingresar Segundo Apellido del cliente*@
                                     <div class="form-group">
                                         <input asp-for="Input.Apellido2" placeholder="Segundo Apellido" class="form-control" />
                                         <span asp-validation-for="Input.Apellido2" class="text-danger"></span>
                                     </div>
+                                    @*Campo para ingresar Numero de telefono del cliente*@
                                     <div class="form-group">
                                         <input asp-for="Input.Phone" placeholder="Numero de Telefono" class="form-control" />
                                         <span asp-validation-for="Input.Phone" class="text-danger"></span>
                                     </div>
+                                    @*Campo para ingresar Correo del cliente*@
                                     <div class="form-group">
                                         <input asp-for="Input.Email" placeholder="Correo Electronico" class="form-control" />
                                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                                     </div>
+                                    @*Campo para ingresar Direccion exdacta del cliente*@
                                     <div class="form-group">
                                         <input asp-for="Input.Direction" placeholder="Direccion" class="form-control" />
                                         <span asp-validation-for="Input.Direction" class="text-danger"></span>
                                     </div>
+                                    @*Campo para seleccionar provincia de  Direccion de domicilio del cliente*@
                                     <div class="form-group">
                                         <select id="ddlProvincia" class="form-control" asp-for="InputProvincia.provincia" asp-items="@Model.InputProvincia.itemProvincia">
                                             <option selected="true" disabled="disabled">--Seleccionar Provincia--</option>
                                         </select>
                                         <span asp-validation-for="InputProvincia.provincia" class="text-danger"></span>
                                     </div>
+                                    @*Campo para seleccionar provincia de  Direccion de domicilio del cliente*@
                                     <div class="form-group">
                                         <select id="ddlCanton" class="form-control" asp-for="InputProvincia.canton">
                                             <option selected="true" disabled="disabled">--Seleccionar Canton--</option>
                                         </select>
                                         <span asp-validation-for="InputProvincia.canton" class="text-danger"></span>
                                     </div>
+                                    @*Campo para seleccionar distrito de  Direccion de domicilio del cliente*@
                                     <div class="form-group">
                                         <select id="ddlDistrito" class="form-control" asp-for="InputProvincia.distrito">
                                             <option selected="true" disabled="disabled">--Seleccionar Distrito--</option>
                                         </select>
                                         <span asp-validation-for="InputProvincia.distrito" class="text-danger"></span>
                                     </div>
+                                    @*Campo para seleccionar canton de  Direccion de domicilio del cliente*@
                                     <div class="form-group">
                                         <div class="col-md-10">
                                             <input asp-for="Input.Credit" class="form-check-input" />
                                         </div>
                                         <label asp-for="Input.Credit" class="col-md-10 control-label">¿Elegible Credito?</label>
                                     </div>
+                                    @*botones para enviar el formulario*@
                                     <div class="form-group">
+                                        @*Si se quiere realizar un registro de un cliente el botón sera Registrar*@
                                         @if (Model.Input.Cedula.Equals(0))
                                         {
                                             <button type="submit" class="btn btn-primary btn-block">Registrar</button>
                                         }
+                                        @*Si se quiere realizar una actualización de un cliente el botón sera Actualizar*@
                                         else
                                         {
                                             <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
                                         }
                                     </div>
+                                    @*Si se genera algun error en el proceso este se ira visualizar en el siguiente campo*@
                                     <div class="form-group">
                                         <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessage)</label>
                                     </div>

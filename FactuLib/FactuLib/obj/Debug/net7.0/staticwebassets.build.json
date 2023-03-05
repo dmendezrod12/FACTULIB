@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4gmzYdwhzZka+T+xZzRYvnlb7ZiIuTuoe7DmWsPRe7M=",
+  "Hash": "4ZO+jPNIcqTa6SKq0/d84yf83pIePPDit7CaIWd9SzQ=",
   "Source": "FactuLib",
   "BasePath": "_content/FactuLib",
   "Mode": "Default",
@@ -1445,6 +1445,40 @@
       "OriginalItemSpec": "wwwroot\\js\\AperturaCaja.js"
     },
     {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\chart.js",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "js/chart.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\chart.js"
+    },
+    {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\chart.min.js",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "js/chart.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\chart.min.js"
+    },
+    {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Cliente.js",
       "SourceId": "FactuLib",
       "SourceType": "Discovered",
@@ -1494,6 +1528,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Funciones.js"
+    },
+    {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Graficos.js",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "js/Graficos.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Graficos.js"
     },
     {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Principal.js",

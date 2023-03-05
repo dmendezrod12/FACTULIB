@@ -2,11 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\FactuLib",
+    "\\FactuLib\\FactuLib",
     "\\FactuLib\\FactuLib\\Areas",
-    "\\FactuLib\\FactuLib\\Areas\\Compras",
-    "\\FactuLib\\FactuLib\\Areas\\Compras\\Pages",
-    "\\FactuLib\\FactuLib\\Areas\\Compras\\Pages\\Account"
+    "\\FactuLib\\FactuLib\\Areas\\Cajas",
+    "\\FactuLib\\FactuLib\\Areas\\Cajas\\Pages",
+    "\\FactuLib\\FactuLib\\Areas\\Cajas\\Pages\\Account",
+    "\\FactuLib\\FactuLib\\Areas\\Ventas",
+    "\\FactuLib\\FactuLib\\Areas\\Ventas\\Pages",
+    "\\FactuLib\\FactuLib\\Areas\\Ventas\\Pages\\Account"
   ],
-  "SelectedNode": "\\FactuLib\\FactuLib.sln",
+  "SelectedNode": "\\FactuLib\\FactuLib\\Areas\\Cajas\\Pages\\Account\\Cierre_Caja.cshtml.cs",
   "PreviewInSolutionExplorer": false
 }

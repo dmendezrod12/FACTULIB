@@ -13,14 +13,17 @@
         <div class="col-sm">
             <div class="card text-center" style="width: 21rem;">
                 <div class="card-header">
+                    @*Muestra la imagen que tiene cargada el registro de cliente*@
                     <img class="imageUserDetail" src="@image" />
                 </div>
                 <div class="card-body">
                     <div class="col-md-10">
                         <div class="row">
+                            @*Muestra el nombre completo del cliente*@
                             <p>@Model.Input.datosCliente.Name</p>
                         </div>
                     </div>
+                    @*Coloca Disponible si el cliente es elegible a credito y No Disponible si no es elegible a credito.*@
                     <div class="row">
                         <p>Credito: </p>
                         &nbsp;
@@ -34,6 +37,7 @@
                             <p class="text-danger"> No Disponible</p>
                         }
                     </div>
+                    @*Muestra la información de credito del cliente*@
                     <div class="row">
                         <a asp-area="Clientes" asp-page="CreditoCliente" asp-route-id="@Model.Input.datosCliente.Cedula" class="btn btn-info">Credito de Cliente</a>
                     </div>
@@ -43,6 +47,7 @@
         <div class="col-sm">
             <div class="card">
                 <div class="card-body">
+                    @*La siguiente sección muestra el detalle de la información del cliente*@
                     <table class="tableCursos">
                         <tbody>
                             <tr>
@@ -51,6 +56,7 @@
                                 </th>
                             </tr>
                             <tr>
+                                @*Muestra el numero de cedula del cliente*@
                                 <th>
                                     Numero de Cédula
                                 </th>
@@ -60,6 +66,7 @@
                                     <p>@Model.Input.datosCliente.Cedula</p>
                                 </td>
                             </tr>
+                            @*Muestra el Nombre del cliente*@
                             <tr>
                                 <th>
                                     Nombre
@@ -70,6 +77,7 @@
                                     <p>@name</p>
                                 </td>
                             </tr>
+                            @*Muestra el telefono del cliente*@
                             <tr>
                                 <th>
                                     Telefono
@@ -80,6 +88,7 @@
                                     <p>@Model.Input.datosCliente.Phone</p>
                                 </td>
                             </tr>
+                            @*Muestra el correo electronico del cliente*@
                             <tr>
                                 <th>
                                     Correo Electronico
@@ -91,6 +100,7 @@
                                 </td>
                             </tr>
                             <tr>
+                             @*Muestra la provincia de la dirección de domiclilio del cliente*@
                             <tr>
                                 <th>
                                     Provincia
@@ -101,6 +111,7 @@
                                     <p>@Model.Input.datosCliente.nombreProvincia</p>
                                 </td>
                             </tr>
+                            @*Muestra el canton de la dirección de domiclilio del cliente*@
                             <tr>
                                 <th>
                                     Canton
@@ -111,6 +122,7 @@
                                     <p>@Model.Input.datosCliente.nombreCanton</p>
                                 </td>
                             </tr>
+                            @*Muestra el distrito de la dirección de domiclilio del cliente*@
                             <tr>
                                 <th>
                                     Distrito
@@ -121,6 +133,7 @@
                                     <p>@Model.Input.datosCliente.nombreDistrito</p>
                                 </td>
                             </tr>
+                            @*Muestra la direccion exacta de domiclilio del cliente*@
                             <tr>
                                 <th>
                                     Direccion Exacta

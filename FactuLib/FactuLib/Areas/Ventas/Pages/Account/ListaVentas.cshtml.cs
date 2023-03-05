@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using System;
 using FactuLib.Areas.Clientes.Models;
+using FactuLib.Areas.Cajas.Models;
 
 namespace FactuLib.Areas.Ventas.Pages.Account
 {

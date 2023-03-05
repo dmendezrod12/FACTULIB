@@ -70,6 +70,7 @@ namespace FactuLib.Areas.Clientes.Controllers
         public ActionResult ReportesClientes(String opcion)
         {
             Object[] objects = new Object[3];
+            // Realiza la consulta de clientes y lo almacena en una variable 
             var data = _cliente.getTClienteAsync(null, 0);
             var url = Request.Scheme + "://" + Request.Host.Value;
             objects = new LPaginador<InputModelRegistrar>().paginador(data, 0, 10, "Clientes", "Clientes", "Reportes", url);
@@ -78,6 +79,7 @@ namespace FactuLib.Areas.Clientes.Controllers
             // Define la URL del Pie de página
             string _footerUrl = Url.Action("FooterPDF", "Clientes", null, "https");
 
+            // Define la clase de modelo para enviar a la vista HTML que se convertira en PDF 
             models = new DataPaginador<InputModelRegistrar>
             {
                 List = (List<InputModelRegistrar>)objects[2],
@@ -86,6 +88,7 @@ namespace FactuLib.Areas.Clientes.Controllers
                 Input = new InputModelRegistrar()
             };
 
+            //Genera PDF a partir de la clase ViewAsPDF de la librería de Rotativa
             return new ViewAsPdf("Reports/ReportesClientes", models)
             {
                 //..
