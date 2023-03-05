@@ -32,6 +32,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
         private IWebHostEnvironment _environment;
         private UserManager<IdentityUser> _userManager;
         private LVentas _ventas;
+        private LApertura _apertura;
         private static InputModelVentas _temporalVentas;
         private static byte[] imageByte = null;
         private static bool ventaIniciada = false;
@@ -51,6 +52,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
             _environment = environment;
             _userManager = userManager;
             _ventas = new LVentas(context);
+            _apertura = new LApertura(context);
             Moneda = "¢";
         }
 
@@ -174,27 +176,42 @@ namespace FactuLib.Areas.Ventas.Pages.Account
             {
                 if (value == 1)
                 {
-                    if (await VentasAsync())
+                    if (!_apertura.ValidaApertura(_userManager.GetUserId(User)))
                     {
-                        return Redirect("/Ventas/AgregarVenta?area=Ventas");
-                    }
-                    else
-                    {
-                        return Redirect("/Ventas/AgregarVenta?area=VGentas&error=true");
-                    }
-                }
-                else
-                {
-                    if (_temporalVentas.idTempVentas == 0)
-                    {
-                        if (await SaveAsync())
+                        if (await VentasAsync())
                         {
                             return Redirect("/Ventas/AgregarVenta?area=Ventas");
                         }
                         else
                         {
-                            return Redirect("/Ventas/AgregarVenta?area=Ventas&error=true");
+                            return Redirect("/Ventas/AgregarVenta?area=VGentas&error=true");
                         }
+                    }
+                    else
+                    {
+                        return Redirect("/Cajas/Apertura_Caja?area=Cajas");
+                    }
+                    
+                }
+                else
+                {
+                    if (_temporalVentas.idTempVentas == 0)
+                    {
+                        if (!_apertura.ValidaApertura(_userManager.GetUserId(User)))
+                        {
+                            if (await SaveAsync())
+                            {
+                                return Redirect("/Ventas/AgregarVenta?area=Ventas");
+                            }
+                            else
+                            {
+                                return Redirect("/Ventas/AgregarVenta?area=Ventas&error=true");
+                            }
+                        }
+                        else
+                        {
+                            return Redirect("/Cajas/Apertura_Caja?area=Cajas");
+                        }       
                     }
                     else
                     {

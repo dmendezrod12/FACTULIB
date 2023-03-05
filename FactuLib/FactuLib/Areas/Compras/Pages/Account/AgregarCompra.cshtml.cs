@@ -29,6 +29,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
         private IWebHostEnvironment _environment;
         private UserManager<IdentityUser> _userManager;
         private LCompras _compras;
+        private LApertura _apertura;
         private static InputModelCompras _temporal_compras;
         private static byte[] imageByte = null;
         private static bool compraIniciada = false;
@@ -49,6 +50,7 @@ namespace FactuLib.Areas.Compras.Pages.Account
             _environment = environment;
             _userManager = userManager;
             _compras = new LCompras(context);
+            _apertura = new LApertura(context);
             Moneda = "¢";
         }
 
@@ -171,20 +173,9 @@ namespace FactuLib.Areas.Compras.Pages.Account
             {
                 if (value == 1)
                 {
-                    if (await ComprasAsync())
+                    if (!_apertura.ValidaApertura(_userManager.GetUserId(User)))
                     {
-                        return Redirect("/Compras/AgregarCompra?area=Compras");
-                    }
-                    else
-                    {
-                        return Redirect("/Compras/AgregarCompra?area=Compras&error=true");
-                    }
-                }
-                else
-                {
-                    if (_temporal_compras.idTempCompras == 0)
-                    {
-                        if (await SaveAsync())
+                        if (await ComprasAsync())
                         {
                             return Redirect("/Compras/AgregarCompra?area=Compras");
                         }
@@ -195,8 +186,35 @@ namespace FactuLib.Areas.Compras.Pages.Account
                     }
                     else
                     {
-                        await EditAsync();
+                        return Redirect("/Cajas/Apertura_Caja?area=Cajas");
                     }
+                       
+                }
+                else
+                {
+                    if (!_apertura.ValidaApertura(_userManager.GetUserId(User)))
+                    {
+                        if (_temporal_compras.idTempCompras == 0)
+                        {
+                            if (await SaveAsync())
+                            {
+                                return Redirect("/Compras/AgregarCompra?area=Compras");
+                            }
+                            else
+                            {
+                                return Redirect("/Compras/AgregarCompra?area=Compras&error=true");
+                            }
+                        }
+                        else
+                        {
+                            await EditAsync();
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/Cajas/Apertura_Caja?area=Cajas");
+                    }    
+                    
                 }
             }
             return Redirect("/Compras/AgregarCompra?area=Compras");

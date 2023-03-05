@@ -11,6 +11,6 @@
     "\\FactuLib\\FactuLib\\Areas\\Ventas\\Pages",
     "\\FactuLib\\FactuLib\\Areas\\Ventas\\Pages\\Account"
   ],
-  "SelectedNode": "\\FactuLib\\FactuLib\\Areas\\Cajas\\Pages\\Account\\Cierre_Caja.cshtml.cs",
+  "SelectedNode": "\\FactuLib\\FactuLib\\Areas\\Cajas\\Pages\\Account\\Lista_Cierres.cshtml.cs",
   "PreviewInSolutionExplorer": false
 }
