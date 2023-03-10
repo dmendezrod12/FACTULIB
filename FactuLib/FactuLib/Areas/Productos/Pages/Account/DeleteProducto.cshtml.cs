@@ -30,6 +30,23 @@ namespace FactuLib.Areas.Productos.Pages.Account
         private static InputModelProductos _dataProducto1, _dataProducto2;
         private IWebHostEnvironment _environment;
         private LProducto _producto;
+
+        public DeleteProductoModel(
+       UserManager<IdentityUser> userManager,
+       SignInManager<IdentityUser> signInManager,
+       RoleManager<IdentityRole> roleManager,
+       ApplicationDbContext context,
+       IWebHostEnvironment environment
+       )
+        {
+            _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _environment = environment;
+            _uploadimage = new UploadImage();
+            _producto = new LProducto(context);
+        }
         public void OnGet(int id)
         {
             if (id.Equals(0))
@@ -102,9 +119,9 @@ namespace FactuLib.Areas.Productos.Pages.Account
             public IFormFile AvatarImage { get; set; }
         }
 
-        public async Task<IActionResult> OnPost(String dataUser, int id)
+        public async Task<IActionResult> OnPost(String DataProducto, int id)
         {
-            if (dataUser == null)
+            if (DataProducto == null)
             {
 
                 if (User.IsInRole("Administrador"))
@@ -130,7 +147,7 @@ namespace FactuLib.Areas.Productos.Pages.Account
             }
             else
             {
-                _dataProducto1 = JsonConvert.DeserializeObject<InputModelProductos>(dataUser);
+                _dataProducto1 = JsonConvert.DeserializeObject<InputModelProductos>(DataProducto);
                 return Redirect("/Productos/DeleteProducto?id=" + id);
             }
         }
@@ -140,7 +157,8 @@ namespace FactuLib.Areas.Productos.Pages.Account
             _dataInput = Input;
             var valor = false;
             var strategy = _context.Database.CreateExecutionStrategy();
-            await strategy.ExecuteAsync(async () => {
+            await strategy.ExecuteAsync(async () =>
+            {
                 using (var transaction = _context.Database.BeginTransaction())
                 {
                     try

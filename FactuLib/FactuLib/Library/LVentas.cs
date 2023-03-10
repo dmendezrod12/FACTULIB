@@ -108,7 +108,7 @@ namespace FactuLib.Library
             if (0 < data.Count)
             {
                 data.Reverse();
-                objects = new LPaginador<TProducto>().paginador(data, page, num, "Compras", "Compras", "AgregarCompra", url);
+                objects = new LPaginador<TProducto>().paginador(data, page, num, "Ventas", "Ventas", "AgregarVenta", url);
             }
             else
             {

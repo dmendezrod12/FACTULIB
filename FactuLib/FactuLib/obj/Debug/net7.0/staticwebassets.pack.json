@@ -113,6 +113,10 @@
       "PackagePath": "staticwebassets\\js\\Graficos.js"
     },
     {
+      "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Notificaciones.js",
+      "PackagePath": "staticwebassets\\js\\Notificaciones.js"
+    },
+    {
       "Id": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Principal.js",
       "PackagePath": "staticwebassets\\js\\Principal.js"
     },

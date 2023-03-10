@@ -88,7 +88,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Precio Costo</span>    
                                             </div>
-                                            <input asp-for="Input.Precio_Costo" class="form-control" type="text" id="currency-field" pattern="^\¢\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="¢1,000,000.00">
+                                            @*<input asp-for="Input.Precio_Costo" class="form-control" type="text" id="currency-field" pattern="^\¢\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="¢1,000,000.00">*@
+                                            <input asp-for="Input.Precio_Costo" class="form-control" type="text" id="currency-field" data-type="currency" placeholder="¢1,000,000.00>
                                         </div>       
                                         <span asp-validation-for="Input.Precio_Costo" class="text-danger"></span>
                                     </div>
@@ -97,7 +98,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Precio Venta</span>
                                             </div>
-                                            <input asp-for="Input.Precio_Venta" class="form-control" type="text" id="currency-field" pattern="^\¢\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="¢1,000,000.00">
+                                            <input asp-for="Input.Precio_Venta" class="form-control" type="text" id="currency-field" pattern="^\¢\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency" placeholder="¢1,000,000.00">
                                         </div>
                                         <span asp-validation-for="Input.Precio_Venta" class="text-danger"></span>
                                     </div>

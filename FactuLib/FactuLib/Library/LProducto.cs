@@ -1,6 +1,7 @@
 ﻿using FactuLib.Areas.Clientes.Models;
 using FactuLib.Areas.Productos.Models;
 using FactuLib.Data;
+using NuGet.DependencyResolver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,29 @@ namespace FactuLib.Library
                 listTProductos = dbContext.TProducto.Where(u => u.Codigo_Producto.Equals(codigoProducto)).ToList();
             }
             return listTProductos;
+        }
+
+        public bool compruebaCantidadMinimaProducto (int IdProducto)
+        {
+            bool result = false;
+            var producto = _context.TProducto.Where(p => p.Id_Producto.Equals(IdProducto)).ToList();
+
+            if (producto.Count > 0)
+            {
+                if (producto.Last().Cantidad_Producto < 10)
+                {
+                    result = true;
+                    return result; ;
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            else
+            {
+                return result;
+            }
         }
     }
 }

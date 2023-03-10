@@ -33,6 +33,8 @@ namespace FactuLib.Areas.Ventas.Pages.Account
         private UserManager<IdentityUser> _userManager;
         private LVentas _ventas;
         private LApertura _apertura;
+        private LProducto _producto;
+        private LSendMails _correo;
         private static InputModelVentas _temporalVentas;
         private static byte[] imageByte = null;
         private static bool ventaIniciada = false;
@@ -53,6 +55,8 @@ namespace FactuLib.Areas.Ventas.Pages.Account
             _userManager = userManager;
             _ventas = new LVentas(context);
             _apertura = new LApertura(context);
+            _producto = new LProducto(context);
+            _correo = new LSendMails();
             Moneda = "¢";
         }
 
@@ -71,8 +75,8 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                 Input.AvatarImage = null;
                 Input.Image = _dataInput.Image;
                 Input.Temporal_Ventas = _ventas.Get_Temporal_Ventas(_idPagina, 5, search, Request);
-                Input.Lista_Clientes = _ventas.GetClientesLista(_idPagina, 5, null, Request);
-                Input.Lista_Productos = _ventas.GetProductosLista(_idPagina, 5, null, Request);
+                Input.Lista_Clientes = _ventas.GetClientesLista(_idPagina, 5, search, Request);
+                Input.Lista_Productos = _ventas.GetProductosLista(_idPagina, 5, search, Request);
 
                 if (error == true)
                 {
@@ -95,8 +99,8 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                 Input = new InputModel
                 {
                     Temporal_Ventas = _ventas.Get_Temporal_Ventas(_idPagina, 5, search, Request),
-                    Lista_Clientes = _ventas.GetClientesLista(_idPagina, 5, null, Request),
-                    Lista_Productos = _ventas.GetProductosLista(_idPagina, 5, null, Request),
+                    Lista_Clientes = _ventas.GetClientesLista(_idPagina, 5, search, Request),
+                    Lista_Productos = _ventas.GetProductosLista(_idPagina, 5, search, Request),
                     idTempVentas = _temporalVentas.idTempVentas,
                     Nombre = _temporalVentas.Nombre,
                     Descripcion = _temporalVentas.Descripcion,
@@ -597,6 +601,11 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                     //Elimina Información de la tabla temporal
                                     _context.TTemporalVentas.Where(t => t.idTempVentas.Equals(item.idTempVentas)).ToList().ForEach(d => _context.TTemporalVentas.Remove(d));
                                     await _context.SaveChangesAsync();
+
+                                    if (_producto.compruebaCantidadMinimaProducto(ProductoDetalle.Id_Producto))
+                                    {
+                                        _correo.SendEmailInventario(ProductoDetalle.Nombre_Producto, ProductoDetalle.Cantidad_Producto, ProductoDetalle.Codigo_Producto);
+                                    }
                                 }
                                 valor = true;
                                 //Genera ticket al finalizar la venta
@@ -685,6 +694,11 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                     //Elimina información de la tabla temporal 
                                     _context.TTemporalVentas.Where(t => t.idTempVentas.Equals(item.idTempVentas)).ToList().ForEach(d => _context.TTemporalVentas.Remove(d));
                                     await _context.SaveChangesAsync();
+
+                                    if (_producto.compruebaCantidadMinimaProducto(ProductoDetalle.Id_Producto))
+                                    {
+                                        _correo.SendEmailInventario(ProductoDetalle.Nombre_Producto, ProductoDetalle.Cantidad_Producto, ProductoDetalle.Codigo_Producto);
+                                    }
                                 }
                                 valor = true;
                                 //Genera ticket

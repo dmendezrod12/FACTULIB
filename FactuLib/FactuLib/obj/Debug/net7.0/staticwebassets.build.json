@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4ZO+jPNIcqTa6SKq0/d84yf83pIePPDit7CaIWd9SzQ=",
+  "Hash": "3ykIZgcR0BclD/jgFV/3x/IqfQYSHZNPX0SlayP+amw=",
   "Source": "FactuLib",
   "BasePath": "_content/FactuLib",
   "Mode": "Default",
@@ -1545,6 +1545,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Graficos.js"
+    },
+    {
+      "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Notificaciones.js",
+      "SourceId": "FactuLib",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\",
+      "BasePath": "_content/FactuLib",
+      "RelativePath": "js/Notificaciones.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Notificaciones.js"
     },
     {
       "Identity": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\wwwroot\\js\\Principal.js",

@@ -49,6 +49,7 @@ namespace FactuLib.Library
                         c.Fecha,
                         c.Credito,
                         c.Imagen,
+                        c.Enabled,
                         e.correo
                     }).Where(c => c.Nombre.StartsWith(valor) || c.Apellido1.StartsWith(valor) || c.Apellido2.StartsWith(valor) || c.correo.StartsWith(valor)).ToList();
 
@@ -64,6 +65,7 @@ namespace FactuLib.Library
                             Fecha = item.Fecha,
                             Credito = item.Credito,
                             Imagen = item.Imagen,
+                            Enabled = item.Enabled
                         });
                     }
                 }
