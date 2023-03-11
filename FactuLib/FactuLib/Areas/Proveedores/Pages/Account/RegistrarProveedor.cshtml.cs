@@ -154,8 +154,6 @@ namespace FactuLib.Areas.Proveedores.Pages.Account
                 {
                     if (User.IsInRole("Administrador"))
                     {
-                        if (_proveedor.NoExisteCedJur(Input.CedulaJuridica))
-                        {
                             if (await UpdateAsync())
                             {
                                 var url = $"/Proveedores/Account/Details?id={_datosProveedor2.CedulaJuridica}";
@@ -167,15 +165,7 @@ namespace FactuLib.Areas.Proveedores.Pages.Account
                             else
                             {
                                 return Redirect("/Proveedores/Registrar?id=1");
-                            }
-                        }
-                        else
-                        {
-                            _dataInput = new InputModel();
-                            _dataInput = Input;
-                            _dataInput.ErrorMessage = "Ya existe numero de cédula juridica registrado";
-                            return Redirect("/Proveedores/Registrar?id=1");
-                        }       
+                            }       
                     }
                     else
                     {

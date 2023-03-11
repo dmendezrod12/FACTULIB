@@ -20,7 +20,7 @@ namespace FactuLib.Areas.Clientes.Pages.Account
     public class CreditoClienteModel : PageModel
     {
         private LCliente _cliente;
-        private static int idCliente = 0;
+        private static long idCliente = 0;
         public  string Moneda = "¢";
         private static string _errorMessage;
         public static InputModelRegistrar _dataclient;
@@ -38,7 +38,7 @@ namespace FactuLib.Areas.Clientes.Pages.Account
             _cliente = new LCliente(context);
             _codigos = new LCodigos();
         }
-        public IActionResult OnGet(int id, InputModel input)
+        public IActionResult OnGet(long id, InputModel input)
         {
             idCliente = 0;
             if (idCliente == 0)

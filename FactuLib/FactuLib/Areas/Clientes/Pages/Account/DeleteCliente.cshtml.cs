@@ -77,7 +77,7 @@ namespace FactuLib.Areas.Clientes.Pages.Account
                             Name = _dataCliente1.Name,
                             Apellido1 = _dataCliente1.Apellido1,
                             Apellido2 = _dataCliente1.Apellido2,
-                            Cedula = _dataCliente1.Cedula,
+                            CedulaDelete = _dataCliente1.Cedula,
                             Email = _dataCliente1.Email,
                             Image = _dataCliente1.Image,
                             Phone = _dataCliente1.Phone,
@@ -109,7 +109,6 @@ namespace FactuLib.Areas.Clientes.Pages.Account
             }
 
             _dataCliente1 = null;
-
         }
         [BindProperty]
 
@@ -117,6 +116,8 @@ namespace FactuLib.Areas.Clientes.Pages.Account
         public class inputModel : InputModelRegistrar
         {
             public IFormFile AvatarImage { get; set; }
+
+            
         }
 
 
@@ -165,7 +166,7 @@ namespace FactuLib.Areas.Clientes.Pages.Account
                 {
                     try
                     {
-                        var clientData = _cliente.getCliente(Input.Cedula);
+                        var clientData = _cliente.getCliente(Input.CedulaDelete);
                         long Cedula = clientData.Last().Cedula;
                         _context.TCreditoClientes.Where(r => r.TClients.Cedula == Cedula).ToList().ForEach(p => _context.TCreditoClientes.Remove(p));
                         await _context.SaveChangesAsync();
@@ -202,7 +203,7 @@ namespace FactuLib.Areas.Clientes.Pages.Account
                 {
                     try
                     {
-                        var clientData = _cliente.getCliente(_dataInput.Cedula);
+                        var clientData = _cliente.getCliente(_dataInput.CedulaDelete);
                         if (!clientData.Count.Equals(0))
                         {
                             var client = new TClientes

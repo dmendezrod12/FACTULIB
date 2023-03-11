@@ -164,6 +164,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFBhZ2VzXEFjY291bnRcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Pages/Account/ListaProductos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFBhZ2VzXEFjY291bnRcTGlzdGFQcm9kdWN0b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Productos/Pages/Account/ReportsSearch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdG9zXFBhZ2VzXEFjY291bnRcUmVwb3J0c1NlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -286,6 +290,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Ventas/Pages/Account/DetallesVenta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmVudGFzXFBhZ2VzXEFjY291bnRcRGV0YWxsZXNWZW50YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Ventas/Pages/Account/ListaClientes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmVudGFzXFBhZ2VzXEFjY291bnRcTGlzdGFDbGllbnRlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pafla/Source/Repos/dmendezrod12/FACTULIB/FactuLib/FactuLib/Areas/Ventas/Pages/Account/ListaVentas.cshtml]

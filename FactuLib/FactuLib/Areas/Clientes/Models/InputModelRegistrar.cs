@@ -108,6 +108,8 @@ namespace FactuLib.Areas.Clientes.Models
 
         public String User { get; set; }
 
+        public long CedulaDelete { get; set; }
+
         [TempData]
         public string ErrorMessage { get; set; }
     }

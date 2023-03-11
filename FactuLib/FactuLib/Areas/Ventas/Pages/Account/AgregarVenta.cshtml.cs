@@ -43,6 +43,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
         public float monto, montoDescuento, montoImpuesto, montoBruto = 0;
         public static string _clienteSeleccionado;
         public static string _nombreCliente = "";
+        public static long _CedulaCliente = 0;
 
         public AgregarVentaModel(
            ApplicationDbContext context,
@@ -61,7 +62,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
         }
 
 
-        public void OnGet(int id, int IdTemporal, string nombreCliente, int idProducto, string search, bool error)
+        public void OnGet(int id, int IdTemporal, string nombreCliente, int idProducto, string search, bool error, long CedulaCliente)
         {
             _idPagina = id;
             monto = _ventas.getMontoTotal();
@@ -132,17 +133,20 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                 if (_nombreCliente != "")
                 {
                     Input.Cliente = _nombreCliente;
+                    Input.CedClienteSeleccionada = _CedulaCliente;
                 }
 
                 if (nombreCliente != null)
                 {
                     _nombreCliente = nombreCliente;
+                    _CedulaCliente = CedulaCliente;
                     Input.Cliente = _nombreCliente;
+                    Input.CedClienteSeleccionada = _CedulaCliente;
                 }
 
                 if (idProducto > 0)
                 {
-                    var producto = Input.Lista_Productos.List.Where(p => p.Id_Producto.Equals(idProducto)).ToList().Last();
+                    var producto = _context.TProducto.Where(p => p.Id_Producto.Equals(idProducto)).ToList().Last();
                     Input.Nombre = producto.Nombre_Producto;
                     Input.Descripcion = producto.Descripcion_Producto;
                     Input.Precio = (float)producto.Precio_Costo;
@@ -219,7 +223,14 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                     }
                     else
                     {
-                        await EditAsync();
+                        if (await EditAsync())
+                        {
+                            return Redirect("/Ventas/AgregarVenta?area=Ventas");
+                        }
+                        else
+                        {
+                            return Redirect("/Ventas/AgregarVenta?area=Ventas&error=true");
+                        }
                     }
                 }
             }
@@ -236,7 +247,9 @@ namespace FactuLib.Areas.Ventas.Pages.Account
 
             public string NombreCliente { get; set; }
 
-            public string CedCliente { get; set; }
+            public long CedCliente { get; set; }
+
+            public long CedClienteSeleccionada { get; set; }
 
             public int IdProducto { get; set; }
 
@@ -269,7 +282,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
             {
                 imageByte = await _uploadImage.ByteAvatarImageAsync(Input.AvatarImage, _environment, "images/images/agregarCompra.png");
                 _dataInput.Image = imageByte;
-                var cliente = _context.TClientes.Where(p => p.Nombre.Replace(" ", "").Equals(_dataInput.Cliente.Replace(" ", ""))).ToList();
+                var cliente = _context.TClientes.Where(p => p.Cedula.Equals(_CedulaCliente)).ToList();
                 if (0 < cliente.Count)
                 {
                     var dataCliente = cliente.Last();
@@ -385,7 +398,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
             {
                 imageByte = await _uploadImage.ByteAvatarImageAsync(Input.AvatarImage, _environment, "images/images/agregarCompra.png");
             }
-            var cliente = _context.TClientes.Where(u => u.Nombre.Replace(" ", "").Equals(_dataInput.Cliente.Replace(" ", ""))).ToList();
+            var cliente = _context.TClientes.Where(u => u.Cedula.Equals(_CedulaCliente)).ToList();
 
             if (0 < cliente.Count)
             {
@@ -399,47 +412,54 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                 }
                 if (tempVentas[0].TCliente.IdCliente.Equals(datosCliente.IdCliente))
                 {
-                    var strategy = _context.Database.CreateExecutionStrategy();
-                    var usuario = _context.TUsers.Where(u => u.IdUser.Equals(tempVentas[0].TUser.IdUser)).ToList().Last();
-                    await strategy.ExecuteAsync(async () =>
+                    if (producto.Cantidad_Producto > _dataInput.Cantidad)
                     {
-                        using (var transaction = _context.Database.BeginTransaction())
+                        var strategy = _context.Database.CreateExecutionStrategy();
+                        var usuario = _context.TUsers.Where(u => u.IdUser.Equals(tempVentas[0].TUser.IdUser)).ToList().Last();
+                        await strategy.ExecuteAsync(async () =>
                         {
-                            try
+                            using (var transaction = _context.Database.BeginTransaction())
                             {
-                                var monto = _dataInput.Precio * _dataInput.Cantidad;
-                                float descuento = monto * (_dataInput.Descuento / 100);
-                                float impuesto = (float)(monto * 0.13);
-                                float montoNeto = monto + descuento + impuesto;
-                                var ventas = new TTemporalVentas
+                                try
                                 {
-                                    idTempVentas = _temporalVentas.idTempVentas,
-                                    Date = _temporalVentas.Date,
-                                    TotalDescuentos = descuento,
-                                    TotalImpuestos = impuesto,
-                                    TotalNeto = montoNeto,
-                                    TotalBruto = monto,
-                                    Cantidad_Venta = _dataInput.Cantidad,
-                                    TCliente = datosCliente,
-                                    TProducto = producto,
-                                    TUser = usuario,
-                                };
-                                _context.Update(ventas);
-                                _context.SaveChanges();
-                                transaction.Commit();
-                                _dataInput = null;
-                                _temporalVentas = null;
-                                valor = true;
-                            }
-                            catch (Exception ex)
-                            {
+                                    var monto = _dataInput.Precio * _dataInput.Cantidad;
+                                    float descuento = monto * (_dataInput.Descuento / 100);
+                                    float impuesto = (float)(monto * 0.13);
+                                    float montoNeto = monto + descuento + impuesto;
+                                    var ventas = new TTemporalVentas
+                                    {
+                                        idTempVentas = _temporalVentas.idTempVentas,
+                                        Date = _temporalVentas.Date,
+                                        TotalDescuentos = descuento,
+                                        TotalImpuestos = impuesto,
+                                        TotalNeto = montoNeto,
+                                        TotalBruto = monto,
+                                        Cantidad_Venta = _dataInput.Cantidad,
+                                        TCliente = datosCliente,
+                                        TProducto = producto,
+                                        TUser = usuario,
+                                    };
+                                    _context.Update(ventas);
+                                    _context.SaveChanges();
+                                    transaction.Commit();
+                                    _dataInput = null;
+                                    _temporalVentas = null;
+                                    valor = true;
+                                }
+                                catch (Exception ex)
+                                {
 
-                                _dataInput.ErrorMessage = ex.Message;
-                                transaction.Rollback();
-                                valor = false;
+                                    _dataInput.ErrorMessage = ex.Message;
+                                    transaction.Rollback();
+                                    valor = false;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                    else
+                    {
+                        _dataInput.ErrorMessage = "No existen productos disponibles, la cantidad disponible es de: " + producto.Cantidad_Producto;
+                    }
                 }
                 else
                 {
@@ -472,6 +492,11 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                         transaction.Commit();
                         _dataInput = null;
                         _temporalVentas = null;
+                        var listaTotalVenta = _context.TTemporalVentas.ToList();
+                        if (listaTotalVenta.Count.Equals(0))
+                        {
+                            ventaIniciada = false;
+                        }
 
                     }
                     catch (Exception ex)
@@ -490,7 +515,7 @@ namespace FactuLib.Areas.Ventas.Pages.Account
             var valor = false; // Variable utilizada para dar el resultado de la operación satisfactorio o fallido. 
             var idUser = _userManager.GetUserId(User); // Devuelve el Id del usuario logueado en el sistema
             var userReg = _context.TUsers.Where(u => u.IdUser.Equals(idUser)).ToList().Last(); // Devuelve el registro de usuario logueado al sistema
-            var cliente = _context.TClientes.Where(u => u.Nombre.Replace(" ", "").Equals(_clienteSeleccionado.Replace(" ", ""))).ToList().Last(); // Retorna el registro de cliente de la venta
+            var cliente = _context.TClientes.Where(u => u.Cedula.Equals(_CedulaCliente)).ToList().Last(); // Retorna el registro de cliente de la venta
             var productos = _context.TProducto.ToList(); // Retorna el listado de productos registrados en el sistema.
             var clientes = _context.TClientes.ToList(); //Retorna el listado de cliente registrados en el sistema.
             var creditosCliente = _context.TCreditoClientes.ToList(); // Retorna el listado de creditos de clientes registrados en el sistema
@@ -613,6 +638,8 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                 //Realiza commit en la transacción para guardar los registros en base de datos
                                 transaction.Commit();
                                 ventaIniciada = false;
+                                _nombreCliente = "";
+                                _CedulaCliente = 0;
                             }
                             // Si la venta es a credito realiza los siguientes procedimientos
                             if (_dataInput.Credito == true)
@@ -706,6 +733,8 @@ namespace FactuLib.Areas.Ventas.Pages.Account
                                 //Realiza commit de la transaccion para guardar registros en base de datos
                                 transaction.Commit();
                                 ventaIniciada = false;
+                                _nombreCliente = "";
+                                _CedulaCliente = 0;
                             }
 
                             //Validacion de que ingrese opciones de credito o contado

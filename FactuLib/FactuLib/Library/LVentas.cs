@@ -55,7 +55,7 @@ namespace FactuLib.Library
             if (0 < data.Count)
             {
                 data.Reverse();
-                objects = new LPaginador<TClientes>().paginador(data, page, num, "Ventas", "Ventas", "AgregarVenta", url);
+                objects = new LPaginador<TClientes>().paginador(data, page, num, "Ventas", "Ventas", "ListaClientes", url);
             }
             else
             {
@@ -83,7 +83,7 @@ namespace FactuLib.Library
             }
             else
             {
-                listTemporal = _context.TClientes.Where(c => c.Nombre.StartsWith(valor) || c.Cedula.Equals(valor) || c.Apellido1.Equals(valor) || c.Apellido2.Equals(valor) && c.Enabled == true).ToList();
+                listTemporal = _context.TClientes.Where(c => c.Nombre.StartsWith(valor) || c.Cedula.ToString().Equals(valor) || c.Apellido1.Equals(valor) || c.Apellido2.Equals(valor) && c.Enabled == true).ToList();
             }
             if (!listTemporal.Count.Equals(0))
             {
@@ -108,7 +108,7 @@ namespace FactuLib.Library
             if (0 < data.Count)
             {
                 data.Reverse();
-                objects = new LPaginador<TProducto>().paginador(data, page, num, "Ventas", "Ventas", "AgregarVenta", url);
+                objects = new LPaginador<TProducto>().paginador(data, page, num, "Productos", "Productos", "ListaProductos", url);
             }
             else
             {
@@ -136,7 +136,7 @@ namespace FactuLib.Library
             }
             else
             {
-                listTemporal = _context.TProducto.Where(c => c.Nombre_Producto.StartsWith(valor) || c.Codigo_Producto.Equals(valor)).ToList();
+                listTemporal = _context.TProducto.Where(c => c.Nombre_Producto.StartsWith(valor) || c.Codigo_Producto.ToString().Equals(valor)).ToList();
             }
             if (!listTemporal.Count.Equals(0))
             {
