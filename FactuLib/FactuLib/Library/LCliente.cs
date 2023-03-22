@@ -51,7 +51,7 @@ namespace FactuLib.Library
                         c.Imagen,
                         c.Enabled,
                         e.correo
-                    }).Where(c => c.Nombre.StartsWith(valor) || c.Apellido1.StartsWith(valor) || c.Apellido2.StartsWith(valor) || c.correo.StartsWith(valor)).ToList();
+                    }).Where(c => c.Nombre.StartsWith(valor) || c.Apellido1.StartsWith(valor) || c.Apellido2.StartsWith(valor) || c.correo.StartsWith(valor) || c.Cedula.ToString().StartsWith(valor)).ToList();
 
                     listTClientes = new List<TClientes>();
                     foreach (var item in query)

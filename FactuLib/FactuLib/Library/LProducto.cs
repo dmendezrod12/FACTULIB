@@ -29,7 +29,7 @@ namespace FactuLib.Library
             {
                 if (id.Equals(0))
                 {
-                    listTProductos = _context.TProducto.Where(u => u.Nombre_Producto.StartsWith(valor) || u.Descripcion_Producto.StartsWith(valor)).ToList();
+                    listTProductos = _context.TProducto.Where(u => u.Nombre_Producto.StartsWith(valor) || u.Descripcion_Producto.StartsWith(valor) || u.Codigo_Producto.ToString().StartsWith(valor)).ToList();
                 }
                 else
                 {

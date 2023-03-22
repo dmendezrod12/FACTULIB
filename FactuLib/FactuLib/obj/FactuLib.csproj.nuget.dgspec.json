@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj": {}
+    "C:\\Users\\pafla\\source\\repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj": {
+    "C:\\Users\\pafla\\source\\repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj",
+        "projectUniqueName": "C:\\Users\\pafla\\source\\repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj",
         "projectName": "FactuLib",
-        "projectPath": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj",
+        "projectPath": "C:\\Users\\pafla\\source\\repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\FactuLib.csproj",
         "packagesPath": "C:\\Users\\pafla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pafla\\Source\\Repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\obj\\",
+        "outputPath": "C:\\Users\\pafla\\source\\repos\\dmendezrod12\\FACTULIB\\FactuLib\\FactuLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pafla\\AppData\\Roaming\\NuGet\\NuGet.Config",
