@@ -1,0 +1,168 @@
+﻿@page "/Proveedores/Registrar"
+@model RegistrarProveedorModel
+@{
+}
+@{
+    var image = "";
+    if (Model.Input.Image != null)
+    {
+        image = "data:image/jpg;base64," + Convert.ToBase64String(Model.Input.Image, 0, Model.Input.Image.Length);
+    }
+    else
+    {
+        image = "/images/images/DefaultProveedor.png";
+    }
+
+}
+<div class="container p-4">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <output id="imageProveedor">
+                            <img src=@image class="imageUser" />
+                        </output>
+                    </div>
+                    <div class="card-body">
+                        <div class="caption text-center">
+                            <label class="btn btn-primary" for="files">Cargar Foto</label>
+                            <input asp-for="Input.AvatarImage" accept="image/*" type="file" id="files" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-5">
+                <div class="panel panel-primary">
+                    @if (Model.Input.CedulaJuridica.Equals(0))
+                    {
+                        <h3 class="panel-title">Registrar Proveedor</h3>
+                    }
+                    else
+                    {
+                        <h3 class="panel-title">Actualizar Proveedor</h3>
+                    }
+                </div>
+                <div class="panel-body">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <div id="header" class="bg-info">
+                                    <h2 class="mb-0 t">
+                                        <button class="btn btn-link text-light" type="button" data-toggle="collapse"
+                                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Ingresar Información
+                                        </button>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                         @if (Model.Input.CedulaJuridica.Equals(0))
+                                        {
+                                            <input asp-for="Input.CedulaJuridica" placeholder="Cedula Juridica" class="form-control" aria-describedby="CedulaAyuda" autofocus />
+                                        }                       
+                                        else
+                                        {
+                                            <input asp-for="Input.CedulaJuridica" placeholder="Cedula Juridica" class="form-control" aria-describedby="CedulaAyuda" readonly />
+                                        }
+                                        <span asp-validation-for="Input.CedulaJuridica" class="text-danger"></span>
+                                        <div id="CedulaAyuda" class="form-text">
+                                            <small>El numero de cédula Juridica tiene que contener 10 digitos númericos.</small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="Input.NombreProveedor" placeholder="Nombre de Proveedor" class="form-control" />
+                                        <span asp-validation-for="Input.NombreProveedor" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="Input.Telefono" placeholder="Numero de Telefono" class="form-control" />
+                                        <span asp-validation-for="Input.Telefono" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="Input.Email" placeholder="Correo Electronico" class="form-control" />
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="Input.Direccion" placeholder="Direccion Exacta Proveedor" class="form-control" />
+                                        <span asp-validation-for="Input.Direccion" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="ddlProvincia" class="form-control" asp-for="Input.Provincia" asp-items="@Model.Input.itemProvincia">
+                                            <option selected="true" disabled="disabled">--Seleccionar Provincia--</option>
+                                        </select>
+                                        <span asp-validation-for="Input.Provincia" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="ddlCanton" class="form-control" asp-for="Input.Canton">
+                                            <option selected="true" disabled="disabled">--Seleccionar Canton--</option>
+                                        </select>
+                                        <span asp-validation-for="Input.Canton" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="ddlDistrito" class="form-control" asp-for="Input.Distrito">
+                                            <option selected="true" disabled="disabled">--Seleccionar Distrito--</option>
+                                        </select>
+                                        <span asp-validation-for="Input.Distrito" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        @if (Model.Input.CedulaJuridica.Equals(0))
+                                        {
+                                            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
+                                        }
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessage)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $("#ddlProvincia").change(function () {
+                $.get("/Clientes/GetCantonesList", { idProvincia: $("#ddlProvincia").val() }, function (data) {
+                    // VACIAMOS EL DropDownList
+                    $("#ddlCanton").empty();
+                    // AÑADIMOS UN NUEVO label CON EL NOMBRE DEL ELEMENTO SELECCIONADO
+                    $("#ddlCanton").append("<option value> -- Seleccionar Cantones de " + $("#ddlProvincia option:selected").text() + " --</option>")
+                    // CONSTRUIMOS EL DropDownList A PARTIR DEL RESULTADO Json (data)
+                    $.each(data, function (index, row) {
+                        $("#ddlCanton").append("<option value='" + row.idCanton + "'>" + row.nombreCanton + "</option>")
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#ddlCanton").change(function () {
+                $.get("/Clientes/GetDistritosList", { idCanton: $("#ddlCanton").val() }, function (data) {
+                    // VACIAMOS EL DropDownList
+                    $("#ddlDistrito").empty();
+                    // AÑADIMOS UN NUEVO label CON EL NOMBRE DEL ELEMENTO SELECCIONADO
+                    $("#ddlDistrito").append("<option value> -- Seleccionar Distritos de " + $("#ddlCanton option:selected").text() + " --</option>")
+                    // CONSTRUIMOS EL DropDownList A PARTIR DEL RESULTADO Json (data)
+                    $.each(data, function (index, row) {
+                        $("#ddlDistrito").append("<option value='" + row.idDistrito + "'>" + row.nombreDistrito + "</option>")
+                    });
+                });
+            });
+        });
+    </script>
+
+}

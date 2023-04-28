@@ -1,0 +1,130 @@
+﻿@page
+@model FactuLib.Areas.Productos.Pages.Account.DetailsModel
+@{
+}
+@{
+    var image = "data:image/jpg;base64," + Convert.ToBase64String(Model.Input.datosProducto.Imagen, 0, Model.Input.datosProducto.Imagen.Length);
+    var name = Model.Input.datosProducto.Nombre_Producto;
+}
+
+<div class="container">
+    <h1>@name</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card text-center" style="width: 21rem;">
+                <div class="card-header">
+                    <img class="imageUserDetail" src="@image" />
+                </div>
+                <div class="card-body">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <p>@Model.Input.datosProducto.Descripcion_Producto</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a asp-area="" asp-page="" asp-route-id="@Model.Input.datosProducto.Id_Producto" class="btn btn-info">Historico de Compras</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <table class="tableCursos">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Informacion
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Código de Producto
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosProducto.Codigo_Producto</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Nombre de Producto
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@name</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Cantidad de Producto
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosProducto.Cantidad_Producto</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Precio de Costo
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosProducto.Precio_Costo</p>
+                                </td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <th>
+                                    Porcentaje Descuento
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>%@Model.Input.datosProducto.Descuento_Producto</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Tipo de Producto
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.nombreTipo</p>
+                                </td>
+                            </tr>    
+                        <td>
+                            <form asp-area="Productos" asp-route-id="1" asp-page="AgregarProducto" method="post">
+                                        @{
+                                            var dataProducto = JsonConvert.SerializeObject(Model.Input.datosProducto);
+                                        }
+                                <input type="hidden" name="DataProducto" value="@dataProducto" />
+                                <button type="submit" value="Editar" class="btn btn-success btn-sm">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-area="Productos" asp-route-id="2" asp-page="DeleteProducto" method="post">
+                                        @{
+                                            var dataProducto2 = JsonConvert.SerializeObject(Model.Input.datosProducto);
+                                        }
+                                <input type="hidden" name="DataProducto" value="@dataProducto2" />
+                                <button type="submit" value="Borrar" class="btn btn-danger btn-sm" onclick="return confirm('Seguro de eliminar el Producto: @Model.Input.datosProducto.Nombre_Producto ')">
+                                    <i class="bi bi-trash3-fill"></i> Borrar
+                                </button>
+                            </form>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

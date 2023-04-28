@@ -1,0 +1,65 @@
+﻿@page "/Clientes/ReporteBusquedaCliente"
+@model ReporteBusquedaClienteModel
+@{
+}
+<div class="container">
+    <h1>Seleccione Cliente para extraer reporte</h1>
+    <div class="col-sm">
+        <div class="card">
+            <div class="card-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" data-toggle="tab" href="#nav-fee" role="tab" aria-selected="true">Lista de Clientes</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-fee" role="tabpanel">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.clientes.Last().Cedula)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.clientes.Last().Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.clientes.Last().Apellido1)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Input.clientes.Last().Apellido2)
+                                    </th>
+                                    <th>
+                                        Opciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Input.clientes)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Cedula
+                                        </td>
+                                        <td>
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Apellido1
+                                        </td>
+                                        <td>
+                                            @item.Apellido2
+                                        </td>
+                                        <td>
+                                            <a href="/Clientes/ReportesPagosClientes?Cedula=@item.Cedula&area=Clientes" class="btn btn-outline-info btn-sm">Generar Reporte</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

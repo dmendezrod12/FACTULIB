@@ -1,0 +1,146 @@
+﻿@page "/Cajas/DetallesCajas"
+@model FactuLib.Areas.Cajas.Pages.Account.DetallesCajasModel
+@{
+}
+<div class="container">
+    <h1>Detalle de Cierre</h1>
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Detalle de Apertura</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Dinero en Cajas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.MontoCajasApertura)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Dinero en Cuentas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.MontoCuentasApertura)</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Detalle de Movimientos</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Ventas Efectivo: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.TotalVentas)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Ventas Cuentas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.TotalVentasCuentasBancarias)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Ventas Credito: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.TotalVentasCredito)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Compras Efectivo: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.TotalCompras)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Compras Cuentas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.TotalComprasCuentasBancarias)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Compras Credito: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.TotalComprasCredito)</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Detalle Cierre</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Dinero en Cajas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.Dinero_Cajas)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Dinero en Cuentas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.Dinero_Cuentas)</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Arqueo de Caja</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Faltante en Cajas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.MontoFaltanteCajas)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Faltante en Cuentas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.MontoFaltanteCuentas)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Sobrante en Cajas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.MontoSobranteCajas)</label>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="text-danger labelCompra_Importe_peq">
+                            <label>Sobrante en Cuentas: </label>
+                            @Html.Raw(Model.Input.Moneda)
+                            <label class="text-success labelCompra_Importe_peq">@Html.Raw(Model.Input.MontoSobranteCuentas)</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

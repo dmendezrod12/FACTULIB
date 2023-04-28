@@ -3,12 +3,39 @@
 *@
 @{
 }
+@model PrincipalModel
 <div class="container-fluid px-4">
     <h1 class="mt-4">Sistema de Ventas para Librería Dieka</h1>
+    <br />
+    <div class="row">
+        <div class="col-sm-2 text-right">
+            <p class="font-weight-bold">
+                Estado de Caja:
+            </p>
+        </div>
+        <div class="col-sm-1">
+            @if (Model.estadoCaja.Equals("Abierta"))
+            {
+                <div class="text-success font-weight-bold text-left"><i class="bi bi-unlock-fill" style="color:green"></i>Abierta</div>
+            }
+            else
+            {
+                <div class="text-danger font-weight-bold text-left"><i class="bi bi-lock-fill" style="color:red"></i>Cerrada</div>
+            }
+        </div>
+        <div class="col-sm-2 text-right">
+            <p class="font-weight-bold">
+                Fecha del sistema: 
+            </p>
+        </div>
+        <div class="col-sm-3">
+            @Model.FechaSiste
+        </div>
+    </div>
+    <br />
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Navegación del sitio</li>
     </ol>
-    <br />
     <br />
     <br />
     <div class="row">

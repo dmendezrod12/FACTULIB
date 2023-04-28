@@ -1,0 +1,77 @@
+﻿@page "/Compras/ListaProductos"
+@model FactuLib.Areas.Compras.Pages.Account.ListaProductosModel
+@{
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h5>Seleccione un Producto del listado</h5>
+        </div>
+        <div class="card-body">
+            <form method="get">
+                <div class="row">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Buscar" class="form-control" autofocus autocomplete="off" />
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-info btn-sm">Buscar</button>
+                    </div>
+                </div>
+            </form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Input.Lista_Productos.List.Last().Codigo_Producto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Input.Lista_Productos.List.Last().Nombre_Producto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Input.Lista_Productos.List.Last().Cantidad_Producto)
+                        </th>
+                        <th>
+                            Seleccionar
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Input.Lista_Productos.List)
+                    {
+                        <tr>
+                            <td>
+                                @Html.Raw(item.Codigo_Producto)
+                            </td>
+                            <td>
+                                @Html.Raw(item.Nombre_Producto)
+                            </td>
+                            <td>
+                                @Html.Raw(item.Cantidad_Producto)
+                            </td>
+                            <td>
+                                <form method="post">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-outline-info btn-sm">Seleccionar</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="IdProd" type="hidden" value="@item.Id_Producto" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="SelProd" type="hidden" value="1" />
+                                    </div>
+                                </form>
+                                @*<a href="/Compras/AgregarCompra?SelProv=1" class="btn btn-outline-info btn-sm" method="POST">Seleccionar</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center">
+                Resultados @Html.Raw(Model.Input.Lista_Productos.Pagi_info)
+                <br />
+                @Html.Raw(Model.Input.Lista_Productos.Pagi_navegacion)
+            </div>
+        </div>
+    </div>
+</div>

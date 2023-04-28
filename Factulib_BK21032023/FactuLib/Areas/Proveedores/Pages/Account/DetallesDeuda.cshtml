@@ -1,0 +1,70 @@
+﻿@page "/Proveedores/DetallesDeuda/"
+@model DetallesDeudaModel
+@{
+    var nombre = $"{Model.Input.DatosProveedor.NombreProveedor}";
+    var deuda = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0.00####}", Model.Input.DatosProveedor.Deuda)}";
+    var pago = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0.00####}", Model.Input.DatosProveedor.Pago)}";
+    var deudaActual = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosProveedor.DeudaActual)}";
+    var mensual = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosProveedor.Mensual)}";
+    var id = Model.Input.DatosProveedor.CedulaJuridica;
+}
+<div class="container">
+    <h1>@nombre</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card text-center" style="width: 21rem;">
+                <div class="card-header">
+                    <h5>Reporte de Pago</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <p>Deuda</p>
+                        &nbsp;
+                        <p>@deuda</p>
+                    </div>
+                    <div class="row">
+                        <p>Fecha deuda: </p>
+                        &nbsp;
+                        <p>@Model.Input.DatosProveedor.FechaDeuda.ToString("dd/MMM/yyy")</p>
+                    </div>
+                    <div class="row">
+                        <p>Pago: </p>
+                        &nbsp;
+                        <p>@pago</p>
+                    </div>
+                    <div class="row">
+                        <p>Fecha del pago: </p>
+                        &nbsp;
+                        <p>@Model.Input.DatosProveedor.FechaPago.ToString("dd/MMM/yyy")</p>
+                    </div>
+                    <div class="row">
+                        <p>Monto cuota por mes: </p>
+                        &nbsp;
+                        <p>@mensual</p>
+                    </div>
+                    <div class="row">
+                        <p>Deuda Actual: </p>
+                        &nbsp;
+                        <p>@deudaActual</p>
+                    </div>
+                    <div class="row">
+                        <p>Ticket: </p>
+                        &nbsp;
+                        <p>@Model.Input.DatosProveedor.Ticket</p>
+                    </div>
+                    <div class="row">
+                        <p>Usuario: </p>
+                        &nbsp;
+                        <p>@Model.Input.DatosProveedor.User</p>
+                    </div>
+                    <div class="row">
+                        <form asp-area="Proveedores" asp-page="DetallesDeuda" method="post">
+                            <input type="submit" value="Ticket" class="btn btn-outline-info btn-sm" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

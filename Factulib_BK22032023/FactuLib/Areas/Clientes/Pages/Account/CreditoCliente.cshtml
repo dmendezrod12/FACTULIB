@@ -1,0 +1,175 @@
+﻿@page "/Clientes/CreditoCliente"
+@model CreditoClienteModel
+@{
+    var nombre = $"{Model.Input.DatosCliente.Name} {Model.Input.DatosCliente.Apellido1} {Model.Input.DatosCliente.Apellido2}";
+    var deudaActual = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosCliente.DeudaActual)}";
+    var ultimoPago = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosCliente.UltimoPago)}";
+    var mensual = $"{Model.Input.Moneda}{String.Format("{0:#,###,###,##0,##0.00####}", Model.Input.DatosCliente.Mensual)}";
+    var id = Model.Input.DatosCliente.Cedula;
+}
+
+<div class="container">
+    <h1>@nombre</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card text-center" style="width:21rem;">
+                <div class="card-header">
+                    <h5>Reportes de pago</h5>
+                </div>
+                <div class="card-body">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" data-togle="tab" href="#nav-fee" role="tab" aria-selected="true">Cuotas</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-fee" role="tabpanel">
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <p>Deuda: </p>
+                                    &nbsp;
+                                    <p> @deudaActual </p>
+                                </div>
+                                <div class="row">
+                                    <p>Pago: </p>
+                                    &nbsp;
+                                    <p>@ultimoPago</p>
+                                </div>
+                                <div class="row">
+                                    <p>Cuotas por mes: </p>
+                                    &nbsp;
+                                    <p>@mensual</p>
+                                </div>
+                                <div class="row">
+                                    <p>Fecha sigt. pago: </p>
+                                    &nbsp;
+                                    <p>@Model.Input.DatosCliente.FechaLimite.ToString("dd/MMM/yyy")</p>
+                                </div>
+                                <div class="row">
+                                    <p>Ticket: </p>
+                                    &nbsp;
+                                    <p>@Model.Input.DatosCliente.Ticket</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <form asp-area="Clientes" asp-page="CreditoCliente" method="post">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" id="inlineRadio1" asp-for="Input.RadioOptions" value="1" />
+                                    <label class="form-check-label" for="inlineRadio1">Cuotas</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <span asp-validation-for="Input.RadioOptions" class="text-danger"></span>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input asp-for="Input.Pago" placeholder="Pagos" class="form-control" autofocus />
+                                            <span asp-validation-for="Input.Pago" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <input type="submit" value="Efectuar pago" class="btn btn-success btn-block" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group">
+                                <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessage)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <form asp-area="Clientes" asp-page="CreditoCliente" method="get">
+                    <div class="row">
+                        <div class="col-sm">
+                            <label class="form-check-label">Inicio</label>
+                            <input style="width: 9rem;" asp-for="Input.horaInicio" />
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-check-label">Final</label>
+                            <input style="width: 9rem;" asp-for="Input.horaFinal" />
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-check-label"></label>
+                            <input type="submit" value="filtrar" class="btn btn-success btn-block" />
+                        </div>
+                        <input type="hidden" value="@id" name="id" />
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessageFecha)</label>
+                        </div>
+                    </div>
+                </form>
+                <div class="card-body">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-fee" role="tab" aria-selected="true">Historico de Pagos</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-fee" role="tabpanel">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.Deuda)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.DeudaActual)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.Pago)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Input.TPagos.Input.Fecha)
+                                        </th>
+                                        <th>
+                                            Opciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Input.TPagos.List)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}", item.Deuda)
+                                            </td>
+                                            <td>
+                                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}", item.DeudaActual)
+                                            </td>
+                                            <td>
+                                                @String.Format(Model.Moneda + "{0:#,###,###,##0.00####}", item.Pago)
+                                            </td>
+                                            <td>
+                                                @{
+                                                    var FechaReg = $"{item.Fecha.Day}/{item.Fecha.Month}/{item.Fecha.Year}";
+                                                }
+                                                @Html.Raw(FechaReg)
+                                            </td>
+                                            <td>
+                                                <a href="/Clientes/DetallesDeuda?idPago=@item.IdPago&cedula=@id" class="btn btn-outline-info btn-sm">Reporte</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

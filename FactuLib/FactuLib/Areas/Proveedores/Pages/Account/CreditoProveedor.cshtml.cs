@@ -26,6 +26,7 @@ namespace FactuLib.Areas.Proveedores.Pages.Account
         private static string _errorMessage;
         public static InputModelProveedor _datosProveedor;
         private LCodigos _codigos;
+        private LCliente _cliente;
         private ApplicationDbContext _context;
         private UserManager<IdentityUser> _userManager;
 
@@ -35,6 +36,7 @@ namespace FactuLib.Areas.Proveedores.Pages.Account
             _userManager = userManager;
             _codigos = new LCodigos();
             _proveedor = new LProveedor(context);
+            _cliente = new LCliente(context);
             moneda = "¢";
         }
 
@@ -57,10 +59,15 @@ namespace FactuLib.Areas.Proveedores.Pages.Account
             _datosProveedor.horaInicio = input.horaInicio;
             _datosProveedor.horaFinal = input.horaFinal;
 
+            InputModelRegistrar _dataInput = new InputModelRegistrar();
+            _dataInput.horaInicio = input.horaInicio;
+            _dataInput.horaFinal = input.horaFinal;
+
             Input = new InputModel
             {
                 DatosProveedor = _datosProveedor,
                 ErrorMessage = _errorMessage,
+                ErrorMessageFecha = _cliente.validacionFecha(_dataInput),
                 TPagos = _proveedor.GetPagosListaProveedor(id, 1, 10, _datosProveedor, Request)
             };
             //Input.horaInicio = input.horaInicio;
@@ -227,6 +234,7 @@ namespace FactuLib.Areas.Proveedores.Pages.Account
 
             // public DataPaginador<TPagos_Proveedor> TPagos { get; set; }
 
+            public string ErrorMessageFecha { get; set; }
             public DateTime horaInicio { get; set; } = DateTime.Now;
             public DateTime horaFinal { get; set; } = DateTime.Now;
 

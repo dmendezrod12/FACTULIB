@@ -1,0 +1,77 @@
+﻿@*model IEnumerable<InputModelRegistrar>*@
+@model DataPaginador<InputModelRegistrar>
+
+@{
+    ViewData["Title"] = "ReportesClientes";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reportes Clientes</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div style="background-image: url('/images/images/ReporteCabecera.jpg');">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <img alt="Imagen" src="/images/images/logoNav.png" style="width:50px; height:50px; margin-left:25px; margin-top:25px;"/>
+                    </div>
+                    <div class="col-md-8">
+                        <h2 class="text-light text-center">
+                            Reporte de Cliente
+                        </h2>
+                    </div>
+                </div>
+        </div>
+        <br />
+        <br />
+        <hr />
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Cedula)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Phone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Email)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cedula)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

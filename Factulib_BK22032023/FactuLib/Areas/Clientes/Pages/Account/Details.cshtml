@@ -1,0 +1,176 @@
+﻿@page
+@model FactuLib.Areas.Clientes.Pages.Account.DetailsModel
+@{
+}
+@{
+    var image = "data:image/jpg;base64," + Convert.ToBase64String(Model.Input.datosCliente.Image, 0, Model.Input.datosCliente.Image.Length);
+    var name = Model.Input.datosCliente.Name + " " + Model.Input.datosCliente.Apellido1 + " " + Model.Input.datosCliente.Apellido2;
+}
+
+<div class="container">
+    <h1>@name</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card text-center" style="width: 21rem;">
+                <div class="card-header">
+                    @*Muestra la imagen que tiene cargada el registro de cliente*@
+                    <img class="imageUserDetail" src="@image" />
+                </div>
+                <div class="card-body">
+                    <div class="col-md-10">
+                        <div class="row">
+                            @*Muestra el nombre completo del cliente*@
+                            <p>@Model.Input.datosCliente.Name</p>
+                        </div>
+                    </div>
+                    @*Coloca Disponible si el cliente es elegible a credito y No Disponible si no es elegible a credito.*@
+                    <div class="row">
+                        <p>Credito: </p>
+                        &nbsp;
+                        @if (Model.Input.datosCliente.Credit)
+                        {
+
+                            <p class="text-success">Disponible</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger"> No Disponible</p>
+                        }
+                    </div>
+                    @*Muestra la información de credito del cliente*@
+                    <div class="row">
+                        <a asp-area="Clientes" asp-page="CreditoCliente" asp-route-id="@Model.Input.datosCliente.Cedula" class="btn btn-info">Credito de Cliente</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    @*La siguiente sección muestra el detalle de la información del cliente*@
+                    <table class="tableCursos">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Informacion
+                                </th>
+                            </tr>
+                            <tr>
+                                @*Muestra el numero de cedula del cliente*@
+                                <th>
+                                    Numero de Cédula
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosCliente.Cedula</p>
+                                </td>
+                            </tr>
+                            @*Muestra el Nombre del cliente*@
+                            <tr>
+                                <th>
+                                    Nombre
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@name</p>
+                                </td>
+                            </tr>
+                            @*Muestra el telefono del cliente*@
+                            <tr>
+                                <th>
+                                    Telefono
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosCliente.Phone</p>
+                                </td>
+                            </tr>
+                            @*Muestra el correo electronico del cliente*@
+                            <tr>
+                                <th>
+                                    Correo Electronico
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosCliente.Email</p>
+                                </td>
+                            </tr>
+                            <tr>
+                             @*Muestra la provincia de la dirección de domiclilio del cliente*@
+                            <tr>
+                                <th>
+                                    Provincia
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosCliente.nombreProvincia</p>
+                                </td>
+                            </tr>
+                            @*Muestra el canton de la dirección de domiclilio del cliente*@
+                            <tr>
+                                <th>
+                                    Canton
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosCliente.nombreCanton</p>
+                                </td>
+                            </tr>
+                            @*Muestra el distrito de la dirección de domiclilio del cliente*@
+                            <tr>
+                                <th>
+                                    Distrito
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosCliente.nombreDistrito</p>
+                                </td>
+                            </tr>
+                            @*Muestra la direccion exacta de domiclilio del cliente*@
+                            <tr>
+                                <th>
+                                    Direccion Exacta
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>@Model.Input.datosCliente.direccionExacta</p>
+                                </td>
+                            </tr>
+                        <td>
+                            <form asp-area="Clientes" asp-route-id="1" asp-page="RegistrarCliente" method="post">
+                                        @{
+                                            var dataUser = JsonConvert.SerializeObject(Model.Input.datosCliente);
+                                        }
+                                <input type="hidden" name="DataUser" value="@dataUser" />
+                                <button type="submit" value="Editar" class="btn btn-success btn-sm">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-area="Clientes" asp-route-id="2" asp-page="DeleteCliente" method="post">
+                                        @{
+                                            var dataUser2 = JsonConvert.SerializeObject(Model.Input.datosCliente);
+                                        }
+                                <input type="hidden" name="DataUser" value="@dataUser2" />
+                                <button type="submit" value="Borrar" class="btn btn-danger btn-sm" onclick="return confirm('Seguro de eliminar el usuario: @Model.Input.datosCliente.Email ')">
+                                    <i class="bi bi-trash3-fill"></i> Borrar
+                                </button>
+                            </form>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

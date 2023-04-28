@@ -1,0 +1,32 @@
+﻿@model FactuLib.Models.RecoveryViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container p-4">
+    <div class="row text-center">
+        <h1>Recuperacion de contraseña</h1>
+    </div>
+    <form action="@Url.Content("~/Home/StartRecovery")" method="post">
+        <div class="row">
+            <h5>Digite un correo electronico para enviar la recuperación de contraseña</h5>
+        </div>
+        <div class="row">
+            @Html.TextBoxFor(d=>d.Email,null,new{@class = "form-control"})
+        </div>
+        <div class="row">
+            @Html.ValidationMessageFor(d=>d.Email,null,new{style="color:red;"})
+        </div>
+        <div class="form-group">
+            <span class="text-danger">
+                @Html.DisplayFor(d => d.ErrorMessage);
+            </span>
+        </div>
+        <br />
+        <div class="text-right">
+            <button class="btn btn-primary">Recuperar</button>
+        </div>
+        
+    </form>
+</div>

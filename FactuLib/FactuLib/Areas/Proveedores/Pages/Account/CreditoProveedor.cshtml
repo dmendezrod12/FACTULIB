@@ -109,6 +109,11 @@
                             <label class="form-check-label"></label>
                             <input type="submit" value="Filtrar" class="btn btn-success btn-block" />
                         </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessageFecha)</label>
+                            </div>
+                        </div>
                     </div>
                     <input type="hidden" value="@id" name="id" />
                 </form>

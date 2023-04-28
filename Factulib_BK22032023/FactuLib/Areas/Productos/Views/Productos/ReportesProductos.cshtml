@@ -1,0 +1,86 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataPaginador<InputModelProductos>
+
+@{
+    ViewData["Title"] = "ReportesProductos";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reportes Clientes</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div style="background-image: url('/images/images/ReporteCabecera.jpg');">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <img alt="Imagen" src="/images/images/logoNav.png" style="width:50px; height:50px; margin-left:25px; margin-top:25px;" />
+                </div>
+                <div class="col-md-8">
+                    <h2 class="text-light text-center">
+                        Reporte de Inventario
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <hr />
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Codigo_Producto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Nombre_Producto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Cantidad_Producto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Precio_Venta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Input.Precio_Costo)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.List)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo_Producto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre_Producto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad_Producto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio_Venta)
+                        </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.Precio_Costo)
+                            </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

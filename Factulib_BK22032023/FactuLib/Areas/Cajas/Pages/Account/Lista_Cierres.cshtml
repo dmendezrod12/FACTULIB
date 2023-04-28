@@ -1,0 +1,75 @@
+﻿@page "/Cajas/Lista_Cierres"
+@model FactuLib.Areas.Cajas.Pages.Account.Lista_CierresModel
+@{
+}
+<div class="container">
+    <h2>Lista de Cierres</h2>
+    <br />
+    <div class="card">
+        <div class="card-header">
+            <form asp-area="Cajas" asp-page="Lista_Cierres" method="get">
+                <div class="row">
+                    <div class="col-sm">
+                        <label class="form-check-label">Inicio</label>
+                        <input style="width: 9rem;" asp-for="Input.horaInicio" />
+                    </div>
+                    <div class="col-sm">
+                        <label class="form-check-label">Final</label>
+                        <input style="width: 9rem;" asp-for="Input.horaFinal" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="form-check-label"></label>
+                        <input type="submit" value="filtrar" class="btn btn-success" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <label class="text-danger">@Html.DisplayFor(m => m.Input.ErrorMessageFecha)</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-fee" role="tabpanel">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Fecha de Cierre
+                                </th>
+                                <th>
+                                    Correo de Usuario
+                                </th>
+                                <th>
+                                    Opciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Input.TRegistroCierre.List)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Fecha_Cierre
+                                    </td>
+                                    <td>
+                                        @item.TUser.Email
+                                    </td>
+                                    <td>
+                                        <a href="/Cajas/DetallesCajas?idCierre=@item.Id_Cierre" class="btn btn-outline-info btn-sm">Detalle</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        Resultados @Html.Raw(Model.Input.TRegistroCierre.Pagi_info)
+                        <br />
+                        @Html.Raw(Model.Input.TRegistroCierre.Pagi_navegacion)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

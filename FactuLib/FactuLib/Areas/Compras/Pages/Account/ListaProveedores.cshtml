@@ -1,0 +1,74 @@
+﻿@page "/Compras/ListaProveedores"
+@model FactuLib.Areas.Compras.Pages.Account.ListaProveedoresModel
+@{
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h5>Seleccione un Proveedor del listado</h5>
+        </div>
+        <div class="card-body">
+            <form method="get">
+                <div class="row">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Buscar" class="form-control" autofocus autocomplete="off" />
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-info btn-sm">Buscar</button>
+                    </div>
+                </div>
+            </form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Input.Lista_Proveedores.List.Last().Nombre_Proveedor)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Input.Lista_Proveedores.List.Last().Ced_Jur)
+                        </th>
+                        <th>
+                            Seleccionar
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Input.Lista_Proveedores.List)
+                    {
+                        <tr>
+                            <td>
+                                @Html.Raw(item.Nombre_Proveedor)
+                            </td>
+                            <td>
+                                @Html.Raw(item.Ced_Jur)
+                            </td>
+                            <td>
+                                <form method="post">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-outline-info btn-sm">Seleccionar</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="NombreProveedor" type="hidden" value="@item.Nombre_Proveedor" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="CedulaProveedor" type="hidden" value="@item.Ced_Jur" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="SelProveedor" type="hidden" value="1" />
+                                    </div>
+                                </form>
+                                @*<a href="/Compras/AgregarCompra?SelProv=1" class="btn btn-outline-info btn-sm" method="POST">Seleccionar</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center">
+                Resultados @Html.Raw(Model.Input.Lista_Proveedores.Pagi_info)
+                <br />
+                @Html.Raw(Model.Input.Lista_Proveedores.Pagi_navegacion)
+            </div>
+        </div>
+    </div>
+</div>

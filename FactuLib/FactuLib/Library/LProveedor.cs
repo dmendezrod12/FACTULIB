@@ -41,7 +41,7 @@ namespace FactuLib.Library
             {
                 if (id.Equals(0))
                 {
-                    listTProveedores = _context.TProveedor.Where(p => p.Nombre_Proveedor.StartsWith(valor)).ToList();
+                    listTProveedores = _context.TProveedor.Where(p => p.Nombre_Proveedor.StartsWith(valor) || p.Ced_Jur.ToString().StartsWith(valor)).ToList();
 
                 }
                 else
